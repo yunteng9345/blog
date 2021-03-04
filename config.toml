@@ -96,7 +96,12 @@ disqusShortname = "yourdiscussshortname"
         name = "生活"
         weight = 3
         url = "life/"
-            
+        
+        [[menu.main]]
+        name = "leetcode"
+        weight = 4
+        url = "leetcode/"
+
         # [[menu.main]]
         # name = "项目"
         # weight = 3
