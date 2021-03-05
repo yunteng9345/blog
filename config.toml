@@ -88,12 +88,12 @@ disqusShortname = "yourdiscussshortname"
         url = "jvm/"
 
         [[menu.main]]
-        name = "Go语言"
+        name = "Golang"
         weight = 2
         url = "go/"
 
         [[menu.main]]
-        name = "生活"
+        name = "life"
         weight = 3
         url = "life/"
         
@@ -113,6 +113,6 @@ disqusShortname = "yourdiscussshortname"
         # url = "java/"
 
         [[menu.main]]
-        name = "关于我"
+        name = "me"
         weight = 4
         url = "/about/"
