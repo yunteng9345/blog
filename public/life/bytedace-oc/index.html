@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="🎂云☁️">
+    <meta name="description" content="生活">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="收集问题"/>
+<meta name="twitter:description" content="生活"/>
+
+    <meta property="og:title" content="收集问题" />
+<meta property="og:description" content="生活" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunteng9345.github.io/life/bytedace-oc/" /><meta property="article:section" content="life" />
+<meta property="article:published_time" content="2021-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-06T00:00:00+00:00" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/06.0/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-8-jvm-run/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-7-class-struct/" />
+
+
+
+    <title>
+  收集问题 · 云的博客
+</title>
+
+    
+      <link rel="canonical" href="https://yunteng9345.github.io/life/bytedace-oc/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.87.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      云的博客
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/jvm/">JVM</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/go/">Golang</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/life/">life</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/leetcode/">leetcode</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>收集问题</h1>
+    </header>
+
+    <p>【面经】字节北京抖音直播后端面经-已OC</p>
+<p>面经内容</p>
+<p>Image</p>
+<p>【一面】</p>
+<p>1.自我介绍</p>
+<p>2.问项目</p>
+<p>3.redis的服务量级</p>
+<p>4.redis热点问题怎么解决</p>
+<p>5.java gc</p>
+<p>6.java内存区域？new对象在哪？局部变量在哪？gc发生在哪？</p>
+<p>7.java synchronized，volatile还有reentrantLock的底层原理</p>
+<p>8.Atomic</p>
+<p>9.线程同步的方式</p>
+<p>10.线程之间共享的有什么</p>
+<p>11.进程和线程的区别</p>
+<p>12.进程间通信的方式</p>
+<p>13.共享内存的实现方式？shmset，shmat</p>
+<p>14.如何结束一个进程？kill底层发生了什么（信号）</p>
+<p>15.用户态和内核态的区别</p>
+<p>16.用户态什么情况下会陷入内核态</p>
+<p>17.tcp和udp的区别</p>
+<p>18.tcp拥塞控制</p>
+<p>19.time_wait的作用</p>
+<p>20.算法题：</p>
+<p>问得中规中矩</p>
+<p>【二面】</p>
+<p>1.自我介绍</p>
+<p>2.问项目</p>
+<p>3.项目中遇到的最大的挑战？</p>
+<p>4.用到的Go的特性？channel</p>
+<p>5.进程和线程 线程和协程的区别</p>
+<p>6.段页式存储</p>
+<p>7.逻辑地址和物理地址的转化</p>
+<p>8.输入一个用https协议的url到呈现出页面的过程</p>
+<p>9.详细说下ssl连接的建立过程</p>
+<p>10.算法题：</p>
+<ol>
+<li>
+<p>LRU Cache的实现 复杂度O(1) 口头描述</p>
+</li>
+<li>
+<p>K个一组翻转链表</p>
+</li>
+</ol>
+<p>11.聊天：平时怎么学技术知识？有系统看书吗？最近在看啥书？</p>
+<p>不知道为啥，问得好像有点少。</p>
+<p>不能说面试常考LRU吧，只能说这题每一次都遇到。</p>
+<p>【三面】</p>
+<p>1.自我介绍</p>
+<p>2.聊项目</p>
+<p>3.设计关注和被关注的功能，怎么存储</p>
+<p>4.mongodb和mysql的区别</p>
+<p>5.redis持久化</p>
+<p>6.rdb bgsave的时候存储的数据是拷贝给子进程的吗</p>
+<p>7.算法题：实现除法，对整数a，b，若为无限循环小数则用括号标出循环结。比如1/2=0.5，1/3=0.(3) ，1/12=0.8(3)</p>
+<p>8.TCP的建立连接和断开连接的过程</p>
+<p>9.TCP为什么四次挥手</p>
+
+  </article>
+  <script src="https://utteranc.es/client.js"
+        repo="yunteng9345/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>码出艺术 © 2020 - 2020 | 蒙ICP备2020004632号 | 粤公网安备 44030502006604号</p>
+      
+      
+      
+      
+        
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js"></script>
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    <script data-goatcounter="https://code.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+  </body>
+
+</html>

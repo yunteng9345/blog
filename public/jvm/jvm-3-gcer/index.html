@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="🎂云☁️">
+    <meta name="description" content="深入理解Java虚拟机第三版">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《深入理解JVM》——03.垃圾收集器理论"/>
+<meta name="twitter:description" content="深入理解Java虚拟机第三版"/>
+
+    <meta property="og:title" content="《深入理解JVM》——03.垃圾收集器理论" />
+<meta property="og:description" content="深入理解Java虚拟机第三版" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunteng9345.github.io/jvm/jvm-3-gcer/" /><meta property="article:section" content="jvm" />
+<meta property="article:published_time" content="2020-11-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-26T00:00:00+00:00" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/06.0/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-8-jvm-run/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-7-class-struct/" />
+
+
+
+    <title>
+  《深入理解JVM》——03.垃圾收集器理论 · 云的博客
+</title>
+
+    
+      <link rel="canonical" href="https://yunteng9345.github.io/jvm/jvm-3-gcer/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.87.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      云的博客
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/jvm/">JVM</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/go/">Golang</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/life/">life</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/leetcode/">leetcode</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>《深入理解JVM》——03.垃圾收集器理论</h1>
+    </header>
+
+    <h1 id="垃圾收集器算法">垃圾收集器算法</h1>
+<p>因为程序计数器、虚拟机栈、本地方法栈都是随线程而生，随线程而灭。所以主要的垃圾收集区域集中在堆区域和方法区，堆里面存放着Java世界中几乎所有对象的实例，垃圾收集器在对堆进行回收之前，第一件事情就是要确认这些对象之中还有哪些“存活”，哪些已经“死去”。</p>
+<h2 id="引用计数算法reference-counting">引用计数算法(Reference Counting)</h2>
+<p>对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用实效时，计数器值减一；任何时刻计数器为零的对象就是不可能再被使用的。但在Java主流的虚拟机里都没有使用引用计数算法来实现垃圾回收，因为它很难解决对象之间相互循环引用的问题。</p>
+<h2 id="可达性分析算法reachability-analysis">可达性分析算法(Reachability Analysis)</h2>
+<p><img src="https://yunteng9345.github.io/images/jvm/gc-root.png" alt="gcroot"></p>
+<p>这个算法的基本思路就是通过一系列称为“GC Roots”的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走的路径称为“引用链”(Reference Cain)，如果某个对象到GC Root键没有任何引用链相连，或者用图论的话来说就是从GC Root到这个对象不可达时，则证明此对象是不可能再被使用的。</p>
+<p><strong>在Java技术体系里面，固定可作为GC Roots的对象包括以下几种：</strong></p>
+<ul>
+<li>在虚拟机栈（栈帧中的本地变量表）中引用的对象，譬如各个线程被调用的方法堆栈中使用到的参数、局部变量、临时变量等。</li>
+<li>在方法区中类静态属性引用的对象，譬如Java类的引用类型静态变量。</li>
+<li>在方法区中常量引用的对象，譬如字符串常量池（String Table）里的引用。</li>
+<li>在本地方法栈中JNI引用的对象</li>
+<li>Java虚拟机内部的引用，如基本数据类型对应的Class对象，一些常驻的异常对象（如NPE、OOE）等，还有系统类加载器。</li>
+<li>所有被同步锁（synchronized）所持有的对象</li>
+<li>反映Java虚拟机内部情况的JMXBean、JVMTI中注册的回调、本地代码缓存等。</li>
+</ul>
+<h2 id="回收方法区">回收方法区</h2>
+<p>Java堆中，新生代对常规应用进行一次垃圾回收通常可以回收70%至99%的内存空间。</p>
+<p>方法区的垃圾收集主要回收两部分内容：废弃的常量和不再使用的类型。</p>
+<blockquote>
+<p>举个例子，假如一个字符串“java”曾经进入常量池中，但是当前系统又没有任何一个字符串对象的值是“java”，换句话说，已经没有任何字符串对象引用常量池中的“java”常量，且虚拟机中也没有其他的地方引用这个字面量。如果在这时发生内存回收，而且垃圾收集器判断有必要的话，这个“java”常量就将会被系统清理出常量池。常量池中其他类（接口）、方法、字段的符号引用也类似。</p>
+</blockquote>
+<p>判断一个类型是否属于“不在被使用的类”需要<strong>同时</strong>满足以下三个条件：</p>
+<ul>
+<li>该类所有的实例都已经被回收</li>
+<li>加载该类的类加载器已经被回收</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+<h1 id="垃圾收集算法">垃圾收集算法</h1>
+<h2 id="分代收集理论">分代收集理论</h2>
+<p>所谓分代收集理论，实质上一套符合大多数程序运行实际情况的经验法则，它建立在俩个分代假说之上</p>
+<ul>
+<li>弱分代假说（Weak Generational Hypothesis）：绝大多数对象都是朝生夕灭的。</li>
+<li>强分代假说（Strong Generational Hypothesis）：熬过越多次垃圾收集的对象就越难以消灭。</li>
+</ul>
+<p><strong>收集器应该将Java堆分成不同的区域，然后将回收对象依据其年龄（年龄即对象熬过垃圾收集过程的次数）分配到不同的区域之中存储</strong></p>
+<p>如果一个区域中大多数对象都是朝生夕灭，我们可以把它们集中在一起，每次回收时<strong>只关注如何保留少量存活的对象，而不是去标记那些大量将要被回收的对象</strong>，这样就能以较低的代价回收到大量的空间；</p>
+<p>如果剩下的都是难以消亡的对象，那把它们集中到一起，虚拟机可以使用较低的频率来回收这个区域，这就同时兼顾了垃圾收集的时间开销和内存空间的有效利用。</p>
+<h2 id="标记-清除算法mark--sweep">标记-清除算法（Mark- Sweep）</h2>
+<p>首先标记出所有需要回收的对象，在标记完成之后，统一回收所有被标记的对象，或者所有未被标记的对象。</p>
+<blockquote>
+<p>缺点1：效率不稳定，随堆中对象的数量线性增长。</p>
+</blockquote>
+<blockquote>
+<p>缺点2：标记-清除后产生大量不连续的内存碎片，分配大对象时无法找到连续的内存不得不提前触发垃圾回收操作。</p>
+</blockquote>
+<h2 id="标记-复制算法">标记-复制算法</h2>
+<p>它将可用内存按容量分为大小相等的两块，没次只使用其中的一块。当这一块的内存用完了，就将<strong>存活的对象复制</strong>到另一块上面，然后再把已使用过的内存空间<strong>一次清理掉</strong>。如果内存中多数对象都是存活的，这种算法将会产生大量的内存间复制的开销。</p>
+<blockquote>
+<p>缺点：可用内存缩小为原来的一半。</p>
+</blockquote>
+<h2 id="标记复制算法的进化-appel式回收">标记复制算法的进化-Appel式回收</h2>
+<p><img src="https://yunteng9345.github.io/images/jvm/1606700592.jpg" alt="Appel式回收"></p>
+<h2 id="标记-整理算法mark-compact">标记-整理算法（Mark Compact）</h2>
+<p>标记-整理算法，其中的标记过程任然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向内存空间一段移动，然后直接清理掉边界以外的的内存。</p>
+<p>如果移动存活对象，尤其是在老年代这种每次回收都有大量对象存货区域，移动存活对象并更新所有引用这些对象的地方将会是一种极为负重的操作，而且这种对象移动操作必须全程暂停用户应用程序才能进行（Stop The World）</p>
+<p>移动对象会使内存回收时更加复杂，不移动会使内存分配时更加复杂。从垃圾回收的角度来说，不移动对象停顿的时间短，甚至不停顿，但是从整个程序的吞吐量来看，移动对象更加划算。所以HotSpot虚拟机中<strong>关注吞吐的Parallel Scavenge收集器是基于标记-整理算法的</strong>，而<strong>关注延迟的CMS收集器是基于标记-清除算法的。</strong></p>
+<p>所以便衍生出了折中的方案，平时多数使用标记-清除算法，暂时容忍内存碎片的存在，直到内存空间的碎片化程度已经大到影响对象分配时，在采用标记-整理算法收集一次，以获得规整的内存空间。前面提到的CMS收集器面临空间碎片过多时就是采用这种方法。</p>
+<blockquote>
+<p>出现STW的现象完全是因为内存空间碎片影响了正常的内存分配，所以需要停顿各个线程整理内存空间。</p>
+</blockquote>
+<h2 id="hotspot算法实现细节">HotSpot算法实现细节</h2>
+<p>准确式垃圾收集。在HotSpot的解决方案里，**是使用一组OopMap的数据结构来达到这个目的。一旦类加载动作完成的时候，HotSpot就会把对象内什么偏移量上是什么类型的数据算出来，在即时编译过程中，也会在特定的位置记录下栈里和寄存器里哪些位置是引用。**这样收集器在扫描时就可以直接得知这些信息了，并不需要一个不漏的从GC Roots开始查找。</p>
+<h2 id="安全点-安全区域">安全点-安全区域</h2>
+<p>用户线程在执行过程中可以中断的点和区域，进去此点和此区域即可进行垃圾收集。</p>
+<blockquote>
+<p>准确式垃圾收集目标：使用记忆集来缩短GC Roots扫描范围。</p>
+</blockquote>
+<h2 id="并发可达性分析">并发可达性分析</h2>
+<p>可达性分析算法理论上要求全过程都能保障一致性的快照才能分析，这意味着必须全程冻结用户线程的运行。并发情况下，用户线程同时修改引用关系，会产生将已经消亡的对象标记为存活状态，也可能会产生把原本存活的对象标记为已消亡。要解决并发扫描时的对象消失问题，出现了两种解决方案：增量更新和原始快照。这两种的目的都是将冲突的扫描暂存起来，然后重新扫描。</p>
+<p>例如CMS是基于增量更新来做并发标记的，G1、Shenandoah则是用原始快照来实现的。</p>
+<ul>
+<li><a href="../">目录</a></li>
+<li>上一章：<a href="../jvm-2-new-object-flow">创建对象过程</a></li>
+<li>下一节：<a href="../jvm-4-GCer-detail">各类垃圾收集器分析</a></li>
+</ul>
+
+  </article>
+  <script src="https://utteranc.es/client.js"
+        repo="yunteng9345/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>码出艺术 © 2020 - 2020 | 蒙ICP备2020004632号 | 粤公网安备 44030502006604号</p>
+      
+      
+      
+      
+        
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js"></script>
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    <script data-goatcounter="https://code.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+  </body>
+
+</html>

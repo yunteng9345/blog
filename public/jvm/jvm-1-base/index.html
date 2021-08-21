@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="🎂云☁️">
+    <meta name="description" content="深入理解Java虚拟机第三版">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《深入理解JVM》——01.基本概念"/>
+<meta name="twitter:description" content="深入理解Java虚拟机第三版"/>
+
+    <meta property="og:title" content="《深入理解JVM》——01.基本概念" />
+<meta property="og:description" content="深入理解Java虚拟机第三版" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunteng9345.github.io/jvm/jvm-1-base/" /><meta property="article:section" content="jvm" />
+<meta property="article:published_time" content="2020-11-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-17T00:00:00+00:00" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/06.0/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-8-jvm-run/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-7-class-struct/" />
+
+
+
+    <title>
+  《深入理解JVM》——01.基本概念 · 云的博客
+</title>
+
+    
+      <link rel="canonical" href="https://yunteng9345.github.io/jvm/jvm-1-base/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.87.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      云的博客
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/jvm/">JVM</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/go/">Golang</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/life/">life</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/leetcode/">leetcode</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>《深入理解JVM》——01.基本概念</h1>
+    </header>
+
+    <h2 id="java虚拟机基本概念">Java虚拟机基本概念</h2>
+<h3 id="jvm运行时数据区域">JVM运行时数据区域</h3>
+<p><img src="https://yunteng9345.github.io/images/jvm/JVM-Memory.png" alt="jvm"></p>
+<h3 id="说明">说明</h3>
+<p>每开启一个线程JVM都给线程分配三个独立的内存区域，分别是Stack Area（虚拟机栈）、PC Registers（程序计数器）、Native Method Area（本地方法区）。而他们的共享内存区域是Method Area（方法区）、Heap（堆）。</p>
+<h3 id="pc-register">PC Register</h3>
+<p>程序寄存器，线程执行的字节码的行号指示器，通过改变计数器的值选取下一条执行的字节码指令，控制分支、循环、跳转、异常处理、线程恢复。</p>
+<blockquote>
+<p>java虚拟机的多线程是通过线程轮换、分配处理器的执行时间的方式来实现的。<strong>在任何一个确定的时刻，一个处理器（多核来说也是一个处理器）都只会执行一条线程中的指令</strong>。为了每个线程都能恢复到正确的执行位置，所以就有了PC Register。</p>
+</blockquote>
+<h3 id="stack-area">Stack Area</h3>
+<p>虚拟机栈，线程私有，生命周期与线程相同。<strong>每个方法被执行的时候，jvm都会同步创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态连接、方法出口等信息</strong>，每个方法被调用直至完成，就对应一个栈帧从入栈到出栈的过程。更多情况下只是指虚拟机栈中的局部变量表部分。局部变量表存放了编译期可知的各种Java虚拟机 基本数据类型（boolean、byte、char、short、int、float、long、double)、对象引用（reference类型，它并不等同于对象本身）</p>
+<h3 id="native-method-area">Native Method Area</h3>
+<p>本地方法栈，与虚拟机发挥的作用非常相似，区别：VM Stacks执行Java方法，Native Method Stacks执行本地方法，如：c、cpp等。</p>
+<blockquote>
+<p>有的虚拟机直接把本地方法栈和虚拟机栈合二为一使用，如Hot-Spot虚拟机</p>
+</blockquote>
+<p>栈溢出的场景（StackOverflowError）代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
+<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> TestDemo {
+
+    <span style="color:#fff;font-weight:bold">private</span> <span style="color:#fff;font-weight:bold">int</span> index = 1;
+
+    <span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method() {
+        index++;
+        method();
+    }
+
+    @Test
+    <span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> testStackOverflowError() {
+        <span style="color:#fff;font-weight:bold">try</span> {
+            method();
+        } <span style="color:#fff;font-weight:bold">catch</span> (StackOverflowError e) {
+            System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(<span style="color:#0ff;font-weight:bold">&#34;程序所需要的栈大小 &gt; 允许最大的栈大小，执行深度: &#34;</span> + index);
+            e.<span style="color:#007f7f">printStackTrace</span>();
+        }
+    }
+}
+
+java.<span style="color:#007f7f">lang</span>.<span style="color:#007f7f">StackOverflowError</span>
+	at com.<span style="color:#007f7f">collection</span>.<span style="color:#007f7f">map</span>.<span style="color:#007f7f">MapDemo</span>.<span style="color:#007f7f">method</span>(MapDemo.<span style="color:#007f7f">java</span>:29)
+	at com.<span style="color:#007f7f">collection</span>.<span style="color:#007f7f">map</span>.<span style="color:#007f7f">MapDemo</span>.<span style="color:#007f7f">method</span>(MapDemo.<span style="color:#007f7f">java</span>:29)
+	at com.<span style="color:#007f7f">collection</span>.<span style="color:#007f7f">map</span>.<span style="color:#007f7f">MapDemo</span>.<span style="color:#007f7f">method</span>(MapDemo.<span style="color:#007f7f">java</span>:29)
+	at com.<span style="color:#007f7f">collection</span>.<span style="color:#007f7f">map</span>.<span style="color:#007f7f">MapDemo</span>.<span style="color:#007f7f">method</span>(MapDemo.<span style="color:#007f7f">java</span>:29)
+	at com.<span style="color:#007f7f">collection</span>.<span style="color:#007f7f">map</span>.<span style="color:#007f7f">MapDemo</span>.<span style="color:#007f7f">method</span>(MapDemo.<span style="color:#007f7f">java</span>:29)
+
+</code></pre></div><p>当栈内存超过系统配置的栈内存-Xss:2048（<em>为jvm启动的每个线程分配的内存大小</em>），就会出现java.lang.StackOverflowError异常。这也是为什么对于需要谨慎使用递归调用的原因！</p>
+<p>堆栈溢出的场景（OutOfMemoryError）代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> Heap {
+
+<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> main(String[] args) {
+    ArrayList list = <span style="color:#fff;font-weight:bold">new</span> ArrayList();
+    <span style="color:#fff;font-weight:bold">while</span> (<span style="color:#fff;font-weight:bold">true</span>) {
+        list.<span style="color:#007f7f">add</span>(<span style="color:#fff;font-weight:bold">new</span> Heap());
+    }
+  }
+}
+
+Exception in thread <span style="color:#0ff;font-weight:bold">&#34;main&#34;</span> java.<span style="color:#007f7f">lang</span>.<span style="color:#007f7f">OutOfMemoryError</span>: Java heap space
+	at java.<span style="color:#007f7f">util</span>.<span style="color:#007f7f">Arrays</span>.<span style="color:#007f7f">copyOf</span>(Arrays.<span style="color:#007f7f">java</span>:3210)
+	at java.<span style="color:#007f7f">util</span>.<span style="color:#007f7f">Arrays</span>.<span style="color:#007f7f">copyOf</span>(Arrays.<span style="color:#007f7f">java</span>:3181)
+	at java.<span style="color:#007f7f">util</span>.<span style="color:#007f7f">ArrayList</span>.<span style="color:#007f7f">grow</span>(ArrayList.<span style="color:#007f7f">java</span>:261)
+	at java.<span style="color:#007f7f">util</span>.<span style="color:#007f7f">ArrayList</span>.<span style="color:#007f7f">ensureExplicitCapacity</span>(ArrayList.<span style="color:#007f7f">java</span>:235)
+	at java.<span style="color:#007f7f">util</span>.<span style="color:#007f7f">ArrayList</span>.<span style="color:#007f7f">ensureCapacityInternal</span>(ArrayList.<span style="color:#007f7f">java</span>:227)
+	at java.<span style="color:#007f7f">util</span>.<span style="color:#007f7f">ArrayList</span>.<span style="color:#007f7f">add</span>(ArrayList.<span style="color:#007f7f">java</span>:458)
+
+</code></pre></div><p>List是动态增长的，因此容量不够了，就会扩容，一旦空闲内存分配完毕，请求不到其他内存，就抛出OutOfMemoryError。</p>
+<h3 id="heap">Heap</h3>
+<p>堆，是虚拟机管理内存中最大的一块，被所有线程共享，在虚拟机启动时创建。此内存的唯一目的是存放对象。Java堆是垃圾收集器管理的内存区域（GC堆），JVM大多数的堆容量都是可以扩展的（-Xmx和-Xms）</p>
+<h3 id="method-area">Method Area</h3>
+<p>方法区，和Java堆一样，是各个线程共享的内存区域，他用于存储<strong>已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存</strong>等数据。</p>
+<h4 id="runtime-constant-pool">Runtime Constant Pool</h4>
+<p>运行时常量池，是Method Area的一部分。Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池表（ Constant Pool Table），用于存放编译器生成的各种字面量与符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。</p>
+<ul>
+<li><a href="../">目录</a></li>
+<li>下一章：<a href="../jvm-new-object-flow">创建对象过程</a></li>
+</ul>
+
+  </article>
+  <script src="https://utteranc.es/client.js"
+        repo="yunteng9345/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>码出艺术 © 2020 - 2020 | 蒙ICP备2020004632号 | 粤公网安备 44030502006604号</p>
+      
+      
+      
+      
+        
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js"></script>
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    <script data-goatcounter="https://code.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+  </body>
+
+</html>

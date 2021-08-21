@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="🎂云☁️">
+    <meta name="description" content="go语言">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《Mastering Go》翻译第六章（已完成）"/>
+<meta name="twitter:description" content="go语言"/>
+
+    <meta property="og:title" content="《Mastering Go》翻译第六章（已完成）" />
+<meta property="og:description" content="go语言" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunteng9345.github.io/go/06.0/" /><meta property="article:section" content="go" />
+<meta property="article:published_time" content="2021-01-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-09T00:00:00+00:00" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-03/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-02/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-01/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+
+
+
+    <title>
+  《Mastering Go》翻译第六章（已完成） · 云的博客
+</title>
+
+    
+      <link rel="canonical" href="https://yunteng9345.github.io/go/06.0/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.87.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      云的博客
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/jvm/">JVM</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/go/">Golang</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/life/">life</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/leetcode/">leetcode</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>《Mastering Go》翻译第六章（已完成）</h1>
+    </header>
+
+    <h1 id="mastering-go翻译第6章">《Mastering Go》翻译第6章</h1>
+<p>我的github地址：<a href="https://github.com/yunteng9345/Mastering_Go_Second_Edition_Zh_CN">https://github.com/yunteng9345/Mastering_Go_Second_Edition_Zh_CN</a></p>
+<p>主要内容：</p>
+<ul>
+<li>go函数开发</li>
+<li>匿名函数</li>
+<li>多返回值函数</li>
+<li>命名函数返回值</li>
+<li>函数返回其他函数</li>
+<li>可变参数函数</li>
+<li>开发Go packages</li>
+<li>用Go Modules开发和工作</li>
+<li>私有和公有package对象</li>
+<li>在packages使用<code>init()</code>函数</li>
+<li>Go标准包html/template</li>
+<li>Go标准包text/template</li>
+<li>Go高级包go/scanner, go/parser, go/token</li>
+<li>Go标准包syscall，底层包，虽然你可能不直接使用，但是它广泛运用在其他的Go packages</li>
+</ul>
+<h1 id="你不知道的go-packages和功能">你不知道的Go packages和功能</h1>
+<p>上一章讲解了如何开发和如何自定的数据结构，如：linked lists、binary trees、hash table。用Go语言生成随机数和密码、执行高性能的矩阵操作等。</p>
+<p>这章主要的重点是Go packages，它是用Go的方式组织、交付、使用代码。最重要的通用组件就是Go package中的函数，它使得在Go语言中变得可扩展。紧接着，这章将会讲解Go modules，这是带有版本号的Go packages。在这章的最后，你将了解一些属于Go标准库的packages，为了更好的理解Go packages的不同的创建方式。</p>
+<p>本章，你将学到以下主题：</p>
+<ul>
+<li>go函数开发</li>
+<li>匿名函数</li>
+<li>多返回值函数</li>
+<li>命名函数返回值</li>
+<li>函数返回其他函数</li>
+<li>可变参数函数</li>
+<li>开发Go packages</li>
+<li>用Go Modules开发和工作</li>
+<li>私有和公有package对象</li>
+<li>在packages使用<code>init()</code>函数</li>
+<li>Go标准包html/template</li>
+<li>Go标准包text/template</li>
+<li>Go高级包go/scanner, go/parser, go/token</li>
+<li>Go标准包syscall，底层包，虽然你可能不直接使用，但是它广泛运用在其他的Go packages</li>
+</ul>
+<h1 id="关于go-package">关于Go package</h1>
+<p>任何内容在Go语言中交付都是以packages的形式。Go package是一个用package关键字开头，后面跟着包名的源文件。一些packages也有结构。例如net包有一系列的子目录，http、mail、rpc、smtp、textproto、url。这些包可以用 <code>net/http, net/mail, net/rpc, net/smtp, net/textproto, net/url</code> 的语法形式单独使用。</p>
+<p>为了和Go标准库做分离，存在一些能够使用全路径导入的外部包，在第一次使用之前会被下载。如<code>github.com/matryer/is</code>，是一个Github仓库。</p>
+<p>Packages主要使用于将函数、变量、 常量分组。为的是在使用自己的Go程序时迁移这些分组更加便捷。注意，除了主要的main package，其他Go packages 程序不能够被编译到可执行文件。这意味着它们需要被main package直接或者间接的引用。如果你执行一个自己的go package（不是main package）。出现如下错误：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f00">$</span> <span style="color:#fff;font-weight:bold">go</span> run aPackage.<span style="color:#fff;font-weight:bold">go</span>
+<span style="color:#fff;font-weight:bold">go</span> run: cannot run non-main <span style="color:#fff;font-weight:bold">package</span>
+
+</code></pre></div><h1 id="关于go函数">关于Go函数</h1>
+<p>函数在任何编程语言中都是非常重要的一环，因为它允许你可以将大的程序分割成更小、更便于管理的部分。函数必须尽可能独立，必须做好一件工作，而且只做好一件工作。所以如果你发现你写一个函数做很多事，应该考虑用多个函数去替换它。（单一职责原则）</p>
+<p>Go语言中最流行的函数就是<code>main()</code>，它是每个独立的Go程序都使用的。你应该已经知道所有的函数定义都以<code>func</code>关键字开头。</p>
+<h1 id="匿名函数">匿名函数</h1>
+<p>匿名函数被定义在内部，不需要函数名，经常用它来实现一段代码量很少的功能。在Go语言中，函数能够返回一个匿名函数，或者将一个匿名函数作为函数的一个参数，此外，匿名函数能够被附加到Go变量。注意匿名函数也被称为闭包，特别是在函数式编程术语中。</p>
+<blockquote>
+<p>对于一个匿名函数来说，需要实现最小的一个重点。<strong>如果匿名函数没有重点，你就要考虑将它改造为一个常规的函数。</strong></p>
+</blockquote>
+<p>当一个匿名函数只提供一个功能时，它绝对会使你的工作更加简单便捷。只是如果没有合适的场景时，不要在你的程序中使用太多的匿名函数。稍后你将会看到匿名函数的实际使用。</p>
+<h1 id="多返回值函数">多返回值函数</h1>
+<p>如果你已经知道了<code>strconv.Atoi()</code>函数，此函数可以返回多个不同的值，这使您不必为它创建专用的结构
+保存函数返回的多个值。你可以定义一个返回4个值的函数，如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> aFunction() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">float64</span>, <span style="color:#fff;font-weight:bold">string</span>) {
+}
+</code></pre></div><p>接下来解释匿名函数和多个返回值的函数，更详细内容使用functions.go文件来说明，用五部分代码来说明。</p>
+<p>第一部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+<span style="color:#fff;font-weight:bold">import</span> (
+    <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+    <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+    <span style="color:#0ff;font-weight:bold">&#34;strconv&#34;</span>
+    )
+</code></pre></div><p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> doubleSquare(x <span style="color:#fff;font-weight:bold">int</span>) (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">int</span>) {
+    <span style="color:#fff;font-weight:bold">return</span> x * <span style="color:#ff0;font-weight:bold">2</span>, x * x
+}
+</code></pre></div><p>这里有一个<code>doubleSquare()</code>的函数，它传入一个int类型的参数，返回两个int类型的值，第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    arguments := os.Args
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(arguments) != <span style="color:#ff0;font-weight:bold">2</span> {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;The program needs 1 argument!&#34;</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    y, err := strconv.Atoi(arguments[<span style="color:#ff0;font-weight:bold">1</span>])
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(err)
+    <span style="color:#fff;font-weight:bold">return</span>
+ }
+</code></pre></div><p>之前的程序是用命令行中附加的参数来处理的。第四部分包含以下内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"> square := <span style="color:#fff;font-weight:bold">func</span>(s <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+ <span style="color:#fff;font-weight:bold">return</span> s * s
+ }
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;The square of&#34;</span>, y, <span style="color:#0ff;font-weight:bold">&#34;is&#34;</span>, square(y))
+ double := <span style="color:#fff;font-weight:bold">func</span>(s <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+ <span style="color:#fff;font-weight:bold">return</span> s + s
+ }
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;The double of&#34;</span>, y, <span style="color:#0ff;font-weight:bold">&#34;is&#34;</span>, double(y))
+</code></pre></div><p>每个square和double指向一个匿名函数的地址。不够好的部分是你可以改变square和double的值，或者其他变量在匿名函数定义之后也可以指向该匿名函数的地址。这意味着这些变量能够改变和计算其他内容。</p>
+<blockquote>
+<p>改变保存匿名函数的变量代码不是好的编程实践，因为这可能是产生bug的根本原因。</p>
+</blockquote>
+<p>最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"> fmt.Println(doubleSquare(y))
+ d, s := doubleSquare(y)
+ fmt.Println(d, s)
+</code></pre></div><p>所以，你能同时打印函数的返回值，或者将它们分配给其他变量。</p>
+<p>执行functions.go后：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run functions.go <span style="color:#ff0;font-weight:bold">1</span> <span style="color:#ff0;font-weight:bold">21</span>
+The program needs <span style="color:#ff0;font-weight:bold">1</span> argument!
+$ go run functions.go 10.2
+strconv.Atoi: parsing <span style="color:#0ff;font-weight:bold">&#34;10.2&#34;</span>: invalid syntax
+$ go run functions.go <span style="color:#ff0;font-weight:bold">10</span>
+The square of <span style="color:#ff0;font-weight:bold">10</span> is <span style="color:#ff0;font-weight:bold">100</span>
+The double of <span style="color:#ff0;font-weight:bold">10</span> is <span style="color:#ff0;font-weight:bold">20</span>
+<span style="color:#ff0;font-weight:bold">20</span> <span style="color:#ff0;font-weight:bold">100</span>
+<span style="color:#ff0;font-weight:bold">20</span> <span style="color:#ff0;font-weight:bold">100</span>
+</code></pre></div><h1 id="函数的返回值可以被命名">函数的返回值可以被命名</h1>
+<p>不像C语言，Go允许将函数的返回值命名。当这样的函数有一个不带任何参数的return语句时，<strong>该函数会按照函数定义中声明的顺序自动返回每个命名的返回值的当前值。</strong></p>
+<p>returnNames.go源码将会说明，已经命名了返回值的函数是怎样工作的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;strconv&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> namedMinMax(x, y <span style="color:#fff;font-weight:bold">int</span>) (min, max <span style="color:#fff;font-weight:bold">int</span>) {
+    <span style="color:#fff;font-weight:bold">if</span> x &gt; y {
+        min = y
+        max = x
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        min = x
+        max = y
+    }
+    <span style="color:#fff;font-weight:bold">return</span>
+}
+</code></pre></div><p>在这段代码中，可以看到实现了<code>namedMinMax()</code>的函数，它使用了已经命名的返回参数。然而，这里有一个容易出错的地方：<code>namedMinMax()</code>函数在它的return语句中，不能明确的返回一些变量或值。尽管如此，当函数在命名时指定了返回值，min和max参数将按照它们放入函数定义的顺序自动返回。</p>
+<p>第二段代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> minMax(x, y <span style="color:#fff;font-weight:bold">int</span>) (min, max <span style="color:#fff;font-weight:bold">int</span>) {
+    <span style="color:#fff;font-weight:bold">if</span> x &gt; y {
+        min = y
+        max = x
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        min = x
+        max = y
+    }
+    <span style="color:#fff;font-weight:bold">return</span> min, max
+}
+</code></pre></div><p><code>minMax()</code>函数也命名了返回值，但是它的return语句明确定义了返回的顺序和变量。</p>
+<p>最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    arguments := os.Args
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(arguments) &lt; <span style="color:#ff0;font-weight:bold">3</span> {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;The program needs at least 2 arguments!&#34;</span>)
+    <span style="color:#fff;font-weight:bold">return</span>
+    }
+    a1, _ := strconv.Atoi(arguments[<span style="color:#ff0;font-weight:bold">1</span>])
+    a2, _ := strconv.Atoi(arguments[<span style="color:#ff0;font-weight:bold">2</span>])
+
+    fmt.Println(minMax(a1, a2))
+    min, max := minMax(a1, a2)
+    fmt.Println(min, max)
+    fmt.Println(namedMinMax(a1, a2))
+    min, max = namedMinMax(a1, a2)
+    fmt.Println(min, max)
+}
+</code></pre></div><p><code>main()</code>函数的目的是为了验证所有的方法执行的结果是否相同。</p>
+<p>最后一段代码执行后输入如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run returnNames.go -20 <span style="color:#ff0;font-weight:bold">1</span>
+-20 <span style="color:#ff0;font-weight:bold">1</span>
+-20 <span style="color:#ff0;font-weight:bold">1</span>
+-20 <span style="color:#ff0;font-weight:bold">1</span>
+-20 <span style="color:#ff0;font-weight:bold">1</span>
+</code></pre></div><h1 id="带有指针参数的函数">带有指针参数的函数</h1>
+<p>只要签名允许，函数可以接受指针形参。ptrFun.go将会讲解如何在函数中使用指针。</p>
+<p>第一部分:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+<span style="color:#fff;font-weight:bold">func</span> getPtr(v *<span style="color:#fff;font-weight:bold">float64</span>) <span style="color:#fff;font-weight:bold">float64</span> {
+ <span style="color:#fff;font-weight:bold">return</span> *v * *v
+}
+</code></pre></div><p><code>getPtr()</code>函数接收一个值指向类型为float64的指针变量。第二部分代码展示如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+ x := <span style="color:#ff0;font-weight:bold">12.2</span>
+ fmt.Println(getPtr(&amp;x))
+ x = <span style="color:#ff0;font-weight:bold">12</span>
+ fmt.Println(getPtr(&amp;x))
+}
+</code></pre></div><p>比较复杂的部分是函数参数中需要传入变量的地址，因为它是指针参数所需要的类型。通过在变量前加&quot;&amp;&ldquo;符号实现。</p>
+<p>执行<code>ptrFun.go</code>后将生成如下输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run ptrFun.go
+148.83999999999997
+<span style="color:#ff0;font-weight:bold">144</span>
+
+</code></pre></div><p>如果想传入一个简单的值到<code>getPtr()</code>函数中调用，类似于<code>getPtr(12.12)</code>。这样程序将会失败，并出现如下错误：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run ptrFun.go
+<span style="color:#007f7f"># command-line-arguments</span>
+./ptrFun.go:15:21: cannot use 12.12 (<span style="color:#fff;font-weight:bold">type</span> float64) as <span style="color:#fff;font-weight:bold">type</span> *float64 in argument to getPtr
+</code></pre></div><h1 id="返回指针的函数">返回指针的函数</h1>
+<p>从第四章开始，<code>pointerStruct.go</code>文件就用来作为案例代码。对于复合类型的使用，最好的做法是使用单独的函数创建新的结构变量，并从该函数返回指向它们的指针。所以，函数返回指针是很常见的。通常来说，这种函数简化了程序结构，并且允许开发者集中于更多重要的事情上，而不是总是复制一些相同的代码片段。(<code>Ctrl+C</code>和<code>Ctrl+v</code>，造就了一代又一代的程序员，皮一下)。接下来将通过<code>pointerStruct.go</code>的代码来说明本小节的内容。第一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> returnPtr(x <span style="color:#fff;font-weight:bold">int</span>) *<span style="color:#fff;font-weight:bold">int</span> {
+    y := x * x
+    <span style="color:#fff;font-weight:bold">return</span> &amp;y
+}
+</code></pre></div><p>这个函数返回了一个指向<code>int</code>变量的指针。唯一的功能就是使用<code>&amp;y</code>返回y变量的内存地址。第二部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+ sq := returnPtr(<span style="color:#ff0;font-weight:bold">10</span>)
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;sq value:&#34;</span>, *sq)
+</code></pre></div><p><code>“*”</code>这个符号可以得到指针变量的值，这意味着它返回了一个在内存地址中实际代表的值。（而不是值的地址），最后一段代码如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"> fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;sq memory address:&#34;</span>, sq)
+}
+</code></pre></div><p>前面的代码将返回sq变量的内存地址。而不是存在其内存中的值。</p>
+<p>如果执行<code>returnPtr.go</code>，你将看到以下输出。不同的内存地址，（因为我们在不同的机器执行，所以变量内存不一定分配在哪一片段）</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run returnPtr.go
+sq value: <span style="color:#ff0;font-weight:bold">100</span>
+sq memory address: 0xc00009a000
+</code></pre></div><h1 id="返回其他函数的函数">返回其他函数的函数</h1>
+<p>在这个章节中，我们一起学习如何用Go语言实现一个返回其他函数的函数。分为三个部分展示，第一部分<code>returnFunction.go</code>如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+<span style="color:#fff;font-weight:bold">func</span> funReturnFun() <span style="color:#fff;font-weight:bold">func</span>() <span style="color:#fff;font-weight:bold">int</span> {
+    i := <span style="color:#ff0;font-weight:bold">0</span>
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">func</span>() <span style="color:#fff;font-weight:bold">int</span> {
+        i++
+        <span style="color:#fff;font-weight:bold">return</span> i * i
+    }
+}
+</code></pre></div><p>我们可以看到<code>funReturnFun()</code>的实现，它的返回值是一个匿名函数<code>function (func() int)</code>。</p>
+<p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+ i := funReturnFun()
+ j := funReturnFun()
+</code></pre></div><p>在这段代码中，调用funReturnFun()两次，并将其返回值(一个函数)赋给两个独立的变量i和j。我们可以看到程序输出中，这两个变量完全不相关。最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"> fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;1:&#34;</span>, i())
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;2:&#34;</span>, i())
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;j1:&#34;</span>, j())
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;j2:&#34;</span>, j())
+ fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;3:&#34;</span>, i())
+}
+</code></pre></div><p>在这段代码中，使用i变量3次，j变量2次。但是尽管i和j都是通过<code>funReturnFun()函数</code>被创建。但是他们彼此之间相互独立，没有任何相同之处。</p>
+<p>执行代码后输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f00">$</span> <span style="color:#fff;font-weight:bold">go</span> run returnFunction.<span style="color:#fff;font-weight:bold">go</span>
+<span style="color:#ff0;font-weight:bold">1</span>: <span style="color:#ff0;font-weight:bold">1</span>
+<span style="color:#ff0;font-weight:bold">2</span>: <span style="color:#ff0;font-weight:bold">4</span>
+j1: <span style="color:#ff0;font-weight:bold">1</span>
+j2: <span style="color:#ff0;font-weight:bold">4</span>
+<span style="color:#ff0;font-weight:bold">3</span>: <span style="color:#ff0;font-weight:bold">9</span>
+</code></pre></div><p>从输出内容可以看出，在每一次调用i()或j()之后，i的值保持自增没有变为0，</p>
+<h1 id="将函数作为参数的函数">将函数作为参数的函数</h1>
+<p>Go函数能够接受其他Go函数作为其参数，它的特征是能够添加其他Go函数实现的其他用途。两个最常用的功能就是元素排序和<code>filepath.Walk()</code>函数。然而，在展示出的例子中，它被命名为<code>funFun.go</code>。我们将实现最简单的处理int值的例子。有关实现将分为三部分实现。</p>
+<p>第一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+
+<span style="color:#fff;font-weight:bold">func</span> function1(i <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+    <span style="color:#fff;font-weight:bold">return</span> i + i
+}
+<span style="color:#fff;font-weight:bold">func</span> function2(i <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+    <span style="color:#fff;font-weight:bold">return</span> i * i
+}
+</code></pre></div><p>我们有两个函数都接收int返回int。这些函数将在一段时间内被作为其他函数的参数来使用。第二部分代码如下图所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> funFun(f <span style="color:#fff;font-weight:bold">func</span>(<span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span>, v <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+ <span style="color:#fff;font-weight:bold">return</span> f(v)
+}
+</code></pre></div><p><code>funFun()</code>函数接收两个参数，一个名为f的函数参数，一个名为v的int参数。f形参应该是一个接受int形参并返回一个int值的函数。最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;function1:&#34;</span>, funFun(function1, <span style="color:#ff0;font-weight:bold">123</span>))
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;function2:&#34;</span>, funFun(function2, <span style="color:#ff0;font-weight:bold">123</span>))
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Inline:&#34;</span>, funFun(<span style="color:#fff;font-weight:bold">func</span>(i <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {<span style="color:#fff;font-weight:bold">return</span> i * i * i}, <span style="color:#ff0;font-weight:bold">123</span>))
+}
+</code></pre></div><p>The first fmt.Println() call uses funFun() with function1, without any parentheses,
+as its first parameter, whereas the second fmt.Println() call uses funFun() with
+function2 as its first parameter.</p>
+<p>第一个<code>fmt.Println()</code>调用<code>funFun()</code>，用不带任何圆括号的<code>function1</code>作为第一个形参，而第二个<code>fmt.Println()</code>调用<code>funFun()</code>和<code>function2</code>作为形参。</p>
+<p>最后一个<code>fmt.Println()</code>语句，有趣的事情发生了，函数的实现放在了方法<code>funFun()</code>第一个参数的位置上，尽管这种方法适用于简单和功能小的函数参数。但是对于包含许多行Go代码的函数来说就不那么好了。</p>
+<p>执行代码输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run funFun.go
+function1: <span style="color:#ff0;font-weight:bold">246</span>
+function2: <span style="color:#ff0;font-weight:bold">15129</span>
+Inline: <span style="color:#ff0;font-weight:bold">1860867</span>
+</code></pre></div><h1 id="参数可变函数">参数可变函数</h1>
+<p>Go也支持<strong>参数可变函数</strong>，这些函数能够接收可变的参数个数。最为流行的函数在<code>fmt</code>包中可以找到。接下来通过<code>variadic.go</code>来讲解。将分3部分展示，第一部分如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> varFunc(input ...<span style="color:#fff;font-weight:bold">string</span>) {
+    fmt.Println(input)
+}
+</code></pre></div><p>这部分展示了参数可变(变长)函数<code>varFunc()</code>的实现，它接收string类型的可变参数。传入的参数<code>input</code>在函数<code>varFunc()</code>函数内部作为切片使用。而“&hellip;”操作叫做包装操作。而拆包操作以“&hellip;”结尾，以切片类型开始。可以参数函数的包装操作最多一次。第二部分代码如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> oneByOne(message <span style="color:#fff;font-weight:bold">string</span>, s ...<span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+    fmt.Println(message)
+    sum := <span style="color:#ff0;font-weight:bold">0</span>
+    <span style="color:#fff;font-weight:bold">for</span> i, a := <span style="color:#fff;font-weight:bold">range</span> s {
+        fmt.Println(i, a)
+        sum = sum + a
+    }
+    s[<span style="color:#ff0;font-weight:bold">0</span>] = -<span style="color:#ff0;font-weight:bold">1000</span>
+    <span style="color:#fff;font-weight:bold">return</span> sum
+}
+</code></pre></div><p>这里你能看到其他可变参数函数<code>oneByOne()</code>，它接收单个string和一个int类型的可变参数。形参s其实就是一个切片。最后一部分代码如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    arguments := os.Args
+    varFunc(arguments...)
+    sum := oneByOne(<span style="color:#0ff;font-weight:bold">&#34;Adding numbers...&#34;</span>, <span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">3</span>, <span style="color:#ff0;font-weight:bold">4</span>, <span style="color:#ff0;font-weight:bold">5</span>, -<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">10</span>)
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Sum:&#34;</span>, sum)
+    s := []<span style="color:#fff;font-weight:bold">int</span>{<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">3</span>}
+    sum = oneByOne(<span style="color:#0ff;font-weight:bold">&#34;Adding numbers...&#34;</span>, s...)
+    fmt.Println(s)
+}
+</code></pre></div><p><code>main</code>函数中使用了2个可变参数函数。对第二个函数<code>oneByOne()</code>使用了切片。对可变参数函数内的切片所做的任何更改在函数退出后仍将保留。</p>
+<p>执行代码后输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./variadic <span style="color:#ff0;font-weight:bold">1</span> <span style="color:#ff0;font-weight:bold">2</span>
+[./variadic <span style="color:#ff0;font-weight:bold">1</span> 2]
+Adding numbers...
+<span style="color:#ff0;font-weight:bold">0</span> <span style="color:#ff0;font-weight:bold">1</span>
+<span style="color:#ff0;font-weight:bold">1</span> <span style="color:#ff0;font-weight:bold">2</span>
+<span style="color:#ff0;font-weight:bold">2</span> <span style="color:#ff0;font-weight:bold">3</span>
+<span style="color:#ff0;font-weight:bold">3</span> <span style="color:#ff0;font-weight:bold">4</span>
+<span style="color:#ff0;font-weight:bold">4</span> <span style="color:#ff0;font-weight:bold">5</span>
+<span style="color:#ff0;font-weight:bold">5</span> -1
+<span style="color:#ff0;font-weight:bold">6</span> <span style="color:#ff0;font-weight:bold">10</span>
+Sum: <span style="color:#ff0;font-weight:bold">24</span>
+Adding numbers...
+<span style="color:#ff0;font-weight:bold">0</span> <span style="color:#ff0;font-weight:bold">1</span>
+<span style="color:#ff0;font-weight:bold">1</span> <span style="color:#ff0;font-weight:bold">2</span>
+<span style="color:#ff0;font-weight:bold">2</span> <span style="color:#ff0;font-weight:bold">3</span>
+[-1000 <span style="color:#ff0;font-weight:bold">2</span> 3]
+</code></pre></div><h1 id="开发自己的go-packages">开发自己的Go packages</h1>
+<p>Go package的源码，可以包含多个文件和文件夹，能够在以包名命名的单个目录内找到。除了显而易见的main包可以放在任何地方。这章的目标，我们将开发一个名为<code>aPackage</code>的Go package。包的源文件为<code>aPackage.go</code>，它的源码分两部分展示。第一部分如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> aPackage
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> A() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;This is function A!&#34;</span>)
+}
+</code></pre></div><p>在Go package中注意使用首写字母大写。在这里的<code>– aPackage</code>仅仅是作为例子在使用。第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> B() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;privateConstant:&#34;</span>, privateConstant)
+}
+<span style="color:#fff;font-weight:bold">const</span> MyConstant = <span style="color:#ff0;font-weight:bold">123</span>
+<span style="color:#fff;font-weight:bold">const</span> privateConstant = <span style="color:#ff0;font-weight:bold">21</span>
+</code></pre></div><p>可以看出，开发一个新的Go package非常简单。当前，你不能单独使用这个包，你需要创建一个名为main的包，其中包含main()函数，以便创建一个可执行文件。在这个例子中，将使用aPackage的作为usepackage.go的包名</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;aPackage&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Using aPackage!&#34;</span>)
+    aPackage.A()
+    aPackage.B()
+    fmt.Println(aPackage.MyConstant)
+}
+</code></pre></div><p>如果此时执行，会得到以下错误，这意味着我们的程序还没有完成。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run useAPackage.go
+useAPackage.go:4:2: cannot find package <span style="color:#0ff;font-weight:bold">&#34;aPackage&#34;</span> in any of:
+ /usr/local/Cellar/go/1.9.2/libexec/src/aPackage (from $GOROOT)
+ /Users/mtsouk/go/src/aPackage (from $GOPATH)
+</code></pre></div><p>这里有另外一件事情需要我们处理。假设你已经知道了第一章的内容和操作系统的知识。Go需要在UNIX中执行一些特殊的shell命令来下载所有的外部包，其中也包含了你本地开发的包。因此，在打包之前你要确保当前的UNIX的用户是可用的，并且将之前的包放在合适的路劲下。因此，下载你自己的包涉及到执行以下UNIX的shell命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ mkdir ~/go/src/aPackage
+$ cp aPackage.go ~/go/src/aPackage/
+$ go install aPackage
+$ <span style="color:#fff;font-weight:bold">cd</span> ~/go/pkg/darwin_amd64/
+$ ls -l aPackage.a
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff <span style="color:#ff0;font-weight:bold">4980</span> Dec <span style="color:#ff0;font-weight:bold">22</span> 06:12 aPackage.a
+</code></pre></div><blockquote>
+<p>如果 ~/go 文件夹不是已经存在的, 你将需要用<code>mkdir</code>命令创建一个。在这个例子中。你将需要和 <code>~/go/src</code>相似的目录，代码执行后如下图所示：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run useAPackage.go
+Using aPackage!
+This is <span style="color:#fff;font-weight:bold">function</span> A!
+privateConstant: <span style="color:#ff0;font-weight:bold">21</span>
+<span style="color:#ff0;font-weight:bold">123</span>
+</code></pre></div><h1 id="编译一个go-package">编译一个Go package</h1>
+<p>虽然你不能执行不在main函数内的Go package，但是你仍然可以编译和创建对应的目标文件。如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go tool compile aPackage.go
+$ ls -l aPackage.*
+-rw-r--r--@ <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff <span style="color:#ff0;font-weight:bold">201</span> Jan <span style="color:#ff0;font-weight:bold">10</span> 22:08 aPackage.go
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff <span style="color:#ff0;font-weight:bold">16316</span> Mar <span style="color:#ff0;font-weight:bold">4</span> 20:01 aPackage.o#
+</code></pre></div><h1 id="私有变量和函数">私有变量和函数</h1>
+<p>私有变量和函数与公共变量和函数的区别在于，私有变量和函数可以在包的内部严格使用和调用。控制哪些函数、常量和变量是公共的，也称为封装。Go使用一个简单的规则区分函数或者变量私有或是共有。<strong>公有的函数，变量都是以大写字母开头，相反，私有的函数，变量都是以小写字母开头</strong>，这就是<code>fmt.Println()</code>中用<code>Println()</code>而不用<code>println()</code>的原因。然而，<strong>这个规则不影响包名的大小写。</strong></p>
+<h1 id="init-初始化函数"><code>init()</code> 初始化函数</h1>
+<p>任何一个Go package能够拥有一个私有函数<code>init()</code>，该函数在其他方法执行之前最开始自动执行。</p>
+<blockquote>
+<p><code>init()</code>函数被设计为私有函数，这意味着不能从包外部调用它。作为package的用户不能完全控制<code>init()</code>函数，你应该在使用公共包或在<code>init()</code>函数中修改全局状态时，仔细思考。</p>
+</blockquote>
+<p>我们将从多个Go packages中展示一个多个<code>init()</code>函数的例子。案例代码的包名简化为<code>a</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> a
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> init() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;init() a&#34;</span>)
+}
+
+<span style="color:#fff;font-weight:bold">func</span> FromA() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;fromA()&#34;</span>)
+}
+</code></pre></div><p>这个a包实现了<code>init()</code>函数和一个名为<code>FromA()</code>的函数。在这之后，我们需要使用如下shell命令让这个包成为当前UNIX用户可用的包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ mkdir ~/go/src/a
+$ cp a.go ~/go/src/a/
+$ go install a
+</code></pre></div><p>现在，我们看下一个Go语言的包b。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> b
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;a&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> init() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;init() b&#34;</span>)
+}
+<span style="color:#fff;font-weight:bold">func</span> FromB() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;fromB()&#34;</span>)
+    a.FromA()
+}
+</code></pre></div><p>这里发生了什么？a包使用了<code>fmt</code>的Go语言标准库。然而，b包需要导入a包才能使用<code>a.FromA()</code>函数。a和b都有一个<code>init()</code>函数。</p>
+<p>在这之后，我们需要下载这个包使得它在当前UNIX用户下可用。执行如下shell脚本。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ mkdir ~/go/src/b
+$ cp b.go ~/go/src/b
+$ go install b
+</code></pre></div><p>因此，我们当前有两个包含<code>init()</code>初始话函数的Go packages。现在我们试着猜测下执行<code>manyInit.go</code>后会输出什么，请看以下代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;a&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;b&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> init() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;init() manyInit&#34;</span>)
+}
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    a.FromA()
+    b.FromB()
+}
+</code></pre></div><p>实际的问题是：在a包执行时<code>init()</code>函数执行了几次？执<code>manyInit.go</code>生成如下输出，并对这个问题给出一些解释:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run manyInit.go
+init() a
+init() b
+init() manyInit
+fromA()
+fromB()
+fromA()
+</code></pre></div><p>虽然事实是a包被两个不同的包两次导入，但是之前的输出说明了<code>init()</code>函数只执行了一次。作为从<code>manyInit.go</code>导入的第一次执行的代码块，包a和包b的<code>init()</code>函数在<code>manyInit.go</code>的<code>init()</code>函数之前执行，这比较合理。主要原因是<code>manyInit.go</code>的<code>init()</code>函数允许使用a或b中的元素。</p>
+<p>当你想要设置一些不需要外部使用的内部变量是，<code>init()</code>函数是非常有用的。举例来说，我们可以在<code>init()</code>函数中找到当前的时区。记住，一个文件中可以有多个init()函数；然而，Go的这个特点很少被使用。</p>
+<h1 id="go-modules">Go modules</h1>
+<p>Go modules在GO 1.11版本中第一次被提及。在写这些内容的时候最新的Go版本是1.13。但在未来的Go版本中，所介绍的一些细节可能会发生变化。</p>
+<p>Go module类似于一个有版本好的Go package。Go对版本控制模块使用语义版本控制。这意味着版本从字母v开头后面加版本号，因此，我们能够有一些类似于v1.0.0, v1.0.5, 和v2.0.2的版本号。</p>
+<p>第一位版本号，v1, v2, or v3代表不向后兼容的Go package的大版本。这意味着如果我们的程序工作在v1版本，它不一定能在v2和v3版本的Go环境下正常工作。第二位版本号是特性相关的，通常v1.1.0版本要比v1.0.2或者v1.0.0有更多的新的特性，也比所有老的版本更加完整。最后一位版本号是和bug fix相关的。没有新的饿特性。注意，语义版本控制也用于Go版本。</p>
+<p>注意Go modules允许我们在GOPATH路径外写一些东西。</p>
+<h1 id="go-module的创建和使用">Go module的创建和使用</h1>
+<p>这部分，我们将创建第一个基础版本的Go module，我们需要一个Github仓库来存储代码。在这部分内容中，代码将放在<a href="https://github.com/mactsouk/myModule">https://github.com/mactsouk/myModule</a>。我们将创建一个只有<code>README.md</code>的仓库。所以第一次将在shell命令行下执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ git clone git@github.com:mactsouk/myModule.git
+Cloning into <span style="color:#0ff;font-weight:bold">&#39;myModule&#39;</span>...
+remote: Enumerating objects: 7, <span style="color:#fff;font-weight:bold">done</span>.
+remote: Counting objects: 100% (7/7), <span style="color:#fff;font-weight:bold">done</span>.
+remote: Compressing objects: 100% (6/6), <span style="color:#fff;font-weight:bold">done</span>.
+remote: Total <span style="color:#ff0;font-weight:bold">7</span> (delta 1), reused <span style="color:#ff0;font-weight:bold">0</span> (delta 0), pack-reused <span style="color:#ff0;font-weight:bold">0</span>
+Receiving objects: 100% (7/7), <span style="color:#fff;font-weight:bold">done</span>.
+Resolving deltas: 100% (1/1), <span style="color:#fff;font-weight:bold">done</span>.
+</code></pre></div><p>执行之后，我们将有一个作者的Github仓库，如果你想从头创建你自己的Go模块，你需要创建你自己的空GitHub仓库。</p>
+<h1 id="创建v100版本">创建v1.0.0版本</h1>
+<p>我们将需要执行如下命令来创建一个我们自己的v1.0.0 Go module。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go mod init
+go: creating new go.mod: module github.com/mactsouk/myModule
+$ touch myModule.go
+$ vi myModule.go
+$ git add .
+$ git commit -a -m <span style="color:#0ff;font-weight:bold">&#34;Initial version 1.0.0&#34;</span>
+$ git push
+$ git tag v1.0.0
+$ git push -q origin v1.0.0
+$ go list
+github.com/mactsouk/myModule
+$ go list -m
+github.com/mactsouk/myModule
+</code></pre></div><p><code>myModule.go</code>文件内容如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> myModule
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> Version() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Version 1.0.0&#34;</span>)
+}
+</code></pre></div><p><code>go.mod</code>之前就被创建了，如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cat go.mod
+module github.com/mactsouk/myModule
+go 1.12
+</code></pre></div><h1 id="使用v100版本">使用v1.0.0版本</h1>
+<p>在这章中，我们将学习如何使用之前创建的v1.0.0的Go module。为了使用Go modules，我们将创建一个Go程序，<code>useModule.go</code>文件如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ v1 <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v1.Version()
+}
+</code></pre></div><p>我们需要包含Go module（github.com/mactsouk/myModule）路径。在这例子这个路径的别名为v1。在Go语言中使用别名是不整洁的。为使阅读方便所以使用了别名。虽然如此，这个特征也不推荐用在生产代码中。</p>
+<p>如果我们试着在<code>/tmp</code>路径下执行<code>useModule.go</code>。它将报“找不到github.com/mactsouk/myModule”错误。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">pwd</span>
+/tmp
+$ go run useModule.go
+useModule.go:4:2: cannot find package <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule&#34;</span> in any
+of:
+ /usr/local/Cellar/go/1.12/libexec/src/github.com/mactsouk/myModule
+(from $GOROOT)
+ /Users/mtsouk/go/src/github.com/mactsouk/myModule (from $GOPATH)
+</code></pre></div><p>因此，我们需要执行如下命令获得Go modules，然后成功执行<code>useModule.go</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">export</span> GO111MODULE=on
+$ go run useModule.go
+go: finding github.com/mactsouk/myModule v1.0.0
+go: downloading github.com/mactsouk/myModule v1.0.0
+go: extracting github.com/mactsouk/myModule v1.0.0
+Version 1.0.0
+</code></pre></div><p>所以，<code>useModule.go</code>是正确的且能被执行，现在是时候让<code>useModule.go</code>更加规范了。去命名并创建它。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go mod init hello
+go: creating new go.mod: module hello
+$ go build
+</code></pre></div><p>最后一部分命令是在<code>/tmp</code>下生成一个可执行文件，以及两个额外的名为<code>go.mod</code>和<code>go.dum</code>文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cat go.sum
+github.com/mactsouk/myModule v1.0.0
+h1:eTCn2Jewnajw0REKONrVhHmeDEJ0Q5TAZ0xsSbh8kFs=
+github.com/mactsouk/myModule v1.0.0/go.mod
+h1:s3ziarTDDvaXaHWYYOf/ULi97aoBd6JfnvAkM8rSuzg=
+</code></pre></div><p><code>go.sum</code>文件的作用是检查所有的module是否已经下载，内容如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cat go.mod
+module hello
+go 1.12
+require github.com/mactsouk/myModule v1.0.0
+</code></pre></div><blockquote>
+<p>注意如果<code>go.mod</code>文件在我们的项目中制定了v1.3.0 Go module版本，即使有最新版本的Go module可以使用，项目也不会用到最新的Go module。</p>
+</blockquote>
+<h1 id="创建v110版本">创建v1.1.0版本</h1>
+<p>在这部分，我们将用不同的tag创建一个新版本的<code>myModule</code>文件。然而，这一次不需要执行命令<code>go mod init</code>，像之前那样。我们将需要执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ vi myModule.go
+$ git commit -a -m <span style="color:#0ff;font-weight:bold">&#34;v1.1.0&#34;</span>
+[master ddd0742] v1.1.0
+<span style="color:#ff0;font-weight:bold">1</span> file changed, <span style="color:#ff0;font-weight:bold">1</span> insertion(+), <span style="color:#ff0;font-weight:bold">1</span> deletion(-)
+$ git push
+$ git tag v1.1.0
+$ git push -q origin v1.1.0
+</code></pre></div><p><code>myModule.go</code>文件内容如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> myModule
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> Version() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Version 1.1.0&#34;</span>)
+}
+</code></pre></div><h1 id="使用v110版本">使用v1.1.0版本</h1>
+<p>在这章中，我们将学习如何使用我们创建的Go module v1.1.0。这一次，我们将使用Docker镜像，以便尽可能独立用于开发模块的机器。下面的命令会使我们得到Docker镜像然后进入这个程序的运行环境中。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker run --rm -it golang:latest
+root@884c0d188694:/go# <span style="color:#fff;font-weight:bold">cd</span> /tmp
+root@58c5688e3ee0:/tmp# go version
+go version go1.13 linux/amd64
+</code></pre></div><p>正如我们所见，Docker镜像使用最新的Go版本，在写本文时就是1.13版本。为了使用一个或多个Go modules。我们将需要创建一个Go程序，命名为<code>useUpdatedModule.go</code>。内容如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    v1 <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v1.Version()
+}
+</code></pre></div><p><code>useUpdatedModule.go</code>和<code>useModule.go</code>比较相似。非常棒的一件事情就是我们将自动更新到最新的v1版本。在Docker镜像中写完代码后，我们做如下操作。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@58c5688e3ee0:/tmp# ls -l
+total <span style="color:#ff0;font-weight:bold">4</span>
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> root root <span style="color:#ff0;font-weight:bold">91</span> Mar <span style="color:#ff0;font-weight:bold">2</span> 19:59 useUpdatedModule.go
+root@58c5688e3ee0:/tmp# <span style="color:#fff;font-weight:bold">export</span> GO111MODULE=on
+root@58c5688e3ee0:/tmp# go run useUpdatedModule.go
+go: finding github.com/mactsouk/myModule v1.1.0
+go: downloading github.com/mactsouk/myModule v1.1.0
+go: extracting github.com/mactsouk/myModule v1.1.0
+Version 1.1.0
+</code></pre></div><p>这意味着<code>useUpdatedModule.go</code>被自动使用最新的v1版本的Go module。当你开启module支持<code>GO111MODULE=on</code>时是比较危险的。</p>
+<p>如果我们尝试执在本地机器上<code>/tmp</code>执行<code>useModule.go</code>时，会得到如下输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ls -l go.mod go.sum useModule.go
+-rw------- <span style="color:#ff0;font-weight:bold">1</span> mtsouk wheel <span style="color:#ff0;font-weight:bold">67</span> Mar <span style="color:#ff0;font-weight:bold">2</span> 21:29 go.mod
+-rw------- <span style="color:#ff0;font-weight:bold">1</span> mtsouk wheel <span style="color:#ff0;font-weight:bold">175</span> Mar <span style="color:#ff0;font-weight:bold">2</span> 21:29 go.sum
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk wheel <span style="color:#ff0;font-weight:bold">92</span> Mar <span style="color:#ff0;font-weight:bold">2</span> 21:12 useModule.go
+$ go run useModule.go
+Version 1.0.0
+</code></pre></div><p>这意味着<code>useModule.go</code>依旧使用老版本的Go module。如果想使用最新的Go module，执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ rm go.mod go.sum
+$ go run useModule.go
+go: finding github.com/mactsouk/myModule v1.1.0
+go: downloading github.com/mactsouk/myModule v1.1.0
+go: extracting github.com/mactsouk/myModule v1.1.0
+Version 1.1.0
+</code></pre></div><p>如果又想使用v1.0.0的Go module时，执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go mod init hello
+go: creating new go.mod: module hello
+$ go build
+$ go run useModule.go
+Version 1.1.0
+$ cat go.mod
+module hello
+go 1.12
+require github.com/mactsouk/myModule v1.1.0
+$ vi go.mod
+$ cat go.mod
+module hello
+go 1.12
+require github.com/mactsouk/myModule v1.0.0
+$ go run useModule.go
+Version 1.0.0
+</code></pre></div><p>下一章节将会创建一个新Go module的大版本，这意味着用不同的tag代替。我们需要使用一个不同的Github分支。</p>
+<h1 id="创建v200版本">创建v2.0.0版本</h1>
+<p>在这章中，我们将创建一个第二大的myModule版本。注意，对于主要版本，您需要在import语句中明确表示。</p>
+<p>所以<code>github.com/mactsouk/myModule</code>将成为v2版本的<code>github.com/mactsouk/myModule/v2</code>和v3版本的<code>github.com/mactsouk/myModule/v3</code>。第一件事情就是创建一个新的Github分支：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ git checkout -b v2
+Switched to a new branch <span style="color:#0ff;font-weight:bold">&#39;v2&#39;</span>
+$ git push --set-upstream origin v2
+</code></pre></div><p>然后输入如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ vi go.mod
+$ cat go.mod
+module github.com/mactsouk/myModule/v2
+go 1.12
+$ git commit -a -m <span style="color:#0ff;font-weight:bold">&#34;Using 2.0.0&#34;</span>
+[v2 5af2269] Using 2.0.0
+<span style="color:#ff0;font-weight:bold">2</span> files changed, <span style="color:#ff0;font-weight:bold">2</span> insertions(+), <span style="color:#ff0;font-weight:bold">2</span> deletions(-)
+$ git tag v2.0.0
+$ git push --tags origin v2
+Counting objects: 4, <span style="color:#fff;font-weight:bold">done</span>.
+Delta compression using up to <span style="color:#ff0;font-weight:bold">8</span> threads.
+Compressing objects: 100% (3/3), <span style="color:#fff;font-weight:bold">done</span>.
+Writing objects: 100% (4/4), <span style="color:#ff0;font-weight:bold">441</span> bytes | 441.00 KiB/s, <span style="color:#fff;font-weight:bold">done</span>.
+Total <span style="color:#ff0;font-weight:bold">4</span> (delta 1), reused <span style="color:#ff0;font-weight:bold">0</span> (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with <span style="color:#ff0;font-weight:bold">1</span> <span style="color:#fff;font-weight:bold">local</span> object.
+To github.com:mactsouk/myModule.git
+* [new branch] v2 -&gt; v2
+* [new tag] v2.0.0 -&gt; v2.0.0
+$ git --no-pager branch -a
+ master
+* v2
+ remotes/origin/HEAD -&gt; origin/master
+ remotes/origin/master
+ remotes/origin/v2
+</code></pre></div><p>这个大版本的内容<code>myModule.go</code>如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> myModule
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+<span style="color:#fff;font-weight:bold">func</span> Version() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Version 2.0.0&#34;</span>)
+}
+</code></pre></div><h1 id="使用v200版本">使用v2.0.0版本</h1>
+<p>Once again, in order to use our Go modules, we will need to create a Go program, which is called useV2.go and contains the following Go code:</p>
+<p>为了使用我们的Go module，我们将需要创建一个名为<code>useV2.go</code>的Go程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    v <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule/v2&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v.Version()
+}
+</code></pre></div><p>我们将使用Docker镜像。这是最便捷的使用Go module的方式，因为我们会从一个新的go环境下安装。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker run --rm -it golang:latest
+root@191d84fc5571:/go# <span style="color:#fff;font-weight:bold">cd</span> /tmp
+root@191d84fc5571:/tmp# cat &gt; useV2.go
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    v <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule/v2&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v.Version()
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@191d84fc5571:/tmp# <span style="color:#fff;font-weight:bold">export</span> GO111MODULE=on
+root@191d84fc5571:/tmp# go run useV2.go
+go: finding github.com/mactsouk/myModule/v2 v2.0.0
+go: downloading github.com/mactsouk/myModule/v2 v2.0.0
+go: extracting github.com/mactsouk/myModule/v2 v2.0.0
+Version 2.0.0
+</code></pre></div><p>Docker镜像下使用v2.0.0版本的myModule工作正常。</p>
+<h1 id="创建v210版本">创建v2.1.0版本</h1>
+<p>现在我们要创建<code>myModule.go</code>的更新版本。这与使用不同的GitHub标签有关。执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ vi myModule.go
+$ git commit -a -m <span style="color:#0ff;font-weight:bold">&#34;v2.1.0&#34;</span>
+$ git push
+$ git tag v2.1.0
+$ git push -q origin v2.1.0
+</code></pre></div><p>The updated contents of myModule.go will be as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> myModule
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+)
+<span style="color:#fff;font-weight:bold">func</span> Version() {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Version 2.1.0&#34;</span>)
+}
+</code></pre></div><h1 id="使用v210版本">使用v2.1.0版本</h1>
+<p>我们目前已经知道，为了使用我们的Go module，我们将需要创建一个名为<code>useUpdatedV2.go</code>的Go程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    v <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule/v2&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v.Version()
+}
+</code></pre></div><p>这里不需要定义我们想要使用的最新的v2版本的Go module，因为这是由Go处理的，这是使用<code>useUpdatedV2.go</code>的主要原因。<code>useV2.go</code>和它都是一样的。</p>
+<p>使用Docker镜像的原因就是因为它足够简单。使用vcat(1)命令创建<code>useUpdatedV2.go</code>的原因是因为Doker镜像的独立的，其中并没有vi(1)被下载。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker run --rm -it golang:1.12
+root@ccfcd675e333:/go# <span style="color:#fff;font-weight:bold">cd</span> /tmp/
+root@ccfcd675e333:/tmp# cat &gt; useUpdatedV2.go
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    v <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule/v2&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v.Version()
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@ccfcd675e333:/tmp# ls -l
+total <span style="color:#ff0;font-weight:bold">4</span>
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> root root <span style="color:#ff0;font-weight:bold">92</span> Mar <span style="color:#ff0;font-weight:bold">2</span> 20:34 useUpdatedV2.go
+root@ccfcd675e333:/tmp# go run useUpdatedV2.go
+useUpdatedV2.go:4:2: cannot find package <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule/v2&#34;</span>
+in any of:
+ /usr/local/go/src/github.com/mactsouk/myModule/v2 (from $GOROOT)
+ /go/src/github.com/mactsouk/myModule/v2 (from $GOPATH)
+root@ccfcd675e333:/tmp# <span style="color:#fff;font-weight:bold">export</span> GO111MODULE=on
+root@ccfcd675e333:/tmp# go run useUpdatedV2.go
+go: finding github.com/mactsouk/myModule/v2 v2.1.0
+go: downloading github.com/mactsouk/myModule/v2 v2.1.0
+go: extracting github.com/mactsouk/myModule/v2 v2.1.0
+Version 2.1.0
+</code></pre></div><blockquote>
+<p>我们将在第7章反射和接口中学习更多的关于git(1)和Github的命令。</p>
+</blockquote>
+<h1 id="一个go-module使用不同的版本">一个Go module使用不同的版本</h1>
+<p>在这章中，我们将学习一个Go module使用的两个以上主要版本。如果你想同时使用一个Go模块的两个以上主要版本，也可以使用相同的技术。</p>
+<p>Go文件<code>useTwo.go</code>如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+    v1 <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule&#34;</span>
+    v2 <span style="color:#0ff;font-weight:bold">&#34;github.com/mactsouk/myModule/v2&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    v1.Version()
+    v2.Version()
+}
+</code></pre></div><p>所以我们需要明确的导入想使用的不同的版本，并且要给它起别名。</p>
+<p>执行<code>useTwo.go</code>输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">export</span> GO111MODULE=on
+$ go run useTwo.go
+go: creating new go.mod: module github.com/PacktPublishing/Mastering-GoSecond-Edition
+go: finding github.com/mactsouk/myModule/v2 v2.1.0
+go: downloading github.com/mactsouk/myModule/v2 v2.1.0
+go: extracting github.com/mactsouk/myModule/v2 v2.1.0
+Version 1.1.0
+Version 2.1.0
+</code></pre></div><h1 id="go代码和go-module的存储">Go代码和Go module的存储</h1>
+<p>在本节中，我们将了解Go如何存储代码和正在使用的Go模块的信息。使用我们的Go module作为一个例子。在我们使用我们的Go module就会生成一些内容在本地的macOS机器的<code>~/go/pkg/mod/github.com/mactsouk</code>文件夹下面。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ls -lR ~/go/pkg/mod/github.com/mactsouk
+total <span style="color:#ff0;font-weight:bold">0</span>
+drwxr-xr-x <span style="color:#ff0;font-weight:bold">3</span> mtsouk staff 96B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:38 my!module
+dr-x------ <span style="color:#ff0;font-weight:bold">6</span> mtsouk staff 192B Mar <span style="color:#ff0;font-weight:bold">2</span> 21:18 my!module@v1.0.0
+dr-x------ <span style="color:#ff0;font-weight:bold">6</span> mtsouk staff 192B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:07 my!module@v1.1.0
+/Users/mtsouk/go/pkg/mod/github.com/mactsouk/my!module:
+total <span style="color:#ff0;font-weight:bold">0</span>
+dr-x------ <span style="color:#ff0;font-weight:bold">6</span> mtsouk staff 192B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:38 v2@v2.1.0
+/Users/mtsouk/go/pkg/mod/github.com/mactsouk/my!module/v2@v2.1.0:
+total <span style="color:#ff0;font-weight:bold">24</span>
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 28B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:38 README.md
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 48B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:38 go.mod
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 86B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:38 myModule.go
+/Users/mtsouk/go/pkg/mod/github.com/mactsouk/my!module@v1.0.0:
+total <span style="color:#ff0;font-weight:bold">24</span>
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 28B Mar <span style="color:#ff0;font-weight:bold">2</span> 21:18 README.md
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 45B Mar <span style="color:#ff0;font-weight:bold">2</span> 21:18 go.mod
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 86B Mar <span style="color:#ff0;font-weight:bold">2</span> 21:18 myModule.go
+/Users/mtsouk/go/pkg/mod/github.com/mactsouk/my!module@v1.1.0:
+total <span style="color:#ff0;font-weight:bold">24</span>
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 28B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:07 README.md
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 45B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:07 go.mod
+-r--r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 86B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:07 myModule.go
+</code></pre></div><blockquote>
+<p>最好的学习Go module的方式就是去实验尝试（多写多用）。你用或不用，Go module就在那里，所以我们开始使用他们吧。</p>
+</blockquote>
+<h1 id="go-mod-vendor命令">go mod vendor命令</h1>
+<p>有时，我们需要将所有依赖项存储在同一个地方，并将它们保存在项目文件。在这种情况下<code>go mod vendor</code>命令会帮助我们准确的完成：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">cd</span> useTwoVersions
+$ go mod init useV1V2
+go: creating new go.mod: module useV1V2
+$ go mod vendor
+$ ls -l
+total <span style="color:#ff0;font-weight:bold">24</span>
+-rw------- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 114B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 go.mod
+-rw------- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 356B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 go.sum
+-rw-r--r--@ <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 143B Mar <span style="color:#ff0;font-weight:bold">2</span> 19:36 useTwo.go
+drwxr-xr-x <span style="color:#ff0;font-weight:bold">4</span> mtsouk staff 128B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 vendor
+$ ls -l vendor/github.com/mactsouk/myModule
+total <span style="color:#ff0;font-weight:bold">24</span>
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 28B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 README.md
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 45B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 go.mod
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 86B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 myModule.go
+drwxr-xr-x <span style="color:#ff0;font-weight:bold">6</span> mtsouk staff 192B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 v2
+$ ls -l vendor/github.com/mactsouk/myModule/v2
+total <span style="color:#ff0;font-weight:bold">24</span>
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 28B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 README.md
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 48B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 go.mod
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff 86B Mar <span style="color:#ff0;font-weight:bold">2</span> 22:43 myModule.go
+</code></pre></div><p>关键点在于在执行<code>go mod vendor</code>命令之前去执行<code>go mod init &lt;package name&gt;</code></p>
+<h1 id="创建优秀的go-packages">创建优秀的Go packages</h1>
+<p>这章将提供一些好的的建议帮助我们开发更好的Go packages。我们屏蔽Go packages将其组织在文件夹中，能够包含一些共有和私有的元素。公有元素可以在包内部或者包外部使用，私有元素只能在包的内部使用。</p>
+<ul>
+<li>
+<p>这里有一些创建go package优秀的规则:第一点非官方的规则就是元素之间必须有一定的关联。因此，你可以创建一个支持car的包，但是创建一个包含有car和bicycles的包就不是那么合理了。简单来说，最好的方式就是将不必要的package放在多个package中，而不是在一个单独的包中添加很多函数。此外，package应该简单和易用，但不能太过于简单和凌乱。（包中功能的粒度不能太小，将同类的功能放一个包中即可）</p>
+</li>
+<li>
+<p>第二部分实际的规则就是我们应该多次使用自己的package，在使用多次没有问题然后在提供给别人使用。这将会帮助我们发现一些愚蠢的bug，确保package的使用是我们预期的结果。在此之后，在公开package之前，将package交给其他开发人员进行额外的测试。</p>
+</li>
+<li>
+<p>紧接着，尝试假设一些愉快地使用我们package的用户类型，确保我们的package在使用过程中，会给他们带来超出他们能力范围的问题。</p>
+</li>
+<li>
+<p>除非我们有很好的理由，否则package不应该输出无穷尽的函数列表。你的package内的很少的函数列表，会使我们很好的理解，使用的方便。在此之后，尝试使用简短的名字命令你的函数名称而不是很长的名字。</p>
+</li>
+<li>
+<p>接口能够提高函数的可用性，所以当我们认为合适的时候，使用接口代替单一类型的函数参数或者返回类型。</p>
+</li>
+<li>
+<p>当更新一个包时，除非绝对必要，尽量不要破坏其他package，也不要创建与旧版本产生不兼容的代码。</p>
+</li>
+<li>
+<p>当开发一个新的Go package时，尝试使用多个文件，为了将相似的任务或者概念分组。</p>
+</li>
+<li>
+<p>此外，尝试仿照标准库的Go package的规则，阅读标准库的代码将会对我们有益。</p>
+</li>
+<li>
+<p>不要创建一个已经在之前存在的package。对现有的包进行更改，并创建自己的版本。</p>
+</li>
+<li>
+<p>没有人想要一个在屏幕上打印日志信息的Go package。在需要用到的时候设置一个日志打开标记来打开日志记录会更专业。</p>
+</li>
+<li>
+<p>在Go代码里引用的Go package使用要和谐。这意味着，如果你看到一个使用你的包和函数名的程序在代码中以一种糟糕的方式出现，最好更改函数的名称。由于package名称几乎在任何地方都被使用，所以尽量使用简洁而富有表现力的包名。</p>
+</li>
+<li>
+<p>如果你将新的Go类型定义放在第一次使用它们的地方附近，会更方便，因为包括您在内的任何人都不希望在源文件中搜索新数据类型的定义。</p>
+</li>
+<li>
+<p>试着在我们的包里创建测试文件，因为有测试文件package比没有的要更加标准，专业。小小的细节将会给使用的人产生很大的便捷，说明你是一个很认真的开发者！请注意，为包编写测试是不是随便的，您应该避免使用不包含测试的包。在11章将学到更多关于测试的内容。</p>
+</li>
+<li>
+<p>最后，不要写Go包，因为你没有更好的事情做-在这种情况下，找一些更好的事情做，不要浪费你的时间!</p>
+</li>
+</ul>
+<blockquote>
+<p>永远记住，除了包中的实际Go代码应该是没有bug的这一事实之外，优秀package中最重要的元素就是它的文档以及一些代码示例,澄清其使用和展示的功能包的特性。</p>
+</blockquote>
+<h1 id="syscall包">syscall包</h1>
+<p>这章将展示一小部分的<code>syscall</code>标准包中函数的使用。注意<code>syscall</code>提供了很多的和操作系统底层相关的函数和类型。此外，<code>syscall</code>包也被很多的Go package使用，类似于<code>os</code>、<code>net</code>、<code>time</code>。这些提供了控制操作系统的一部分接口。这意味着<code>syscall</code>包不是最便捷的Go标准库，这不是它的工作。</p>
+<p>虽然UNIX系统有很多相似之处，他们也展示了各个方面的不同，尤其是我们在谈论操作系统内部时，<code>syscall</code>包尽可能聪明的处理他们之间的不兼容问题。这并不是一个秘密，并且有很好的文档，这使得<code>sycall</code>成为一个成功的包。</p>
+<p>严格来讲，程序调用系统的方式就是应用程序从操作系统内核请求一些内容。可以推断出，系统调用的责任就是存取并执行UNIX下最底层的元素，如程序，存储设备、打印数据，网络接口，任何种类的文件。简单来说，在UNIX系统下不使用系统调用我们将不能工作。我们可以使用一些类似于strace(1) and dtrace(1)的工具来检查UNIX进程的系统调用。这些工具在第2章《理解Go内部》有提到。</p>
+<p><code>syscall</code>包的使用将在<code>useSyscall.go</code>中分4个部分说明：</p>
+<blockquote>
+<p>你可能不需要直接使用<code>syscall</code>包，除非你的工作的内容偏向于计算机底层。不是所有的Go包对于所有人都是适用的。</p>
+</blockquote>
+<p>第一部分代码<code>useSyscall.go</code>如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;syscall&#34;</span>
+)
+</code></pre></div><p>这部分内容导入了程序需要的包，第二部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    pid, _, _ := syscall.Syscall(<span style="color:#ff0;font-weight:bold">39</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>)
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;My pid is&#34;</span>, pid)
+    uid, _, _ := syscall.Syscall(<span style="color:#ff0;font-weight:bold">24</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#ff0;font-weight:bold">0</span>)
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;User ID:&#34;</span>, uid)
+</code></pre></div><p>在这部分，我们将使用的两个方法<code>syscall.Syscall()</code>找到一些关于进程ID和user Id的信息，它的第一个参数决定请求的信息。</p>
+<p>第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    message := []<span style="color:#fff;font-weight:bold">byte</span>{<span style="color:#0ff;font-weight:bold">&#39;H&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;e&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;l&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;l&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;o&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;!&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;\n&#39;</span>}
+    fd := <span style="color:#ff0;font-weight:bold">1</span>
+    syscall.Write(fd, message)
+</code></pre></div><p>在这部分，我们将使用<code>syscall.Write()</code>函数在屏幕上打印一些信息。第一个参数是我们将要写的文件描述，第二个参数是承载着实际信息的<code>byte</code>切片。<code>syscall.Write()</code>函数十分便捷。</p>
+<p>最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Using syscall.Exec()&#34;</span>)
+    command := <span style="color:#0ff;font-weight:bold">&#34;/bin/ls&#34;</span>
+    env := os.Environ()
+    syscall.Exec(command, []<span style="color:#fff;font-weight:bold">string</span>{<span style="color:#0ff;font-weight:bold">&#34;ls&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;-a&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;-x&#34;</span>}, env)
+}
+</code></pre></div><p>最后一部分代码，我们将看到如何使用<code>syscall.Exec()</code>函数执行外部命令。然而，我们不能完全控制输入的命令，它是自动打印在屏幕上的。</p>
+<p>在macOS Mojave上执行代码出现如下输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run useSyscall.go
+My pid is <span style="color:#ff0;font-weight:bold">14602</span>
+User ID: <span style="color:#ff0;font-weight:bold">501</span>
+Hello!
+Using syscall.Exec()
+. .. a.go
+funFun.go functions.go html.gohtml
+htmlT.db htmlT.go manyInit.go
+ptrFun.go returnFunction.go returnNames.go
+returnPtr.go text.gotext textT.go
+useAPackage.go useSyscall.go
+</code></pre></div><p>在 Debian Linux上执行代码出现如下输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run useSyscall.go
+My pid is <span style="color:#ff0;font-weight:bold">20853</span>
+User ID: <span style="color:#ff0;font-weight:bold">0</span>
+Hello!
+Using syscall.Exec()
+. .. a.go
+funFun.go functions.go html.gohtml
+htmlT.db htmlT.go manyInit.go
+ptrFun.go returnFunction.go returnNames.go
+returnPtr.go text.gotext textT.go
+useAPackage.go useSyscall.go
+</code></pre></div><p>所以，虽然大多数的输出和之前的输出相似，但是<code>syscall.Syscall(39, 0, 0, 0)</code>不能工作在Linux上面，因为在Linux上user id不能为0，这意味着命令不是很便捷。</p>
+<p>如果想要找到Go标准包的<code>syscall</code>，在UNIX shell下执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ grep <span style="color:#0ff;font-weight:bold">\&#34;</span>syscall<span style="color:#0ff;font-weight:bold">\&#34;</span> <span style="color:#0ff;font-weight:bold">`</span>find /usr/local/Cellar/go/1.12/libexec/src -name
+<span style="color:#0ff;font-weight:bold">&#34;*.go&#34;</span><span style="color:#0ff;font-weight:bold">`</span>
+</code></pre></div><p>请替换<code>/usr/local/Cellar/go/1.12/libexec/src</code>为合适的路径。</p>
+<h1 id="fmtprintln是如何工作的"><code>fmt.Println()</code>是如何工作的</h1>
+<p>如果你真的想掌握<code>syscall</code>的使用，通过实现<code>fmt.Println()</code>函数(可以在<a href="https://golang.org/src/fmt/print.go">https://golang.org/src/fmt/print.go</a>)中找到。代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> Println(a ...<span style="color:#fff;font-weight:bold">interface</span>{}) (n <span style="color:#fff;font-weight:bold">int</span>, err <span style="color:#fff;font-weight:bold">error</span>) {
+    <span style="color:#fff;font-weight:bold">return</span> Fprintln(os.Stdout, a...)
+}
+</code></pre></div><p>这意味着<code>fmt.Println()</code>函数调用了<code>fmt.Fprintln()</code>做了一些工作。<code>fmt.Fprintln()</code>的实现，在同一个文件中可以找到，如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> Fprintln(w io.Writer, a ...<span style="color:#fff;font-weight:bold">interface</span>{}) (n <span style="color:#fff;font-weight:bold">int</span>, err <span style="color:#fff;font-weight:bold">error</span>) {
+    p := newPrinter()
+    p.doPrintln(a)
+    n, err = w.Write(p.buf)
+    p.free()
+    <span style="color:#fff;font-weight:bold">return</span>
+}
+</code></pre></div><p>这意味着在<code>fmt.Fprintln()</code>函数中，实际的去写是通过实现<code>io.Writer</code>接口的<code>Write()</code>函数去写的。在这个例子中。<code>io.Writer</code>的接口是<code>os.Stdout</code>。定义在<a href="https://golang.org/src/os/file.go">https://golang.org/src/os/file.go</a>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">var</span> (
+    Stdin = NewFile(<span style="color:#fff;font-weight:bold">uintptr</span>(syscall.Stdin), <span style="color:#0ff;font-weight:bold">&#34;/dev/stdin&#34;</span>)
+    Stdout = NewFile(<span style="color:#fff;font-weight:bold">uintptr</span>(syscall.Stdout), <span style="color:#0ff;font-weight:bold">&#34;/dev/stdout&#34;</span>)
+    Stderr = NewFile(<span style="color:#fff;font-weight:bold">uintptr</span>(syscall.Stderr), <span style="color:#0ff;font-weight:bold">&#34;/dev/stderr&#34;</span>)
+)
+</code></pre></div><p>现在看<code>NewFile()</code>的实现，在<a href="ttps://golang.org/src/os/file_plan9.go">ttps://golang.org/src/os/file_plan9.go</a>中可以找到：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> NewFile(fd <span style="color:#fff;font-weight:bold">uintptr</span>, name <span style="color:#fff;font-weight:bold">string</span>) *File {
+    fdi := <span style="color:#fff;font-weight:bold">int</span>(fd)
+    <span style="color:#fff;font-weight:bold">if</span> fdi &lt; <span style="color:#ff0;font-weight:bold">0</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">nil</span>
+    }
+    f := &amp;File{&amp;file{fd: fdi, name: name}}
+    runtime.SetFinalizer(f.file, (*file).close)
+    <span style="color:#fff;font-weight:bold">return</span> f
+}
+</code></pre></div><p>当你看到名为<code>file_plan9.go</code>的源文件时，你应该怀疑它是否包含特殊UNIX变体的命令，这意味着它包含的代码不是很便捷。</p>
+<p>我们这里有一个文件结构类型，它嵌入在文件类型中，因为它的名字而被导出。所以，开始在<a href="https://golang.org/src/os/file_plan9.go">https://golang.org/src/os/file_plan9.go</a>寻找应用在文件结构或者指向文件结构的指针，它允许我们写入数据。作为我们寻找的名为<code>Write()</code>的函数，看<code>Fprintln()</code>的实现，我们将不得不在<code>os</code>包中的所有的源文件中寻找它们。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ grep <span style="color:#0ff;font-weight:bold">&#34;func (f \*File) Write(&#34;</span> *.go
+file.go:func (f *File) Write(b []byte) (n int, err error) {
+</code></pre></div><p>在<a href="https://golang.org/src/os/file.go">https://golang.org/src/os/file.go</a>中<code>Write()</code>的实现如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> (f *File) Write(b []<span style="color:#fff;font-weight:bold">byte</span>) (n <span style="color:#fff;font-weight:bold">int</span>, err <span style="color:#fff;font-weight:bold">error</span>) {
+    <span style="color:#fff;font-weight:bold">if</span> err := f.checkValid(<span style="color:#0ff;font-weight:bold">&#34;write&#34;</span>); err != <span style="color:#fff;font-weight:bold">nil</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>, err
+    }
+    n, e := f.write(b)
+    <span style="color:#fff;font-weight:bold">if</span> n &lt; <span style="color:#ff0;font-weight:bold">0</span> {
+        n = <span style="color:#ff0;font-weight:bold">0</span>
+    }
+    <span style="color:#fff;font-weight:bold">if</span> n != <span style="color:#fff;font-weight:bold">len</span>(b) {
+        err = io.ErrShortWrite
+    }
+    epipecheck(f, e)
+    <span style="color:#fff;font-weight:bold">if</span> e != <span style="color:#fff;font-weight:bold">nil</span> {
+        err = f.wrapErr(<span style="color:#0ff;font-weight:bold">&#34;write&#34;</span>, e)
+    }
+    <span style="color:#fff;font-weight:bold">return</span> n, err
+}
+</code></pre></div><p>这意味着我们现在不得不寻找<code>write()</code>函数。寻找在<a href="https://golang.org/src/os/file_plan9.go">https://golang.org/src/os/file_plan9.go</a>中的write string：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> (f *File) write(b []<span style="color:#fff;font-weight:bold">byte</span>) (n <span style="color:#fff;font-weight:bold">int</span>, err <span style="color:#fff;font-weight:bold">error</span>) {
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(b) == <span style="color:#ff0;font-weight:bold">0</span> {
+         <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#fff;font-weight:bold">nil</span>
+    }
+    <span style="color:#fff;font-weight:bold">return</span> fixCount(syscall.Write(f.fd, b))
+}
+</code></pre></div><p>对<code>fmt.Println()</code>函数的调用是使用对<code>syscall.Write()</code>的调用实现的。这说明了<code>syscall</code>包是很重要的。</p>
+<h1 id="goscanner-goparser-和gotoken包"><code>go/scanner, go/parser, 和go/token</code>包</h1>
+<p>这章将讲解关于<code>go/scanner, go/parser, 和go/token</code>包的内容，和<code>go/ast</code>一样，这是有关Go扫码和解析Go代码的底层知识，可以帮助我们理解Go是如何工作的。然而，如果底层知识太难，你可能想要跳过这一章。</p>
+<p>解析语法需要两个阶段。第一个阶段是将输入分解为标记(词法分析)，第二个阶段是将所有这些标记提供给解析器，以确保这些标记有意义且顺序正确（语法分析）。仅仅结合英语单词并不总能创造出有效的句子。</p>
+<h1 id="goast包"><code>go/ast</code>包</h1>
+<p>抽象语法树(AST)是Go源代码的结构化表示的程序。这个树是根据语言中指定的一些规则构造的规范。<code>go/ast</code>在go中一般用在定义数据类型。如果你想要找到更多的有关<code>ast.*</code>类型。<code>go/ast</code>包的源码将是你学习的好地方。</p>
+<h1 id="goscanner包"><code>go/scanner</code>包</h1>
+<p>扫描器就是一个在程序中能够读取写入的组件。在案例中用来生成token。<code>go/scanner</code>包用于读取go程序并生成一系列token。<code>go/scanner</code>的使用将在<code>goScanner.go</code>中分三部分解释说明。第一部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/scanner&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/token&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;io/ioutil&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> main() {
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(os.Args) == <span style="color:#ff0;font-weight:bold">1</span> {
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Not enough arguments!&#34;</span>)
+    <span style="color:#fff;font-weight:bold">return</span>
+    }
+</code></pre></div><p><code>go/token</code>包定义了一些Go程序中的表示字典token的常量。第二部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#fff;font-weight:bold">for</span> _, file := <span style="color:#fff;font-weight:bold">range</span> os.Args[<span style="color:#ff0;font-weight:bold">1</span>:] {
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Processing:&#34;</span>, file)
+        f, err := ioutil.ReadFile(file)
+        <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(err)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    One := token.NewFileSet()
+    files := one.AddFile(file, one.Base(), <span style="color:#fff;font-weight:bold">len</span>(f))
+</code></pre></div><p>将被标记化的源文件存储在file变量中而其内容存储在f，最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#fff;font-weight:bold">var</span> myScanner scanner.Scanner
+    myScanner.Init(files, f, <span style="color:#fff;font-weight:bold">nil</span>, scanner.ScanComments)
+    <span style="color:#fff;font-weight:bold">for</span> {
+        pos, tok, lit := myScanner.Scan()
+        <span style="color:#fff;font-weight:bold">if</span> tok == token.EOF {
+            <span style="color:#fff;font-weight:bold">break</span>
+        }
+    fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;%s\t%s\t%q\n&#34;</span>, one.Position(pos), tok, lit)
+    }
+  }
+}
+</code></pre></div><p><code>for</code>循环用来遍历输入的文件。源码中用<code>toker.EOF</code>表示结尾退出<code>for</code>循环。<code>scanner.Scan()</code>函数返回当前文件的下标、token、和文件名。<code>scanner.Init()</code>的<code>scanner.ScanComments</code>的使用告诉扫描器返回token的注解。你可以使用1代替<code>scanner.ScanComments</code>，如果你不想看到token的注解输出，用0代替<code>scanner.ScanComments</code>。build后执行代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./goScanner a.go
+Processing: a.go
+a.go:1:1 package <span style="color:#0ff;font-weight:bold">&#34;package&#34;</span>
+a.go:1:9 IDENT <span style="color:#0ff;font-weight:bold">&#34;a&#34;</span>
+a.go:1:10 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+a.go:3:1 import <span style="color:#0ff;font-weight:bold">&#34;import&#34;</span>
+a.go:3:8 ( <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:4:2 STRING <span style="color:#0ff;font-weight:bold">&#34;\&#34;fmt\&#34;&#34;</span>
+a.go:4:7 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+a.go:5:1 ) <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:5:2 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+a.go:7:1 func <span style="color:#0ff;font-weight:bold">&#34;func&#34;</span>
+a.go:7:6 IDENT <span style="color:#0ff;font-weight:bold">&#34;init&#34;</span>
+a.go:7:10 ( <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:7:11 ) <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:7:13 { <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:8:2 IDENT <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+a.go:8:5 . <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:8:6 IDENT <span style="color:#0ff;font-weight:bold">&#34;Println&#34;</span>
+a.go:8:13 ( <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:8:14 STRING <span style="color:#0ff;font-weight:bold">&#34;\&#34;init() a\&#34;&#34;</span>
+a.go:8:24 ) <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:8:25 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+a.go:9:1 } <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:9:2 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+a.go:11:1 func <span style="color:#0ff;font-weight:bold">&#34;func&#34;</span>
+a.go:11:6 IDENT <span style="color:#0ff;font-weight:bold">&#34;FromA&#34;</span>
+a.go:11:11 ( <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:11:12 ) <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:11:14 { <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:12:2 IDENT <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+a.go:12:5 . <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:12:6 IDENT <span style="color:#0ff;font-weight:bold">&#34;Println&#34;</span>
+a.go:12:13 ( <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:12:14 STRING <span style="color:#0ff;font-weight:bold">&#34;\&#34;fromA()\&#34;&#34;</span>
+a.go:12:23 ) <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:12:24 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+a.go:13:1 } <span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
+a.go:13:2 ; <span style="color:#0ff;font-weight:bold">&#34;\n&#34;</span>
+</code></pre></div><p><code>goScanner.go</code>输出后很简单。注意<code>goScanner.go</code>可以扫描任何类型的文件，即使是二进制文件。然而，如果你扫描二进制文件。你可能得到看不懂的输出。从输出中可以看到，Go扫描器自动加了分隔符。请注意，IDENT通知一个标识符，这是最流行的token类型。</p>
+<p>下一章将处理解析过程</p>
+<h1 id="goparser包"><code>go/parser</code>包</h1>
+<p>解析器读取scanner的输出为了生成这些token的结构。解析器使用语法器描述语法，为了确保给的token是有效的语法。这个结构展示出来如同树的结构，它就是AST。</p>
+<p><code>goParser.go</code>说明了处理<code>go/token</code>输出的<code>go/parser</code>包的使用。接下来通过4个部分展示说明：</p>
+<p>第一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/ast&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/parser&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/token&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;strings&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">type</span> visitor <span style="color:#fff;font-weight:bold">int</span>
+</code></pre></div><p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> (v visitor) Visit(n ast.Node) ast.Visitor {
+    <span style="color:#fff;font-weight:bold">if</span> n == <span style="color:#fff;font-weight:bold">nil</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">nil</span>
+    }
+    fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;%s%T\n&#34;</span>, strings.Repeat(<span style="color:#0ff;font-weight:bold">&#34;\t&#34;</span>, <span style="color:#fff;font-weight:bold">int</span>(v)), n)
+    <span style="color:#fff;font-weight:bold">return</span> v + <span style="color:#ff0;font-weight:bold">1</span>
+}
+</code></pre></div><p><code>Visit()</code>函数将被AST的每个Node调用。第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(os.Args) == <span style="color:#ff0;font-weight:bold">1</span> {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Not enough arguments!&#34;</span>)
+    <span style="color:#fff;font-weight:bold">return</span>
+ }
+</code></pre></div><p>最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#fff;font-weight:bold">for</span> _, file := <span style="color:#fff;font-weight:bold">range</span> os.Args[<span style="color:#ff0;font-weight:bold">1</span>:] {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Processing:&#34;</span>, file)
+    one := token.NewFileSet()
+    <span style="color:#fff;font-weight:bold">var</span> v visitor
+    f, err := parser.ParseFile(one, file, <span style="color:#fff;font-weight:bold">nil</span>, parser.AllErrors)
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(err)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    ast.Walk(v, f)
+    }
+}
+</code></pre></div><p><code>Walk()</code>函数被递归调用，用深度遍历优先遍历AST，访问所有的节点。</p>
+<p>building和执行<code>goParser.go</code>去找到简单又便捷的AST。输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./goParser a.go
+Processing: a.go
+*ast.File
+ *ast.Ident
+ *ast.GenDecl
+ *ast.ImportSpec
+ *ast.BasicLit
+ *ast.FuncDecl
+ *ast.Ident
+ *ast.FuncType
+ *ast.FieldList
+ *ast.BlockStmt
+ *ast.ExprStmt
+ *ast.CallExpr
+ *ast.SelectorExpr
+ *ast.Ident
+ *ast.Ident
+ *ast.BasicLit
+ *ast.FuncDecl
+ *ast.Ident
+ *ast.FuncType
+ *ast.FieldList
+ *ast.BlockStmt
+ *ast.ExprStmt
+ *ast.CallExpr
+ *ast.SelectorExpr
+ *ast.Ident
+ *ast.Ident
+ *ast.BasicLit
+</code></pre></div><p><code>goParser.go</code>简单的输出就得到了。然而它和<code>goScanner.go.</code>的输出完全不同。</p>
+<p>现在你已经知道了Go扫描器和Go解析器的输出结果，接下来准备看一些更实用的例子。</p>
+<h1 id="实用案例">实用案例</h1>
+<p>在这章中，我们将写一个在输入文件中计算关键字出现次数的Go程序。在这个例子中，关键字为“var”。功能的名字为<code>varTimes.go</code>，它将分4部分展示。第一部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/scanner&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/token&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;io/ioutil&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">var</span> KEYWORD = <span style="color:#0ff;font-weight:bold">&#34;var&#34;</span>
+<span style="color:#fff;font-weight:bold">var</span> COUNT = <span style="color:#ff0;font-weight:bold">0</span>
+</code></pre></div><p>你可以搜索任何你想要的Go关键字——如果你修改了<code>varTimes.go</code>，你甚至可以在运行时设置全局关键字变量的值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(os.Args) == <span style="color:#ff0;font-weight:bold">1</span> {
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Not enough arguments!&#34;</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    <span style="color:#fff;font-weight:bold">for</span> _, file := <span style="color:#fff;font-weight:bold">range</span> os.Args[<span style="color:#ff0;font-weight:bold">1</span>:] {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Processing:&#34;</span>, file)
+    f, err := ioutil.ReadFile(file)
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+    fmt.Println(err)
+        sreturn
+    }
+    one := token.NewFileSet()
+    files := one.AddFile(file, one.Base(), <span style="color:#fff;font-weight:bold">len</span>(f))
+</code></pre></div><p>第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#fff;font-weight:bold">var</span> myScanner scanner.Scanner
+    myScanner.Init(files, f, <span style="color:#fff;font-weight:bold">nil</span>, scanner.ScanComments)
+    localCount := <span style="color:#ff0;font-weight:bold">0</span>
+    <span style="color:#fff;font-weight:bold">for</span> {
+        _, tok, lit := myScanner.Scan()
+        <span style="color:#fff;font-weight:bold">if</span> tok == token.EOF {
+        <span style="color:#fff;font-weight:bold">break</span>
+        }
+</code></pre></div><p>在本例中，发现标记的位置被忽略，因为这不重要。但是，要找出文件的结尾，需要使用tok变量。</p>
+<p>最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#fff;font-weight:bold">if</span> lit == KEYWORD {
+    COUNT++
+    localCount++
+    }
+  }
+    fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;Found _%s_ %d times\n&#34;</span>, KEYWORD, localCount)
+ }
+ fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;Found _%s_ %d times in total\n&#34;</span>, KEYWORD, COUNT)
+}
+</code></pre></div><p>编译执行后<code>varTimes.go</code>输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build varTimes.go
+$ ./varTimes varTimes.go variadic.go a.go
+Processing: varTimes.go
+Found _var_ <span style="color:#ff0;font-weight:bold">3</span> <span style="color:#fff;font-weight:bold">times</span>
+Processing: variadic.go
+Found _var_ <span style="color:#ff0;font-weight:bold">0</span> <span style="color:#fff;font-weight:bold">times</span>
+Processing: a.go
+Found _var_ <span style="color:#ff0;font-weight:bold">0</span> <span style="color:#fff;font-weight:bold">times</span>
+Found _var_ <span style="color:#ff0;font-weight:bold">3</span> <span style="color:#fff;font-weight:bold">times</span> in total
+</code></pre></div><h1 id="查找具有给定字符串长度的变量名">查找具有给定字符串长度的变量名</h1>
+<p>这章将展示其他使用案例，将会比之前在<code>varTimes.go</code>的案例更加高级。你将看到如何查找具有给定字符串长度的变量名，你能使用任何你想要的字符串长度。此外，该程序将能够区分全局变量和局部变量。</p>
+<p>本地变量定义在函数内部，而全局变量定义在函数外部。全局变量也称为包变量。</p>
+<p>The name of the utility is varSize.go and it will be presented in four parts. The first part of varSize.go is as follows:
+名为<code>varSize.go</code>的程序将分为4个部分。第一部分如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/ast&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/parser&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;go/token&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;strconv&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">var</span> SIZE = <span style="color:#ff0;font-weight:bold">2</span>
+<span style="color:#fff;font-weight:bold">var</span> GLOBAL = <span style="color:#ff0;font-weight:bold">0</span>
+<span style="color:#fff;font-weight:bold">var</span> LOCAL = <span style="color:#ff0;font-weight:bold">0</span>
+
+<span style="color:#fff;font-weight:bold">type</span> visitor <span style="color:#fff;font-weight:bold">struct</span> {
+    Package <span style="color:#fff;font-weight:bold">map</span>[*ast.GenDecl]<span style="color:#fff;font-weight:bold">bool</span>
+}
+
+<span style="color:#fff;font-weight:bold">func</span> makeVisitor(f *ast.File) visitor {
+    k1 := <span style="color:#fff;font-weight:bold">make</span>(<span style="color:#fff;font-weight:bold">map</span>[*ast.GenDecl]<span style="color:#fff;font-weight:bold">bool</span>)
+    <span style="color:#fff;font-weight:bold">for</span> _, aa := <span style="color:#fff;font-weight:bold">range</span> f.Decls {
+        v, ok := aa.(*ast.GenDecl)
+        <span style="color:#fff;font-weight:bold">if</span> ok {
+            k1[v] = <span style="color:#fff;font-weight:bold">true</span>
+        }
+    }
+    <span style="color:#fff;font-weight:bold">return</span> visitor{k1}
+}
+</code></pre></div><p>为了区分本地变量和全局变量之间的关系，我们定义了全局变量GLOBAL和本地变量LOCAL保持他们的计数。<code>visitor</code>结构体的使用将帮助我们区分本地变量和全局变量。因此map字段定义在<code>visitor</code>结构体，<code>makeVisitor()</code>函数的作用是根据参数的值初始化<code>visitor</code>结构体，它是一个代表整个文件的文件节点。第二部分代码的实现如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> (v visitor) Visit(n ast.Node) ast.Visitor {
+    <span style="color:#fff;font-weight:bold">if</span> n == <span style="color:#fff;font-weight:bold">nil</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">nil</span>
+    }
+    <span style="color:#fff;font-weight:bold">switch</span> d := n.(<span style="color:#fff;font-weight:bold">type</span>) {
+        <span style="color:#fff;font-weight:bold">case</span> *ast.AssignStmt:
+            <span style="color:#fff;font-weight:bold">if</span> d.Tok != token.DEFINE {
+                <span style="color:#fff;font-weight:bold">return</span> v
+            }
+            <span style="color:#fff;font-weight:bold">for</span> _, name := <span style="color:#fff;font-weight:bold">range</span> d.Lhs {
+                v.isItLocal(name)
+            }
+        <span style="color:#fff;font-weight:bold">case</span> *ast.RangeStmt:
+            v.isItLocal(d.Key)
+            v.isItLocal(d.Value)
+        <span style="color:#fff;font-weight:bold">case</span> *ast.FuncDecl:
+            <span style="color:#fff;font-weight:bold">if</span> d.Recv != <span style="color:#fff;font-weight:bold">nil</span> {
+                v.CheckAll(d.Recv.List)
+            }
+            v.CheckAll(d.Type.Params.List)
+            <span style="color:#fff;font-weight:bold">if</span> d.Type.Results != <span style="color:#fff;font-weight:bold">nil</span> {
+                v.CheckAll(d.Type.Results.List)
+            }
+        <span style="color:#fff;font-weight:bold">case</span> *ast.GenDecl:
+            <span style="color:#fff;font-weight:bold">if</span> d.Tok != token.VAR {
+                <span style="color:#fff;font-weight:bold">return</span> v
+            }
+            <span style="color:#fff;font-weight:bold">for</span> _, spec := <span style="color:#fff;font-weight:bold">range</span> d.Specs {
+            value, ok := spec.(*ast.ValueSpec)
+            <span style="color:#fff;font-weight:bold">if</span> ok {
+                <span style="color:#fff;font-weight:bold">for</span> _, name := <span style="color:#fff;font-weight:bold">range</span> value.Names {
+                    <span style="color:#fff;font-weight:bold">if</span> name.Name == <span style="color:#0ff;font-weight:bold">&#34;_&#34;</span> {
+                        <span style="color:#fff;font-weight:bold">continue</span>
+                    }
+                    <span style="color:#fff;font-weight:bold">if</span> v.Package[d] {
+                        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(name.Name) == SIZE {
+                            fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;** %s\n&#34;</span>, name.Name)
+                            GLOBAL++
+                        }
+                    } <span style="color:#fff;font-weight:bold">else</span> {
+                        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(name.Name) == SIZE {
+                            fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;* %s\n&#34;</span>, name.Name)
+                            LOCAL++
+                        }
+                    }
+                }
+            }
+        }
+    }
+    <span style="color:#fff;font-weight:bold">return</span> v
+}
+</code></pre></div><p><code>Visit()</code>主要的工作是决定node的类型，以便采取相应的行动。这需要使用到<code>switch</code>语句的帮助。</p>
+<p><code>ast.AssignStmt</code>节点代表作业或者定义的短变量。<code>ast.RangeStmt</code>节点是一种结构类型，用于表示带有range子句的for语句。这是另一个声明新的局部变量的地方。</p>
+<p><code>ast.FuncDecl</code>是一个代表函数定义的结构体类型，被定义在函数内部的每个变量都是本地变量。最后，<code>ast.GenDecl</code>是一个代表<code>import, constant, type</code>或者变量的结构体类型。
+然而我们仅仅需要关注在<code>token.VAR</code>里的tokens。第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> (v visitor) isItLocal(n ast.Node) {
+    identifier, ok := n.(*ast.Ident)
+    <span style="color:#fff;font-weight:bold">if</span> ok == <span style="color:#fff;font-weight:bold">false</span> {
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    <span style="color:#fff;font-weight:bold">if</span> identifier.Name == <span style="color:#0ff;font-weight:bold">&#34;_&#34;</span> || identifier.Name == <span style="color:#0ff;font-weight:bold">&#34;&#34;</span> {
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    <span style="color:#fff;font-weight:bold">if</span> identifier.Obj != <span style="color:#fff;font-weight:bold">nil</span> &amp;&amp; identifier.Obj.Pos() == identifier.Pos() {
+        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(identifier.Name) == SIZE {
+            fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;* %s\n&#34;</span>, identifier.Name)
+            LOCAL++
+        }
+    }
+}
+
+<span style="color:#fff;font-weight:bold">func</span> (v visitor) CheckAll(fs []*ast.Field) {
+    <span style="color:#fff;font-weight:bold">for</span> _, f := <span style="color:#fff;font-weight:bold">range</span> fs {
+        <span style="color:#fff;font-weight:bold">for</span> _, name := <span style="color:#fff;font-weight:bold">range</span> f.Names {
+            v.isItLocal(name)
+        }
+    }
+}
+</code></pre></div><p>这两个函数是帮助方法。第一个节点决定标识符节点是否是局部变量，第二个节点访问<code>ast.Field</code>节点检查其内容是否包含局部变量。最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(os.Args) &lt;= <span style="color:#ff0;font-weight:bold">2</span> {
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Not enough arguments!&#34;</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    temp, err := strconv.Atoi(os.Args[<span style="color:#ff0;font-weight:bold">1</span>])
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        SIZE = <span style="color:#ff0;font-weight:bold">2</span>
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Using default SIZE:&#34;</span>, SIZE)
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        SIZE = temp
+    }
+    <span style="color:#fff;font-weight:bold">var</span> v visitor
+    all := token.NewFileSet()
+    <span style="color:#fff;font-weight:bold">for</span> _, file := <span style="color:#fff;font-weight:bold">range</span> os.Args[<span style="color:#ff0;font-weight:bold">2</span>:] {
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Processing:&#34;</span>, file)
+        f, err := parser.ParseFile(all, file, <span style="color:#fff;font-weight:bold">nil</span>, parser.AllErrors)
+        <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+            fmt.Println(err)
+            <span style="color:#fff;font-weight:bold">continue</span>
+        }
+        v = makeVisitor(f)
+        ast.Walk(v, f)
+    }
+    fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;Local: %d, Global:%d with a length of %d.\n&#34;</span>, LOCAL, GLOBAL, SIZE)
+}
+</code></pre></div><p>这程序生成了它输入的AST，为了选出外部需要的信息。分割了<code>Visit()</code>方法，它是接口的一部分，休息的逻辑在<code>main()</code>函数中的<code>ast.Walk()</code>发生，这个函数自动访问了每个文件的所有的AST节点。执行代码生成如下输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build varSize.go
+$ ./varSize
+Not enough arguments!
+$ ./varSize <span style="color:#ff0;font-weight:bold">2</span> varSize.go variadic.go
+Processing: varSize.go
+* k1
+* aa
+* ok
+* ok
+* ok
+* fs
+Processing: variadic.go
+Local: 6, Global:0 with a length of 2.
+$ ./varSize <span style="color:#ff0;font-weight:bold">3</span> varSize.go variadic.go
+Processing: varSize.go
+* err
+* all
+* err
+Processing: variadic.go
+* sum
+* sum
+Local: 5, Global:0 with a length of 3.
+$ ./varSize <span style="color:#ff0;font-weight:bold">7</span> varSize.go variadic.go
+Processing: varSize.go
+Processing: variadic.go
+* message
+Local: 1, Global:0 with a length of 7.
+</code></pre></div><p>你可以移除一些<code>fmt.Println()</code>调用，这样就会少一些杂乱的输出。</p>
+<p>你现在在Go中做了很聪明的事情，你知道如何解析Go陈序，你甚至可以写出你自己解析器和你自己的语言。如果你真的进入解析，你应该看一眼<code>go/ast</code>这章的内容，它的源码在<a href="https://golang.org/pkg/go/ast/">https://golang.org/pkg/go/ast/</a>和<a href="https://github.com/golang/go/tree/master/src/go/ast">https://github.com/golang/go/tree/master/src/go/ast</a></p>
+<h1 id="text和html模板">Text和HTML模板</h1>
+<p>这章的主题将会惊艳到你。因为当前展示的包会带给你很大的灵活性，我确信你将会找到创造性的方式去使用它们，模板主要用于分离输出的格式化部分和数据部分。请注意Go模板能够成为文件或者string，一般的想法是对较小的模板使用内联字符串，对较大的模板使用外部文件。</p>
+<p>在Go语言中，不能同时导入<code>text/template</code>和<code>html/template</code>，因为两个包共享相似的包名(<code>template</code>)。如果绝对需要的话，你可以将其中一个起一个别名。在第四章可以看<code>useStrings.go</code>的使用，复合类型的使用。</p>
+<p>Text的输出经常展示在你的屏幕上，因此html的输出需要浏览器的帮助。然而，text的输出要比html的输出更好些。如果你认为你将需要使用其他UNIX的命令行工具执行Go工具的输出，你应该用<code>text/template</code>代替<code>html/template</code></p>
+<p><code>text/template</code>和<code>html/template</code>会告诉你Go包有多么复杂。你很快就会看到，这两个包都支持它们自己的编程语言——好的软件使复杂的东西看起来简单而优雅。</p>
+<h1 id="生成text输出">生成text输出</h1>
+<p>如果需要创建简单的输出，使用<code>text/template</code>包是一个很好的选择。<code>text/templat</code>包将在<code>textT.go</code>文件中分5部分说明。</p>
+<p>template经常存储在外部文件中，例子将展示<code>text.gotext</code>模板文件，将分3个部分分析。数据是在text中或者网络中是类型可读的。然而最简单的原因就是<code>text.gotext</code>文件中的数据被程序使用切片转成硬编码。接下来我们将看<code>textT.go</code>的Go代码。第一部分代码如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;text/template&#34;</span>
+)
+</code></pre></div><p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">type</span> Entry <span style="color:#fff;font-weight:bold">struct</span> {
+ Number <span style="color:#fff;font-weight:bold">int</span>
+ Square <span style="color:#fff;font-weight:bold">int</span>
+}
+</code></pre></div><p>你将需要定义一个新的数据类型存储你的数据，除非你处理非常简单的数据。第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    arguments := os.Args
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(arguments) != <span style="color:#ff0;font-weight:bold">2</span> {
+        fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Need the template file!&#34;</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    tFile := arguments[<span style="color:#ff0;font-weight:bold">1</span>]
+    DATA := [][]<span style="color:#fff;font-weight:bold">int</span>{{-<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>}, {-<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">4</span>}, {-<span style="color:#ff0;font-weight:bold">3</span>, <span style="color:#ff0;font-weight:bold">9</span>}, {-<span style="color:#ff0;font-weight:bold">4</span>, <span style="color:#ff0;font-weight:bold">16</span>}}
+</code></pre></div><p><code>DATA</code>变量是一个二维切片，用来初始化你的数据的版本。</p>
+<p>第四部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#fff;font-weight:bold">var</span> Entries []Entry
+    <span style="color:#fff;font-weight:bold">for</span> _, i := <span style="color:#fff;font-weight:bold">range</span> DATA {
+        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(i) == <span style="color:#ff0;font-weight:bold">2</span> {
+            temp := Entry{Number: i[<span style="color:#ff0;font-weight:bold">0</span>], Square: i[<span style="color:#ff0;font-weight:bold">1</span>]}
+            Entries = <span style="color:#fff;font-weight:bold">append</span>(Entries, temp)
+        }
+    }
+</code></pre></div><p>这个程序从<code>DATA</code>变量中创建了一个切片的数据结构。</p>
+<p>最后一部分<code>textT.go</code>的代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    t := template.Must(template.ParseGlob(tFile))
+    t.Execute(os.Stdout, Entries)
+}
+</code></pre></div><p><code>template.Must()</code>用在了初始化。它返回的数据类型是一个Template，它控制一个解析后的展示内容。<code>template.ParseGlob()</code>函数读取外部template文件。注意对于外部template文件我更喜欢使用<code>gohtml</code>扩展。但是你能使用任何你想要的，目的一致就好了。</p>
+<p>最后，<code>template.Execute()</code>函数不能全部工作，它包括执行程序和打印输出到指定的文件，使用<code>os.Stdout</code>。</p>
+<p>现在是时候看一下template文件的代码，第一部分text template如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">Calculating the squares of some integers
+</code></pre></div><p>注意空行在text template文件中也是有效的，它将作为空行在最后的文件中展示出来。</p>
+<p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ range . }} The square of {{ printf &#34;%d&#34; .Number}} is {{ printf
+ &#34;%d&#34; .Square}}
+</code></pre></div><p>在这里将会有很多有趣的事情发生。关键字的范围允许你迭代输入的行，作为一个给定的切片结构。简单的text像这样会被打印，因此变量和动态的text必须以“{{”开始以“}}”结束。数据结构的 存取可以用<code>.Number</code>和<code>.Square</code>。注意“.”字符在在这个数据类型的前面。最后,格式化打印命令会将最后的输出文件格式化。</p>
+<p>第三部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ end }}
+</code></pre></div><p><code>{{ range }}</code>命令以<code>{{ end }}</code>结尾，意外的将<code>{{ end }}</code>放在错误的地方将会影响你的输出。第一次，在text template模板中时刻注意空行的有效性，因为它将会输出在最后的文件中。</p>
+<p>Executing textT.go will generate the following type of output:
+执行<code>textT.go</code>输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run textT.go text.gotext
+Calculating the squares of some integers
+The square of -1 is <span style="color:#ff0;font-weight:bold">1</span>
+The square of -2 is <span style="color:#ff0;font-weight:bold">4</span>
+The square of -3 is <span style="color:#ff0;font-weight:bold">9</span>
+The square of -4 is <span style="color:#ff0;font-weight:bold">16</span>
+</code></pre></div><h1 id="构造一个html输出">构造一个HTML输出</h1>
+<p>这部分用<code>htmlT.go</code>文件解释说明了<code>html/template</code>的使用。它将分6个部分展示。<code>html/template</code>的哲学和<code>text/template</code>一样。这两个包不同之处在于<code>html/template</code>代码生成HTML的输出时是安全的，不允许代码注入。</p>
+<p>虽然你能用<code>text/template</code>创建HTML输出。毕竟，HTML就是一个简单的text。如果你想创建HTML输出，然后你应该使用<code>html/template</code>代替。</p>
+<p>接下来的内容将从SQLite数据库读取数据，但是你能使用任何你想用的数据库，提供你有的或者你能够写出适当的Go驱动。为了让事情更加简单，案例在读取之前将导入到数据库。</p>
+<p>第一部分如下所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> main
+
+<span style="color:#fff;font-weight:bold">import</span> (
+ <span style="color:#0ff;font-weight:bold">&#34;database/sql&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+ _ <span style="color:#0ff;font-weight:bold">&#34;github.com/mattn/go-sqlite3&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;html/template&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;net/http&#34;</span>
+ <span style="color:#0ff;font-weight:bold">&#34;os&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">type</span> Entry <span style="color:#fff;font-weight:bold">struct</span> {
+ Number <span style="color:#fff;font-weight:bold">int</span>
+ Double <span style="color:#fff;font-weight:bold">int</span>
+ Square <span style="color:#fff;font-weight:bold">int</span>
+}
+
+<span style="color:#fff;font-weight:bold">var</span> DATA []Entry
+<span style="color:#fff;font-weight:bold">var</span> tFile <span style="color:#fff;font-weight:bold">string</span>
+</code></pre></div><p>你能看出一个导入了一个新包<code>net/http</code>，用来它创建HTTP服务和client服务。你将学到更多的关于网络编程的内容。将在12章学到<code>net</code>和<code>net/http</code>Go标准库的使用。在13章讲Go语言网络编程的基础——构建你自己的Servers和Client。</p>
+<p>分离出<code>net/http</code>，你能够看到<code>Entry</code>数据类型的定义。它将接收从SQLite数据库表单中查询出得数据。其中也要2个全局变量<code>DATA</code>和&rsquo;tFile'，持有的数据分别被传递到模板文件和模板文件的文件名。</p>
+<p>最后，你可以看<a href="https://github.com/mattn/go-sqlite3">https://github.com/mattn/go-sqlite3</a>的使用，通过<code>database/sql</code>接口和<code>SQLite3</code>数据库交互</p>
+<p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> myHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Printf(<span style="color:#0ff;font-weight:bold">&#34;Host: %s Path: %s\n&#34;</span>, r.Host, r.URL.Path)
+    myT := template.Must(template.ParseGlob(tFile))
+    myT.ExecuteTemplate(w, tFile, DATA)
+}
+</code></pre></div><p>简单高效的<code>myHandler()</code>函数很惊人，尤其是你考虑函数的大小。<code>template.ExecuteTemplate()</code>函数并不是全都为我们工作。它的第一个参数变量，用来连接HTTP客户端。第二个参数是一个模板文件，这个模板文件用来格式化数据格式，第三个参数是带有数据的结构切片。</p>
+<p>第三部分代码片段如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> main() {
+    arguments := os.Args
+    <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(arguments) != <span style="color:#ff0;font-weight:bold">3</span> {
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Need Database File + Template File!&#34;</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    database := arguments[<span style="color:#ff0;font-weight:bold">1</span>]
+    tFile = arguments[<span style="color:#ff0;font-weight:bold">2</span>]
+</code></pre></div><p>第四部分代码如下，这部分你将开始处理数据库。</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    db, err := sql.Open(<span style="color:#0ff;font-weight:bold">&#34;sqlite3&#34;</span>, database)
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(<span style="color:#fff;font-weight:bold">nil</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Emptying database table.&#34;</span>)
+    _, err = db.Exec(<span style="color:#0ff;font-weight:bold">&#34;DELETE FROM data&#34;</span>)
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(<span style="color:#fff;font-weight:bold">nil</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    fmt.Println(<span style="color:#0ff;font-weight:bold">&#34;Populating&#34;</span>, database)
+    stmt, _ := db.Prepare(<span style="color:#0ff;font-weight:bold">&#34;INSERT INTO data(number, double, square) values(?,?,?)&#34;</span>)
+    <span style="color:#fff;font-weight:bold">for</span> i := <span style="color:#ff0;font-weight:bold">20</span>; i &lt; <span style="color:#ff0;font-weight:bold">50</span>; i++ {
+        _, _ = stmt.Exec(i, <span style="color:#ff0;font-weight:bold">2</span>*i, i*i)
+    }
+</code></pre></div><p><code>sql.Open()</code>函数连接数据库，用<code>db.Exec()</code>函数，你能执行数据库命令，如果没有异常反馈。最后<code>db.Prepare()</code>函数能够通过它的参数多次处理该表数据，然后调用<code>Exec()</code>函数。</p>
+<p>第五部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    rows, err := db.Query(<span style="color:#0ff;font-weight:bold">&#34;SELECT * FROM data&#34;</span>)
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(<span style="color:#fff;font-weight:bold">nil</span>)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+    <span style="color:#fff;font-weight:bold">var</span> n <span style="color:#fff;font-weight:bold">int</span>
+    <span style="color:#fff;font-weight:bold">var</span> d <span style="color:#fff;font-weight:bold">int</span>
+    <span style="color:#fff;font-weight:bold">var</span> s <span style="color:#fff;font-weight:bold">int</span>
+    <span style="color:#fff;font-weight:bold">for</span> rows.Next() {
+    err = rows.Scan(&amp;n, &amp;d, &amp;s)
+    temp := Entry{Number: n, Double: d, Square: s}
+    DATA = <span style="color:#fff;font-weight:bold">append</span>(DATA, temp)
+ }
+</code></pre></div><p>在这程序这部分，我们使用<code>db.Query()</code>函数和多次调用<code>Next()</code>和<code>Scan()</code>从数据库表单中读取出来数据。循环读取数据，将读取出来的数据放在切片中。现在你已经能够用Go处理数据库了。</p>
+<p>最后一部分用来设置web服务器，它包含如下内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    http.HandleFunc(<span style="color:#0ff;font-weight:bold">&#34;/&#34;</span>, myHandler)
+    err = http.ListenAndServe(<span style="color:#0ff;font-weight:bold">&#34;:8080&#34;</span>, <span style="color:#fff;font-weight:bold">nil</span>)
+    <span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+        fmt.Println(err)
+        <span style="color:#fff;font-weight:bold">return</span>
+    }
+}
+</code></pre></div><p>这里，<code>http.HandleFunc()</code>函数告诉程序中嵌入的web服务器哪些url将被支持，哪些handler函数(<code>myHandler()</code>)支持。当前的handler支持<code>/URL</code>，它是Go匹配所有的URL。这使你不必创建任何额外的静态或动态页面。</p>
+<p><code>htmlT.go</code>被分进里了2个虚拟部分中。第一部分将从数据库查询出的数据放到切片中，第二部分就是将数据显示在web服务中。</p>
+<p><code>SQLite</code>两个最大的优势就是你不需要运行数据库服务，因为<code>SQLite</code>数据库被存储在它自己内部的文件中，这意味着单个文件就是整个数据库。</p>
+<p>注意为了减少Go代码被运行多次的问题，你将需要手动创建数据库表和<code>SQLite3</code>数据库，使用以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sqlite3 htmlT.db
+SQLite version 3.19.3 2017-06-27 16:48:08
+Enter <span style="color:#0ff;font-weight:bold">&#34;.help&#34;</span> <span style="color:#fff;font-weight:bold">for</span> usage hints.
+sqlite&gt; CREATE TABLE data (
+ ...&gt; number INTEGER PRIMARY KEY,
+ ...&gt; double INTEGER,
+ ...&gt; square INTEGER );
+sqlite&gt; ^D
+$ ls -l htmlT.db
+-rw-r--r-- <span style="color:#ff0;font-weight:bold">1</span> mtsouk staff <span style="color:#ff0;font-weight:bold">8192</span> Dec <span style="color:#ff0;font-weight:bold">26</span> 22:46 htmlT.db
+</code></pre></div><p>第一个在UNIX中被执行的shell命令是创建一个数据库文件。第二个命令执行在<code>SQLite3</code>的命令行中创建表和字段，它有3个字段、number、double、square。</p>
+<p>此外，你将需要外部的template文件，它将被命名为<code>html.gohtml</code>，这个文件将被用作生成程序的输出。</p>
+<p><code>html.gohtml</code>的第一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#0f0;font-weight:bold">&lt;!doctype html&gt;</span>
+&lt;<span style="font-weight:bold">html</span> <span style="color:#007f7f">lang</span>=<span style="color:#0ff;font-weight:bold">&#34;en&#34;</span>&gt;
+&lt;<span style="font-weight:bold">head</span>&gt;
+ &lt;<span style="font-weight:bold">meta</span> <span style="color:#007f7f">charset</span>=<span style="color:#0ff;font-weight:bold">&#34;UTF-8&#34;</span>&gt;
+ &lt;<span style="font-weight:bold">title</span>&gt;Doing Maths in Go!&lt;/<span style="font-weight:bold">title</span>&gt;
+ &lt;<span style="font-weight:bold">style</span>&gt;
+ <span style="font-weight:bold">html</span> {
+ <span style="color:#fff;font-weight:bold">font-size</span>: <span style="color:#ff0;font-weight:bold">14</span><span style="color:#fff;font-weight:bold">px</span>;
+ }
+ <span style="font-weight:bold">table</span>, <span style="font-weight:bold">th</span>, <span style="font-weight:bold">td</span> {
+ <span style="color:#fff;font-weight:bold">border</span>: <span style="color:#ff0;font-weight:bold">2</span><span style="color:#fff;font-weight:bold">px</span> <span style="color:#fff;font-weight:bold">solid</span> <span style="color:#fff;font-weight:bold">blue</span>;
+ }
+ &lt;/<span style="font-weight:bold">style</span>&gt;
+ &lt;/<span style="font-weight:bold">head</span>&gt;
+ &lt;<span style="font-weight:bold">body</span>&gt;
+</code></pre></div><p>WEB浏览器将获得的HTML代码基于HTML .gohtml的内容。这意味着你将需要创建适当的HTML输出，因此前面的HTML代码也包括一些内联CSS代码，用于格式化生成的HTML表。</p>
+<p>第二部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="font-weight:bold">table</span>&gt;
+ &lt;<span style="font-weight:bold">thead</span>&gt;
+ &lt;<span style="font-weight:bold">tr</span>&gt;
+ &lt;<span style="font-weight:bold">th</span>&gt;Number&lt;/<span style="font-weight:bold">th</span>&gt;
+ &lt;<span style="font-weight:bold">th</span>&gt;Double&lt;/<span style="font-weight:bold">th</span>&gt;
+ &lt;<span style="font-weight:bold">th</span>&gt;Square&lt;/<span style="font-weight:bold">th</span>&gt;
+ &lt;/<span style="font-weight:bold">tr</span>&gt;
+ &lt;/<span style="font-weight:bold">thead</span>&gt;
+ &lt;<span style="font-weight:bold">tbody</span>&gt;
+{{ range . }}
+ &lt;<span style="font-weight:bold">tr</span>&gt;
+ &lt;<span style="font-weight:bold">td</span>&gt; {{ .Number }} &lt;/<span style="font-weight:bold">td</span>&gt;
+ &lt;<span style="font-weight:bold">td</span>&gt; {{ .Double }} &lt;/<span style="font-weight:bold">td</span>&gt;
+ &lt;<span style="font-weight:bold">td</span>&gt; {{ .Square }} &lt;/<span style="font-weight:bold">td</span>&gt;
+ &lt;/<span style="font-weight:bold">tr</span>&gt;
+{{ end }}
+ &lt;/<span style="font-weight:bold">tbody</span>&gt;
+&lt;/<span style="font-weight:bold">table</span>&gt;
+</code></pre></div><p>As you can see from the preceding code, you still have to use {{ range }} and {{ end }} in order to iterate over the elements of the slice of structures that was passed to template.ExecuteTemplate(). However, this time the html.gohtml template file contains lots of HTML code in order to format the data in the slice of structures better.
+你可以看到之前的代码，你仍然不得不使用<code>{{ range }}</code>和<code>{{ end }}</code>为了遍历切片中的元素值，它通过<code>template.ExecuteTemplate()</code>遍历。然而，这次<code>html.gohtml</code>模板文件包含一些HTML代码为了使数据的数据更加美观。</p>
+<p>最后一部分代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p>最后一部分代码主要是根据HTML标准生成适当的HTML代码。在编译和执行<code>htmlT.go</code>之前，你将需要下载和<code>SQLite3</code>交互的package。执行以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go get github.com/mattn/go-sqlite3
+</code></pre></div><p>你已经知道，你可以在<code>~/go/src</code>路径下找到下载的包的源码。如果你是MacOS机器，它的编译版本在<code>~/go/pkg/darwin_amd64</code>下。否则，检查<code>~/go/pkg</code>的内容去找到你自己的架构。注意“~”字符代表当前用户目录的路径。</p>
+<p>注意附加的Go package存在会帮助你和<code>SQLite3</code>数据库交互。然而，这里使用的是目前唯一支持<code>database/sql</code>接口。执行<code>htmlT.go</code>文件会在浏览器看到如下输出：</p>
+<p><a href="https://yunteng9345.github.io/images/go/go-module.jpg">go-module图片</a>go-module.jpg</p>
+<p>htmlT.go输出</p>
+<p>而且，<code>htmlT.go</code>在UNIX的shell下生成输出的类型，主要有debug信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run htmlT.go htmlT.db html.gohtml
+Emptying database table.
+Populating htmlT.db
+Host: localhost:8080 Path: /
+Host: localhost:8080 Path: /favicon.ico
+Host: localhost:8080 Path: /123
+</code></pre></div><p>如果你想要看到程序从UNIXshell输出HTML,你要使用<code>wget(1)</code>工具：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget -qO- http://localhost:8080
+&lt;!doctype html&gt;
+&lt;html lang=<span style="color:#0ff;font-weight:bold">&#34;en&#34;</span>&gt;
+&lt;head&gt;
+ &lt;meta charset=<span style="color:#0ff;font-weight:bold">&#34;UTF-8&#34;</span>&gt;
+ &lt;title&gt;Doing Maths in Go!&lt;/title&gt;
+ &lt;style&gt;
+ html {
+ font-size: 14px;
+ }
+ table, th, td {
+ border: 2px solid blue;
+ }
+ &lt;/style&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+</code></pre></div><p><code>text/template</code>和<code>html/template</code>都是功能非常强大的包，它能够节省你的时间，所以我建议在你的app有适合的需求时多使用它们。</p>
+<h1 id="资源">资源</h1>
+<p>你将会在下面找到非常有用的资源：</p>
+<ul>
+<li>
+<p>访问<code>syscall</code>标准Go库<a href="https://golang.org/pkg/syscall/">https://golang.org/pkg/syscall/</a>。这是目前为止我看到过最大的Go文档。</p>
+</li>
+<li>
+<p>访问<code>text/template</code>标准Go库<a href="https://golang.org/pkg/text/template/">https://golang.org/pkg/text/template/</a></p>
+</li>
+<li>
+<p>访问<code>html/template</code>标准Go库<a href="https://golang.org/pkg/html/template/">https://golang.org/pkg/html/template/</a></p>
+</li>
+<li>
+<p>访问<code>go/token</code>标准Go库<a href="https://golang.org/pkg/go/token/">https://golang.org/pkg/go/token/</a></p>
+</li>
+<li>
+<p>访问<code>go/parser</code>标准Go库<a href="https://golang.org/pkg/go/parser/">https://golang.org/pkg/go/parser/</a></p>
+</li>
+<li>
+<p>访问<code>go/scanner</code>标准Go库<a href="https://golang.org/pkg/go/scanner/">https://golang.org/pkg/go/scanner/</a></p>
+</li>
+<li>
+<p>访问<code>go/ast</code>标准Go库<a href="https://golang.org/pkg/go/ast/">https://golang.org/pkg/go/ast/</a></p>
+</li>
+<li>
+<p>访问<code>SQLite3</code><a href="https://www.sqlite.org/">https://www.sqlite.org/</a></p>
+</li>
+<li>
+<p>访问&quot;用Go语言写出最漂亮的package&rdquo;<a href="https://www.youtube.com/watch?v=cAWlv2SeQus">https://www.youtube.com/watch?v=cAWlv2SeQus</a></p>
+</li>
+<li>
+<p>如果你想知道<code>Plan 9</code>，查看<a href="https://plan9.io/plan9/">https://plan9.io/plan9/</a></p>
+</li>
+<li>
+<p>花点时间通过<code>man</code>命令<code>(man 1 find)</code>。查看 <code>find(1)</code> 命令行工具。</p>
+</li>
+</ul>
+<h1 id="练习">练习</h1>
+<ol>
+<li>
+<p>寻找更多实现<code>fmt.Printf()</code>的信息。</p>
+</li>
+<li>
+<p>你能写一个函数用来存储3个int值吗？尝试写2个版本的函数：一个带有命名返回值，另一个没有命名返回值。你认为哪个更好？</p>
+</li>
+<li>
+<p>你能修改<code>htmlT.go</code>中的代码用<code>text/template</code>代替<code>html/template</code>吗？</p>
+</li>
+<li>
+<p>你能修改<code>htmlT.go</code>中的代码，使用[https://github.com/feyeleanor/gosqlite3](https://
+github.com/feyeleanor/gosqlite3)或者<a href="https://github.com/phf/go-sqlite3">https://github.com/phf/go-sqlite3</a>让它和SQLite数据库交互。</p>
+</li>
+<li>
+<p>创建你自己的Go module并且开发针对于它的3个大版本。</p>
+</li>
+<li>
+<p>写一个类似于<code>htmlT.go</code>一样能够读取Mysql数据库的程序。</p>
+</li>
+<li>
+<p>写下你所做的代码更改。</p>
+</li>
+</ol>
+<h1 id="总结">总结</h1>
+<p>这章主要展示了三部分主题：Go functions, Go packages, Go modules.</p>
+<p>Go modules主要的优势是准确的记录依赖信息，它能够重用多模块，让编程变得简单直接。这一章也给你提供了大量的关于开发优秀Go package的建议。随后讲了<code>text/template</code>和<code>html/template</code>包，它允许你创建基于模板的简单的text和html的输出。也有<code>go/token, go/parser, go/scanner</code>这些包。最后，讲了<code>syscall</code>标准Go库的高级特性。</p>
+<p>下一章将要讨论关于Go语言重要的俩个特征：<strong>接口和反射</strong>。它将讨论OOP、Debug和Go type方法。所有的这些主题都比较高级，在第一次接触你可能感觉他们比较困难。然而学的更多你将成为了一个十分优秀的程序员。</p>
+<p>最后，下一章包括简介git，就是在这章创建Go module的工具git。</p>
+
+  </article>
+  <script src="https://utteranc.es/client.js"
+        repo="yunteng9345/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>码出艺术 © 2020 - 2020 | 蒙ICP备2020004632号 | 粤公网安备 44030502006604号</p>
+      
+      
+      
+      
+        
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js"></script>
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    <script data-goatcounter="https://code.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="🎂云☁️">
+    <meta name="description" content="深入理解Java虚拟机第三版">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《深入理解JVM》——07.类文件结构"/>
+<meta name="twitter:description" content="深入理解Java虚拟机第三版"/>
+
+    <meta property="og:title" content="《深入理解JVM》——07.类文件结构" />
+<meta property="og:description" content="深入理解Java虚拟机第三版" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunteng9345.github.io/jvm/jvm-7-class-struct/" /><meta property="article:section" content="jvm" />
+<meta property="article:published_time" content="2020-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-28T00:00:00+00:00" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/06.0/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" />
+<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-8-jvm-run/" />
+
+
+
+    <title>
+  《深入理解JVM》——07.类文件结构 · 云的博客
+</title>
+
+    
+      <link rel="canonical" href="https://yunteng9345.github.io/jvm/jvm-7-class-struct/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    
+      <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    
+
+    <meta name="generator" content="Hugo 0.87.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=" twemoji.parse(document.body); "
+  >
+    
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      云的博客
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/jvm/">JVM</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/go/">Golang</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/life/">life</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/leetcode/">leetcode</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/about/">me</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>《深入理解JVM》——07.类文件结构</h1>
+    </header>
+
+    <h2 id="类文件结构">类文件结构</h2>
+<h2 id="概述">概述</h2>
+<p>不仅仅是Java。任何一种语言，只要将其编译成class文件，即可在jvm中运行。</p>
+<h2 id="class类文件的结构">Class类文件的结构</h2>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ClassFile {
+    u4             magic;
+    u2             minor_version;
+    u2             major_version;
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+}
+</code></pre></div><p>Class文件是一组以8个字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在文件之中，中间没有任何分隔符。当需要需要占用8个字节以上空间的数据项时，则会按照高位在前的方式分割成若干个8个字节进行存储。</p>
+<p>Class文件格式采用一种类似于C语言结构体的伪结构来存储数据，这种结构只有两种数据类型：“无符号数”和“表”。</p>
+<ol>
+<li>无符号数属于基本的数据类型，u1,u2,u4,u8来分别代表1个字节、2个字节、4个字节和8个字节的无符号数，无符号数可以用来描述数字、索引引用、数量值或者按照UFT-8编码构成字符串值。</li>
+<li>表是由多个无符号数或者其他表作为数据项构成的符合数据类型，所有的表的命名都习惯地以“_info”结尾。表是用于描述有层次关系的复合结构的数据，整个Class文件本质上也可以视作是一张表，</li>
+</ol>
+<p>魔数，有趣的东西，用来识别文件是不是java的class文件，因为后缀可以变动，而编译后文件的内容不会变，class文件前4个字节的魔数为COFEBABE，咖啡宝贝。在gif和jpeg文件头中都存在魔数这个东西。后4个字节 存储的是Class文件的版本号。5，6个字节存储的次版本号。</p>
+<h2 id="常量池">常量池</h2>
+<p>Class文件主次版本号后面紧接着就是常量池入口，常量池可以比喻为Class文件里的资源仓库，<strong>它是Class文件结构中与其他项目关联最多的数据，通常也是占用Class文件空间最大的数据项目之一，另外它还是Class文件中第一个出现的表类型数据项目</strong>，</p>
+<p>由于常量池中常量的数量不是固定的，所以在常量池的入口放置了一项u2类型的数据，代表常量池容量计数值(constant_pool_count)。此容量是从1开始的而不是从0，为的是，在特定情况下表达“不引用任何一个的常量池项目”。把索引设置为0来表示。除了此常量池计数器，其他的类型都是从0开始的。</p>
+<p>常量池中主要存放2大类常量：字面量和符号引用</p>
+<ol>
+<li>字面量。如文本字符、被声明的final的常量值。</li>
+<li>符号引用。编译原理方面的概念。
+<ol>
+<li>被模块导出或者开放的包</li>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+<li>方法句柄和方法类型</li>
+<li>动态调用点和动态常量</li>
+</ol>
+</li>
+</ol>
+<p><strong>在Class文件中不会保存各个方法、字段最终在内存中的布局信息，这些字段、方法的符号引用不仅过java虚拟机在运行期转换的话是无法得到真正的内存入口地址，也就无法直接被虚拟机使用。当虚拟机做类加载时，将会从常量池获得对应的符号引用，再在类创建时或运行时解析、翻译到具体的内存地址之中。</strong></p>
+<p>常量池中每一项常量都是一个表，这类表都有一个共同的特点，表结构起始的第一个u1类型的标志位tag，代表着当前常量属于哪种常量类型。后面的name_index市场量池的索引值。我们通过工具javap -verbose XXX.class来分析一个类文件中的常量表的信息。</p>
+<p>原始代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#fff;font-weight:bold">package</span> com.taifung.qrcode.chn.bocpay;
+
+<span style="color:#fff;font-weight:bold">import</span> com.jlpay.commons.tools.SpringContextUtil;
+<span style="color:#fff;font-weight:bold">import</span> lombok.extern.slf4j.Slf4j;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.boot.SpringApplication;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.context.annotation.Bean;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.context.annotation.ComponentScan;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.context.annotation.Import;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.http.client.SimpleClientHttpRequestFactory;
+<span style="color:#fff;font-weight:bold">import</span> org.springframework.web.client.RestTemplate;
+
+<span style="color:#007f7f">/**
+</span><span style="color:#007f7f"> * @description 中国银行澳门分行
+</span><span style="color:#007f7f"> * @date 11:24 2020/9/8
+</span><span style="color:#007f7f"> * @author Mr.Cloud
+</span><span style="color:#007f7f"> **/</span>
+@Slf4j
+@EnableDiscoveryClient
+@SpringBootApplication
+@ComponentScan(basePackages = {<span style="color:#0ff;font-weight:bold">&#34;com.jlpay.commons.rpc.thrift.referer.zookeeper&#34;</span>,
+		<span style="color:#0ff;font-weight:bold">&#34;com.jlpay.commons.rpc.thrift.referer.service&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;com.jlpay.commons.rpc.thrift.server&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;com.taifung.qrcode.chn.bocpay&#34;</span>})
+@Import(SpringContextUtil.<span style="color:#007f7f">class</span>)
+<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> BocPayBootstrap {
+
+	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> main(String[] args) {
+		log.<span style="color:#007f7f">info</span>(<span style="color:#0ff;font-weight:bold">&#34;starting qrcode channel of BocPay server&#34;</span>);
+		SpringApplication.<span style="color:#007f7f">run</span>(BocPayBootstrap.<span style="color:#007f7f">class</span>, args);
+		log.<span style="color:#007f7f">info</span>(<span style="color:#0ff;font-weight:bold">&#34;qrcode channel of BocPay server start ok&#34;</span>);
+	}
+
+	@Bean
+	<span style="color:#fff;font-weight:bold">public</span> RestTemplate restTemplate() {
+		SimpleClientHttpRequestFactory clientHttpRequestFactory
+				= <span style="color:#fff;font-weight:bold">new</span> SimpleClientHttpRequestFactory();
+		clientHttpRequestFactory.<span style="color:#007f7f">setConnectTimeout</span>(20000);
+		clientHttpRequestFactory.<span style="color:#007f7f">setReadTimeout</span>(20000);
+		<span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">new</span> RestTemplate(clientHttpRequestFactory);
+	}
+}
+
+</code></pre></div><p>使用命令javap -verbose BocPayBootstrap.class后</p>
+<div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> Last modified 2020-12-17; size 2172 bytes
+  MD5 checksum 2c81850e316de50d35699eaee10d44dc
+  Compiled from <span style="color:#0ff;font-weight:bold">&#34;BocPayBootstrap.java&#34;</span>
+<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> com.<span style="color:#007f7f">taifung</span>.<span style="color:#007f7f">qrcode</span>.<span style="color:#007f7f">chn</span>.<span style="color:#007f7f">bocpay</span>.<span style="color:#007f7f">BocPayBootstrap</span>
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   <span style="color:#f00">#</span>1 = Methodref          <span style="color:#f00">#</span>15.<span style="color:#f00">#</span>50        <span style="color:#007f7f">// java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>2 = Fieldref           <span style="color:#f00">#</span>5.<span style="color:#f00">#</span>51         <span style="color:#007f7f">// com/taifung/qrcode/chn/bocpay/BocPayBootstrap.log:Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>3 = String             <span style="color:#f00">#</span>52            <span style="color:#007f7f">// starting qrcode channel of BocPay server
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>4 = InterfaceMethodref <span style="color:#f00">#</span>53.<span style="color:#f00">#</span>54        <span style="color:#007f7f">// org/slf4j/Logger.info:(Ljava/lang/String;)V
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>5 = Class              <span style="color:#f00">#</span>55            <span style="color:#007f7f">// com/taifung/qrcode/chn/bocpay/BocPayBootstrap
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>6 = Methodref          <span style="color:#f00">#</span>56.<span style="color:#f00">#</span>57        <span style="color:#007f7f">// org/springframework/boot/SpringApplication.run:(Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>7 = String             <span style="color:#f00">#</span>58            <span style="color:#007f7f">// qrcode channel of BocPay server start ok
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>8 = Class              <span style="color:#f00">#</span>59            <span style="color:#007f7f">// org/springframework/http/client/SimpleClientHttpRequestFactory
+</span><span style="color:#007f7f"></span>   <span style="color:#f00">#</span>9 = Methodref          <span style="color:#f00">#</span>8.<span style="color:#f00">#</span>50         <span style="color:#007f7f">// org/springframework/http/client/SimpleClientHttpRequestFactory.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>10 = Methodref          <span style="color:#f00">#</span>8.<span style="color:#f00">#</span>60         <span style="color:#007f7f">// org/springframework/http/client/SimpleClientHttpRequestFactory.setConnectTimeout:(I)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>11 = Methodref          <span style="color:#f00">#</span>8.<span style="color:#f00">#</span>61         <span style="color:#007f7f">// org/springframework/http/client/SimpleClientHttpRequestFactory.setReadTimeout:(I)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>12 = Class              <span style="color:#f00">#</span>62            <span style="color:#007f7f">// org/springframework/web/client/RestTemplate
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>13 = Methodref          <span style="color:#f00">#</span>12.<span style="color:#f00">#</span>63        <span style="color:#007f7f">// org/springframework/web/client/RestTemplate.&#34;&lt;init&gt;&#34;:(Lorg/springframework/http/client/ClientHttpRequestFactory;)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>14 = Methodref          <span style="color:#f00">#</span>64.<span style="color:#f00">#</span>65        <span style="color:#007f7f">// org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>15 = Class              <span style="color:#f00">#</span>66            <span style="color:#007f7f">// java/lang/Object
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>16 = Utf8               log
+  <span style="color:#f00">#</span>17 = Utf8               Lorg/slf4j/Logger;
+  <span style="color:#f00">#</span>18 = Utf8               &lt;init&gt;
+  <span style="color:#f00">#</span>19 = Utf8               ()V
+  <span style="color:#f00">#</span>20 = Utf8               Code
+  <span style="color:#f00">#</span>21 = Utf8               LineNumberTable
+  <span style="color:#f00">#</span>22 = Utf8               LocalVariableTable
+  <span style="color:#f00">#</span>23 = Utf8               <span style="color:#fff;font-weight:bold">this</span>
+  <span style="color:#f00">#</span>24 = Utf8               Lcom/taifung/qrcode/chn/bocpay/BocPayBootstrap;
+  <span style="color:#f00">#</span>25 = Utf8               main
+  <span style="color:#f00">#</span>26 = Utf8               ([Ljava/lang/String;)V
+  <span style="color:#f00">#</span>27 = Utf8               args
+  <span style="color:#f00">#</span>28 = Utf8               [Ljava/lang/String;
+  <span style="color:#f00">#</span>29 = Utf8               MethodParameters
+  <span style="color:#f00">#</span>30 = Utf8               restTemplate
+  <span style="color:#f00">#</span>31 = Utf8               ()Lorg/springframework/web/client/RestTemplate;
+  <span style="color:#f00">#</span>32 = Utf8               clientHttpRequestFactory
+  <span style="color:#f00">#</span>33 = Utf8               Lorg/springframework/http/client/SimpleClientHttpRequestFactory;
+  <span style="color:#f00">#</span>34 = Utf8               RuntimeVisibleAnnotations
+  <span style="color:#f00">#</span>35 = Utf8               Lorg/springframework/context/annotation/Bean;
+  <span style="color:#f00">#</span>36 = Utf8               &lt;clinit&gt;
+  <span style="color:#f00">#</span>37 = Utf8               SourceFile
+  <span style="color:#f00">#</span>38 = Utf8               BocPayBootstrap.<span style="color:#007f7f">java</span>
+  <span style="color:#f00">#</span>39 = Utf8               Lorg/springframework/cloud/client/discovery/EnableDiscoveryClient;
+  <span style="color:#f00">#</span>40 = Utf8               Lorg/springframework/boot/autoconfigure/SpringBootApplication;
+  <span style="color:#f00">#</span>41 = Utf8               Lorg/springframework/context/annotation/ComponentScan;
+  <span style="color:#f00">#</span>42 = Utf8               basePackages
+  <span style="color:#f00">#</span>43 = Utf8               com.<span style="color:#007f7f">jlpay</span>.<span style="color:#007f7f">commons</span>.<span style="color:#007f7f">rpc</span>.<span style="color:#007f7f">thrift</span>.<span style="color:#007f7f">referer</span>.<span style="color:#007f7f">zookeeper</span>
+  <span style="color:#f00">#</span>44 = Utf8               com.<span style="color:#007f7f">jlpay</span>.<span style="color:#007f7f">commons</span>.<span style="color:#007f7f">rpc</span>.<span style="color:#007f7f">thrift</span>.<span style="color:#007f7f">referer</span>.<span style="color:#007f7f">service</span>
+  <span style="color:#f00">#</span>45 = Utf8               com.<span style="color:#007f7f">jlpay</span>.<span style="color:#007f7f">commons</span>.<span style="color:#007f7f">rpc</span>.<span style="color:#007f7f">thrift</span>.<span style="color:#007f7f">server</span>
+  <span style="color:#f00">#</span>46 = Utf8               com.<span style="color:#007f7f">taifung</span>.<span style="color:#007f7f">qrcode</span>.<span style="color:#007f7f">chn</span>.<span style="color:#007f7f">bocpay</span>
+  <span style="color:#f00">#</span>47 = Utf8               Lorg/springframework/context/annotation/Import;
+  <span style="color:#f00">#</span>48 = Utf8               value
+  <span style="color:#f00">#</span>49 = Utf8               Lcom/jlpay/commons/tools/SpringContextUtil;
+  <span style="color:#f00">#</span>50 = NameAndType        <span style="color:#f00">#</span>18:<span style="color:#f00">#</span>19        <span style="color:#007f7f">// &#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>51 = NameAndType        <span style="color:#f00">#</span>16:<span style="color:#f00">#</span>17        <span style="color:#007f7f">// log:Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>52 = Utf8               starting qrcode channel of BocPay server
+  <span style="color:#f00">#</span>53 = Class              <span style="color:#f00">#</span>67            <span style="color:#007f7f">// org/slf4j/Logger
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>54 = NameAndType        <span style="color:#f00">#</span>68:<span style="color:#f00">#</span>69        <span style="color:#007f7f">// info:(Ljava/lang/String;)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>55 = Utf8               com/taifung/qrcode/chn/bocpay/BocPayBootstrap
+  <span style="color:#f00">#</span>56 = Class              <span style="color:#f00">#</span>70            <span style="color:#007f7f">// org/springframework/boot/SpringApplication
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>57 = NameAndType        <span style="color:#f00">#</span>71:<span style="color:#f00">#</span>72        <span style="color:#007f7f">// run:(Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>58 = Utf8               qrcode channel of BocPay server start ok
+  <span style="color:#f00">#</span>59 = Utf8               org/springframework/http/client/SimpleClientHttpRequestFactory
+  <span style="color:#f00">#</span>60 = NameAndType        <span style="color:#f00">#</span>73:<span style="color:#f00">#</span>74        <span style="color:#007f7f">// setConnectTimeout:(I)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>61 = NameAndType        <span style="color:#f00">#</span>75:<span style="color:#f00">#</span>74        <span style="color:#007f7f">// setReadTimeout:(I)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>62 = Utf8               org/springframework/web/client/RestTemplate
+  <span style="color:#f00">#</span>63 = NameAndType        <span style="color:#f00">#</span>18:<span style="color:#f00">#</span>76        <span style="color:#007f7f">// &#34;&lt;init&gt;&#34;:(Lorg/springframework/http/client/ClientHttpRequestFactory;)V
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>64 = Class              <span style="color:#f00">#</span>77            <span style="color:#007f7f">// org/slf4j/LoggerFactory
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>65 = NameAndType        <span style="color:#f00">#</span>78:<span style="color:#f00">#</span>79        <span style="color:#007f7f">// getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>  <span style="color:#f00">#</span>66 = Utf8               java/lang/Object
+  <span style="color:#f00">#</span>67 = Utf8               org/slf4j/Logger
+  <span style="color:#f00">#</span>68 = Utf8               info
+  <span style="color:#f00">#</span>69 = Utf8               (Ljava/lang/String;)V
+  <span style="color:#f00">#</span>70 = Utf8               org/springframework/boot/SpringApplication
+  <span style="color:#f00">#</span>71 = Utf8               run
+  <span style="color:#f00">#</span>72 = Utf8               (Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;
+  <span style="color:#f00">#</span>73 = Utf8               setConnectTimeout
+  <span style="color:#f00">#</span>74 = Utf8               (I)V
+  <span style="color:#f00">#</span>75 = Utf8               setReadTimeout
+  <span style="color:#f00">#</span>76 = Utf8               (Lorg/springframework/http/client/ClientHttpRequestFactory;)V
+  <span style="color:#f00">#</span>77 = Utf8               org/slf4j/LoggerFactory
+  <span style="color:#f00">#</span>78 = Utf8               getLogger
+  <span style="color:#f00">#</span>79 = Utf8               (Ljava/lang/Class;)Lorg/slf4j/Logger;
+{
+  <span style="color:#fff;font-weight:bold">public</span> com.<span style="color:#007f7f">taifung</span>.<span style="color:#007f7f">qrcode</span>.<span style="color:#007f7f">chn</span>.<span style="color:#007f7f">bocpay</span>.<span style="color:#007f7f">BocPayBootstrap</span>();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial <span style="color:#f00">#</span>1                  <span style="color:#007f7f">// Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#007f7f"></span>         4: <span style="color:#fff;font-weight:bold">return</span>
+      LineNumberTable:
+        line 25: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  <span style="color:#fff;font-weight:bold">this</span>   Lcom/taifung/qrcode/chn/bocpay/BocPayBootstrap;
+
+  <span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> main(java.<span style="color:#007f7f">lang</span>.<span style="color:#007f7f">String</span>[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     <span style="color:#f00">#</span>2                  <span style="color:#007f7f">// Field log:Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>         3: ldc           <span style="color:#f00">#</span>3                  <span style="color:#007f7f">// String starting qrcode channel of BocPay server
+</span><span style="color:#007f7f"></span>         5: invokeinterface <span style="color:#f00">#</span>4,  2            <span style="color:#007f7f">// InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+</span><span style="color:#007f7f"></span>        10: ldc           <span style="color:#f00">#</span>5                  <span style="color:#007f7f">// class com/taifung/qrcode/chn/bocpay/BocPayBootstrap
+</span><span style="color:#007f7f"></span>        12: aload_0
+        13: invokestatic  <span style="color:#f00">#</span>6                  <span style="color:#007f7f">// Method org/springframework/boot/SpringApplication.run:(Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;
+</span><span style="color:#007f7f"></span>        16: pop
+        17: getstatic     <span style="color:#f00">#</span>2                  <span style="color:#007f7f">// Field log:Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>        20: ldc           <span style="color:#f00">#</span>7                  <span style="color:#007f7f">// String qrcode channel of BocPay server start ok
+</span><span style="color:#007f7f"></span>        22: invokeinterface <span style="color:#f00">#</span>4,  2            <span style="color:#007f7f">// InterfaceMethod org/slf4j/Logger.info:(Ljava/lang/String;)V
+</span><span style="color:#007f7f"></span>        27: <span style="color:#fff;font-weight:bold">return</span>
+      LineNumberTable:
+        line 28: 0
+        line 29: 10
+        line 30: 17
+        line 31: 27
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      28     0  args   [Ljava/lang/String;
+    MethodParameters:
+      Name                           Flags
+      args
+
+  <span style="color:#fff;font-weight:bold">public</span> org.<span style="color:#007f7f">springframework</span>.<span style="color:#007f7f">web</span>.<span style="color:#007f7f">client</span>.<span style="color:#007f7f">RestTemplate</span> restTemplate();
+    descriptor: ()Lorg/springframework/web/client/RestTemplate;
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=1
+         0: <span style="color:#fff;font-weight:bold">new</span>           <span style="color:#f00">#</span>8                  <span style="color:#007f7f">// class org/springframework/http/client/SimpleClientHttpRequestFactory
+</span><span style="color:#007f7f"></span>         3: dup
+         4: invokespecial <span style="color:#f00">#</span>9                  <span style="color:#007f7f">// Method org/springframework/http/client/SimpleClientHttpRequestFactory.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#007f7f"></span>         7: astore_1
+         8: aload_1
+         9: sipush        20000
+        12: invokevirtual <span style="color:#f00">#</span>10                 <span style="color:#007f7f">// Method org/springframework/http/client/SimpleClientHttpRequestFactory.setConnectTimeout:(I)V
+</span><span style="color:#007f7f"></span>        15: aload_1
+        16: sipush        20000
+        19: invokevirtual <span style="color:#f00">#</span>11                 <span style="color:#007f7f">// Method org/springframework/http/client/SimpleClientHttpRequestFactory.setReadTimeout:(I)V
+</span><span style="color:#007f7f"></span>        22: <span style="color:#fff;font-weight:bold">new</span>           <span style="color:#f00">#</span>12                 <span style="color:#007f7f">// class org/springframework/web/client/RestTemplate
+</span><span style="color:#007f7f"></span>        25: dup
+        26: aload_1
+        27: invokespecial <span style="color:#f00">#</span>13                 <span style="color:#007f7f">// Method org/springframework/web/client/RestTemplate.&#34;&lt;init&gt;&#34;:(Lorg/springframework/http/client/ClientHttpRequestFactory;)V
+</span><span style="color:#007f7f"></span>        30: areturn
+      LineNumberTable:
+        line 35: 0
+        line 37: 8
+        line 38: 15
+        line 39: 22
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      31     0  <span style="color:#fff;font-weight:bold">this</span>   Lcom/taifung/qrcode/chn/bocpay/BocPayBootstrap;
+            8      23     1 clientHttpRequestFactory   Lorg/springframework/http/client/SimpleClientHttpRequestFactory;
+    RuntimeVisibleAnnotations:
+      0: <span style="color:#f00">#</span>35()
+
+  <span style="color:#fff;font-weight:bold">static</span> {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: ldc           <span style="color:#f00">#</span>5                  <span style="color:#007f7f">// class com/taifung/qrcode/chn/bocpay/BocPayBootstrap
+</span><span style="color:#007f7f"></span>         2: invokestatic  <span style="color:#f00">#</span>14                 <span style="color:#007f7f">// Method org/slf4j/LoggerFactory.getLogger:(Ljava/lang/Class;)Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>         5: putstatic     <span style="color:#f00">#</span>2                  <span style="color:#007f7f">// Field log:Lorg/slf4j/Logger;
+</span><span style="color:#007f7f"></span>         8: <span style="color:#fff;font-weight:bold">return</span>
+      LineNumberTable:
+        line 19: 0
+}
+SourceFile: <span style="color:#0ff;font-weight:bold">&#34;BocPayBootstrap.java&#34;</span>
+RuntimeVisibleAnnotations:
+  0: <span style="color:#f00">#</span>39()
+  1: <span style="color:#f00">#</span>40()
+  2: <span style="color:#f00">#</span>41(<span style="color:#f00">#</span>42=[s<span style="color:#f00">#</span>43,s<span style="color:#f00">#</span>44,s<span style="color:#f00">#</span>45,s<span style="color:#f00">#</span>46])
+  3: <span style="color:#f00">#</span>47(<span style="color:#f00">#</span>48=[c<span style="color:#f00">#</span>49])
+
+</code></pre></div><p>此命令将这个class文件的相关内容全部都解析出来了，其中ACC_开头的代表的是类或者接口的访问信息，如：这个类是Class还是接口；是否定义为public类型的，是否是abstract，如果是类，是否被声明final等。access_flags中一共有16个标志位可以使用。</p>
+<h2 id="类索引父类索引与接口索引集合">类索引、父类索引与接口索引集合</h2>
+<p><img src="https://yunteng9345.github.io/images/jvm/class-struct-1.png" alt="类索引、父类索引与接口索引集合"></p>
+<p>Class文件是Java虚拟机执行引擎的数据入口，也是Java技术体系的基础支柱之一。</p>
+<p>下面此说明十分重要，这就完全说明java可以在运行中改变一些类的行为，实现语言使用者的定制化服务。</p>
+<blockquote>
+<p>任何一个Class文件都对应着唯一的一个类或者接口的定义信息，但是反过来说，类或者接口并不一定都得定义在文件里（譬如类或者接口也可以动态生成，直接送入类加载器中）。</p>
+</blockquote>
+<ul>
+<li><a href="../">目录</a></li>
+<li>上一章：<a href="../jvm-6-tool">JVM性能监控及故障处理命令</a></li>
+<li>下一节：<a href="../jvm-8-jvm-run">JVM性能监控及故障处理命令</a></li>
+</ul>
+
+  </article>
+  <script src="https://utteranc.es/client.js"
+        repo="yunteng9345/blog"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</section>
+
+  
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>码出艺术 © 2020 - 2020 | 蒙ICP备2020004632号 | 粤公网安备 44030502006604号</p>
+      
+      
+      
+      
+        
+      
+    </section>
+  </footer>
+
+
+    </main>
+
+    
+      
+        
+        <script src="/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js"></script>
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    <script data-goatcounter="https://code.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goes on 云的博客</title>
+    <link>https://yunteng9345.github.io/go/</link>
+    <description>Recent content in Goes on 云的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 09 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《Mastering Go》翻译第六章（已完成）</title>
+      <link>https://yunteng9345.github.io/go/06.0/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/go/06.0/</guid>
+      <description>《Mastering Go》翻译第6章 我的github地址：https://github.com/yunteng9345/Mastering_Go_Second_Edition_Zh_CN
+主要内容：
+ go函数开发 匿名函数 多返回值函数 命名函数返回值 函数返回其他函数 可变参数函数 开发Go packages 用Go Modules开发和工作 私有和公有package对象 在packages使用init()函数 Go标准包html/template Go标准包text/template Go高级包go/scanner, go/parser, go/token Go标准包syscall，底层包，虽然你可能不直接使用，但是它广泛运用在其他的Go packages  你不知道的Go packages和功能 上一章讲解了如何开发和如何自定的数据结构，如：linked lists、binary trees、hash table。用Go语言生成随机数和密码、执行高性能的矩阵操作等。
+这章主要的重点是Go packages，它是用Go的方式组织、交付、使用代码。最重要的通用组件就是Go package中的函数，它使得在Go语言中变得可扩展。紧接着，这章将会讲解Go modules，这是带有版本号的Go packages。在这章的最后，你将了解一些属于Go标准库的packages，为了更好的理解Go packages的不同的创建方式。
+本章，你将学到以下主题：
+ go函数开发 匿名函数 多返回值函数 命名函数返回值 函数返回其他函数 可变参数函数 开发Go packages 用Go Modules开发和工作 私有和公有package对象 在packages使用init()函数 Go标准包html/template Go标准包text/template Go高级包go/scanner, go/parser, go/token Go标准包syscall，底层包，虽然你可能不直接使用，但是它广泛运用在其他的Go packages  关于Go package 任何内容在Go语言中交付都是以packages的形式。Go package是一个用package关键字开头，后面跟着包名的源文件。一些packages也有结构。例如net包有一系列的子目录，http、mail、rpc、smtp、textproto、url。这些包可以用 net/http, net/mail, net/rpc, net/smtp, net/textproto, net/url 的语法形式单独使用。</description>
+    </item>
+    
+    <item>
+      <title>go语言《Go 环境变量》</title>
+      <link>https://yunteng9345.github.io/go/go-04/</link>
+      <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/go/go-04/</guid>
+      <description>————摘自https://github.com/unknwon/the-way-to-go_ZH_CN
+2.2 Go 环境变量 Go 开发环境依赖于一些操作系统环境变量，你最好在安装 Go 之前就已经设置好他们。如果你使用的是 Windows 的话，你完全不用进行手动设置，Go 将被默认安装在目录 c:/go 下。这里列举几个最为重要的环境变量：
+ $GOROOT 表示 Go 在你的电脑上的安装位置，它的值一般都是 $HOME/go，当然，你也可以安装在别的地方。 $GOARCH 表示目标机器的处理器架构，它的值可以是 386、amd64 或 arm。 $GOOS 表示目标机器的操作系统，它的值可以是 darwin、freebsd、linux 或 windows。 $GOBIN 表示编译器和链接器的安装位置，默认是 $GOROOT/bin，如果你使用的是 Go 1.0.3 及以后的版本，一般情况下你可以将它的值设置为空，Go 将会使用前面提到的默认值。  目标机器是指你打算运行你的 Go 应用程序的机器。
+Go 编译器支持交叉编译，也就是说你可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性（操作系统与处理器架构）。
+为了区分本地机器和目标机器，你可以使用 $GOHOSTOS 和 $GOHOSTARCH 设置本地机器的操作系统名称和编译体系结构，这两个变量只有在进行交叉编译的时候才会用到，如果你不进行显示设置，他们的值会和本地机器（$GOOS 和 $GOARCH）一样。
+ $GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，你必须修改为其它路径。它可以包含多个 Go 语言源码文件、包文件和可执行文件的路径，而这些路径下又必须分别包含三个规定的目录：src、pkg 和 bin，这三个目录分别用于存放源码文件、包文件和可执行文件。 $GOARM 专门针对基于 arm 架构的处理器，它的值可以是 5 或 6，默认为 6。 $GOMAXPROCS 用于设置应用程序可使用的处理器个数与核数，详见第 14.</description>
+    </item>
+    
+    <item>
+      <title>go语言《平台与架构》</title>
+      <link>https://yunteng9345.github.io/go/go-03/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/go/go-03/</guid>
+      <description>————摘自https://github.com/unknwon/the-way-to-go_ZH_CN
+2.1 平台与架构 Go 语言开发团队开发了适用于以下操作系统的编译器：
+ Linux FreeBSD Mac OS X（也称为 Darwin）  目前有2个版本的编译器：Go 原生编译器 gc 和非原生编译器 gccgo，这两款编译器都是在类 Unix 系统下工作 。其中，gc 版本的编译器已经被移植到 Windows 平台上，并集成在主要发行版中，你也可以通过安装 MinGW 从而在 Windows 平台下使用 gcc 编译器。这两个编译器都是以单通道的形式工作。
+你可以获取以下平台上的 Go 1.4 源码和二进制文件：
+ Linux 2.6+：amd64、386 和 arm 架构 Mac OS X（Snow Leopard + Lion）：amd64 和 386 架构 Windows 2000+：amd64 和 386 架构  对于非常底层的纯 Go 语言代码或者包而言，在各个操作系统平台上的可移植性是非常强的，只需要将源码拷贝到相应平台上进行编译即可，或者可以使用交叉编译来构建目标平台的应用程序（第 2.2 节）。但如果你打算使用 cgo 或者类似文件监控系统的软件，就需要根据实际情况进行相应地修改了。
+  Go 原生编译器 gc：
+主要基于 Ken Thompson 先前在 Plan 9 操作系统上使用的 C 工具链。</description>
+    </item>
+    
+    <item>
+      <title>go语言《语言的主要特性与发展的环境和影响因素》</title>
+      <link>https://yunteng9345.github.io/go/go-02/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/go/go-02/</guid>
+      <description>————摘自https://github.com/unknwon/the-way-to-go_ZH_CN
+1.2 语言的主要特性与发展的环境和影响因素 1.2.1 影响 Go 语言发展的早期编程语言 正如 “21 世纪的 C 语言” 这句话所说，Go 语言并不是凭空而造的，而是和 C++、Java 和 C# 一样属于 C 系。不仅如此，设计者们还汲取了其它编程语言的精粹部分融入到 Go 语言当中。
+在声明和包的设计方面，Go 语言受到 Pascal、Modula 和 Oberon 系语言的影响；在并发原理的设计上，Go 语言从同样受到 Tony Hoare 的 CSP（通信序列进程 Communicating Sequential Processes）理论影响的 Limbo 和 Newsqueak 的实践中借鉴了一些经验，并使用了和 Erlang 类似的机制。
+这是一门完全开源的编程语言，因为它使用 BSD 授权许可，所以任何人都可以进行商业软件的开发而不需要支付任何费用。
+尽管为了能够让目前主流的开发者们能够对 Go 语言中的类 C 语言的语法感到非常亲切而易于转型，但是它在极大程度上简化了这些语法，使得它们比 C/C++ 的语法更加简洁和干净。同时，Go 语言也拥有一些动态语言的特性，这使得使用 Python 和 Ruby 的开发者们在使用 Go 语言的时候感觉非常容易上手。
+下图展示了一些其它编程语言对 Go 语言的影响：
+图 1.3 其它编程语言对 Go 语言的影响
+1.2.2 为什么要创造一门编程语言  C/C++ 的发展速度无法跟上计算机发展的脚步，十多年来也没有出现一门与时代相符的主流系统编程语言，因此人们需要一门新的系统编程语言来弥补这个空缺，尤其是在计算机信息时代。 相比计算机性能的提升，软件开发领域不被认为发展得足够快或者比硬件发展得更加成功（有许多项目均以失败告终），同时应用程序的体积始终在不断地扩大，这就迫切地需要一门具备更高层次概念的低级语言来突破现状。 在 Go 语言出现之前，开发者们总是面临非常艰难的抉择，究竟是使用执行速度快但是编译速度并不理想的语言（如：C++），还是使用编译速度较快但执行效率不佳的语言（如：.</description>
+    </item>
+    
+    <item>
+      <title>go语言《起源与发展》</title>
+      <link>https://yunteng9345.github.io/go/go-01/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/go/go-01/</guid>
+      <description>————摘自https://github.com/unknwon/the-way-to-go_ZH_CN
+1.1 起源与发展 Go 语言起源 2007 年，并于 2009 年正式对外发布。它从 2009 年 9 月 21 日开始作为谷歌公司 20% 兼职项目，即相关员工利用 20% 的空余时间来参与 Go 语言的研发工作。该项目的三位领导者均是著名的 IT 工程师：Robert Griesemer，参与开发 Java HotSpot 虚拟机；Rob Pike，Go 语言项目总负责人，贝尔实验室 Unix 团队成员，参与的项目包括 Plan 9，Inferno 操作系统和 Limbo 编程语言；Ken Thompson，贝尔实验室 Unix 团队成员，C 语言、Unix 和 Plan 9 的创始人之一，与 Rob Pike 共同开发了 UTF-8 字符集规范。自 2008 年 1 月起，Ken Thompson 就开始研发一款以 C 语言为目标结果的编译器来拓展 Go 语言的设计思想。
+这是一个由计算机领域 “发明之父” 所组成的黄金团队，他们对系统编程语言，操作系统和并行都有着非常深刻的见解
+图 1.1 Go 语言设计者：Griesemer、Thompson 和 Pike
+在 2008 年年中，Go 语言的设计工作接近尾声，一些员工开始以全职工作状态投入到这个项目的编译器和运行实现上。Ian Lance Taylor 也加入到了开发团队中，并于 2008 年 5 月创建了一个 gcc 前端。</description>
+    </item>
+    
+    <item>
+      <title>go语言学习笔记</title>
+      <link>https://yunteng9345.github.io/go/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/go/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>1.下载gin时遇到网络问题. 解决办法 go env -w GOPROXY=https://goproxy.cn
+开发这个代理的老哥真的nb，可以看看他的博客和github。大佬。。https://aofeisheng.com/</description>
+    </item>
+    
+  </channel>
+</rss>
