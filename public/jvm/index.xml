@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jvms on 云的博客</title>
-    <link>https://yunteng9345.github.io/jvm/</link>
-    <description>Recent content in Jvms on 云的博客</description>
+    <title>Jvms on Example Site</title>
+    <link>https://example.com/jvm/</link>
+    <description>Recent content in Jvms on Example Site</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/jvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>计算机网络</title>
-      <link>https://yunteng9345.github.io/jvm/review-web/</link>
+      <link>https://example.com/jvm/review-web/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/review-web/</guid>
+      <guid>https://example.com/jvm/review-web/</guid>
       <description>TCP连接的建立（三次握手） -
 TCP连接的释放（四次挥手） 客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗ *∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。
 服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。
@@ -28,20 +28,20 @@ TCP保可靠传输，支持流量控制，基于字节传输，仅仅支持一�
     
     <item>
       <title>《深入理解JVM》——09.虚拟机字节码执行引擎</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/</link>
+      <link>https://example.com/jvm/jvm-9-jvm-bytecode/</link>
       <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/</guid>
+      <guid>https://example.com/jvm/jvm-9-jvm-bytecode/</guid>
       <description>虚拟机字节码执行引擎 概述 所有的Java虚拟机的执行引擎输入、输出都是一致的：输入的是字节码二进制流，处理过程是字节码解析执行的等效过程，输出的是执行结果。
  目录 上一章：JVM性能监控及故障处理命令 下一节：Java字节码  </description>
     </item>
     
     <item>
       <title>《深入理解JVM》——08.虚拟机类加载机制</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-8-jvm-run/</link>
+      <link>https://example.com/jvm/jvm-8-jvm-run/</link>
       <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-8-jvm-run/</guid>
+      <guid>https://example.com/jvm/jvm-8-jvm-run/</guid>
       <description>虚拟机类加载机制 概述 Java虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成被虚拟机直接使用的Java类型，这个过程被称作虚拟机的类加载机制。与那些在编译时需要进行连接的语言不同，在Java语言里，类型的加载、连接和初始化都是在程序运行期完成的。这种策略让java语言进行提前编译会面临额外的困难，也会让类加载时稍微增加一点性能开销，但是却为了Java应用提供了极高的饿扩展性和灵活性，Java天生可以动态扩展的语言特征就是依赖运行期动态加载和动态连接这个特点实现的。例如，编写一个面向接口的应用程序，可以等到运行时再指定其实际的实现类，用户可以通过Java预置的或自定义类加载器，让某个本地的应用程序在运行时从网络或其他地方上加载一个二进制流作为其程序代码的一部分。
 类加载的时机 JVM规范严格规定了有且只有6中情况必须立即对类进行“初始化”（而加载、验证、准备自然需要在此之前开始）:
  遇到new、getstatic、putstatic、invokestatic这4条字节码指令时，如果类型没有进行过初始化，则需要先触发其初始化阶段。能够生成这4条指令的典型Java代码场景有：  使用new关键字实例化对象的时候 读取或设置一个类型的静态字段(被final修饰、已在编译期把结果放入常量池的静态字段除外)的时候 调用一个类型的静态方法的时候   使用java.lang.reflect包的方法对类型进行反射调用的时候，如果类型没有进行过初始化，则需要先触发其初始化。 当初始化类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。 当虚拟机启动时，用户需要指定一个要执行的主类（包含main()方法的那个类），虚拟机会先初始化这个主类 当使用JDK7新加入的动态语言支持时，如果一个java.lang.invoke.MethodHandle实例最后的解析结果为REF_getStatic、REF_putStatic、REF_invokeStatic、REF_newInvokeSpecial四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。 当一个接口中定义了JDK 8新加入的默认方法（被default关键字修饰的接口方法）时，如果有这个接口的的实现类发生了初始化，那该接口要在其之前被初始化。  类加载的过程 加载 在加载阶段，jvm主要完成以下3件事情：
@@ -58,10 +58,10 @@ TCP保可靠传输，支持流量控制，基于字节传输，仅仅支持一�
     
     <item>
       <title>《深入理解JVM》——07.类文件结构</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-7-class-struct/</link>
+      <link>https://example.com/jvm/jvm-7-class-struct/</link>
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-7-class-struct/</guid>
+      <guid>https://example.com/jvm/jvm-7-class-struct/</guid>
       <description>类文件结构 概述 不仅仅是Java。任何一种语言，只要将其编译成class文件，即可在jvm中运行。
 Class类文件的结构 ClassFile { u4 magic; u2 minor_version; u2 major_version; u2 constant_pool_count; cp_info constant_pool[constant_pool_count-1]; u2 access_flags; u2 this_class; u2 super_class; u2 interfaces_count; u2 interfaces[interfaces_count]; u2 fields_count; field_info fields[fields_count]; u2 methods_count; method_info methods[methods_count]; u2 attributes_count; attribute_info attributes[attributes_count]; } Class文件是一组以8个字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在文件之中，中间没有任何分隔符。当需要需要占用8个字节以上空间的数据项时，则会按照高位在前的方式分割成若干个8个字节进行存储。
 Class文件格式采用一种类似于C语言结构体的伪结构来存储数据，这种结构只有两种数据类型：“无符号数”和“表”。
@@ -77,10 +77,10 @@ package com.</description>
     
     <item>
       <title>《深入理解JVM》——06.JVM性能监控及故障处理命令</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-6-tool/</link>
+      <link>https://example.com/jvm/jvm-6-tool/</link>
       <pubDate>Thu, 24 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-6-tool/</guid>
+      <guid>https://example.com/jvm/jvm-6-tool/</guid>
       <description>JVM性能监控及故障处理命令 jps命令(JVM Process Status Tool) jps -l 
 输出jvm当前运行的pid及的服务主类的全名，要比ps -ef | grep XXX方便
 jps -v 
@@ -93,10 +93,10 @@ jstat命令(JVM Statistics Monitoring Tool) jstat -gcutil $pid
     
     <item>
       <title>《深入理解JVM》——05.JVM内存分配</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-5-memery-allocate/</link>
+      <link>https://example.com/jvm/jvm-5-memery-allocate/</link>
       <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-5-memery-allocate/</guid>
+      <guid>https://example.com/jvm/jvm-5-memery-allocate/</guid>
       <description>Java虚拟机内存分配与回收策略 java体系的自动内存管理，最根本的目的是自动化地解决两个问题：
  自动给对象分配内存 自动回收分配给对象的内存  在经典分代的设计下，新生对象通常会分配在新生代中，少数情况下也可能分配在老年代。
 对象优先在Eden分配 大多数情况下 ，对象在新生代Eden区中分配。当Eden中没有足够空间进行分配时，虚拟机将发起一次Minor GC。HotSpot虚拟机提供了-XX:+PrintGCDetails这个收集器日志参数，告诉虚拟机在发生垃圾收集行为时打印内存回收日志，并且在进程退出时输出当前内存各个区域分配情况。
@@ -109,10 +109,10 @@ jstat命令(JVM Statistics Monitoring Tool) jstat -gcutil $pid
     
     <item>
       <title>《深入理解JVM》——04.各类垃圾收集器分析</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-4-gcer-detail/</link>
+      <link>https://example.com/jvm/jvm-4-gcer-detail/</link>
       <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-4-gcer-detail/</guid>
+      <guid>https://example.com/jvm/jvm-4-gcer-detail/</guid>
       <description>经典垃圾收集器 如果两个收集器之间存在连线，就说明他们可搭配使用。直到目前为止，也没有万能的收集器，只能是在合适的场景下选择合适的收集器。
 Serial收集器 Serial收集器，从名字就可以看出是单线程工作的收集器，但更重要的是强调他在进行垃圾收集时，必须暂停其他所有的工作。“Stop The World”的理解用一个故事就可以说明：你妈在打扫房间的时候，是不是让你在椅子上或者房间外面待着，如果她一遍打扫，你一边扔纸屑，这个房间永远都打扫不干净了。
 迄今为止，它依然是HotSpot虚拟机运行在客户端模式下（用户桌面）的默认新生代收集器，与其他单线程收集器比较起来十分简单高效，对于内存资源受限的环境，它是所有收集器里额外内存消（Memory Footprint）最小的。因为它不需要和其他线程进行交互，专心只做一件事情。所以说：Serial收集器对于运行在客户端模式下的虚拟机来说是一个很好的选择。
@@ -133,10 +133,10 @@ CMS收集器(jdk8中重点使用的收集器，我司正在使用) CMS(Concurren
     
     <item>
       <title>《深入理解JVM》——03.垃圾收集器理论</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-3-gcer/</link>
+      <link>https://example.com/jvm/jvm-3-gcer/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-3-gcer/</guid>
+      <guid>https://example.com/jvm/jvm-3-gcer/</guid>
       <description>垃圾收集器算法 因为程序计数器、虚拟机栈、本地方法栈都是随线程而生，随线程而灭。所以主要的垃圾收集区域集中在堆区域和方法区，堆里面存放着Java世界中几乎所有对象的实例，垃圾收集器在对堆进行回收之前，第一件事情就是要确认这些对象之中还有哪些“存活”，哪些已经“死去”。
 引用计数算法(Reference Counting) 对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用实效时，计数器值减一；任何时刻计数器为零的对象就是不可能再被使用的。但在Java主流的虚拟机里都没有使用引用计数算法来实现垃圾回收，因为它很难解决对象之间相互循环引用的问题。
 可达性分析算法(Reachability Analysis) 这个算法的基本思路就是通过一系列称为“GC Roots”的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走的路径称为“引用链”(Reference Cain)，如果某个对象到GC Root键没有任何引用链相连，或者用图论的话来说就是从GC Root到这个对象不可达时，则证明此对象是不可能再被使用的。
@@ -160,10 +160,10 @@ CMS收集器(jdk8中重点使用的收集器，我司正在使用) CMS(Concurren
     
     <item>
       <title>《深入理解JVM》——02.创建对象过程</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-2-new-object-flow/</link>
+      <link>https://example.com/jvm/jvm-2-new-object-flow/</link>
       <pubDate>Wed, 18 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-2-new-object-flow/</guid>
+      <guid>https://example.com/jvm/jvm-2-new-object-flow/</guid>
       <description>Java虚拟机创建对象的过程   jvm遇到第一个new关键字
   检查指令的参数是否能在常量池中定位到一个类的符号引用
   检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，执行相应的类加载过程。
@@ -181,10 +181,10 @@ Padding 没有特殊含义，仅仅起着占位符的作用
     
     <item>
       <title>《深入理解JVM》——01.基本概念</title>
-      <link>https://yunteng9345.github.io/jvm/jvm-1-base/</link>
+      <link>https://example.com/jvm/jvm-1-base/</link>
       <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/jvm/jvm-1-base/</guid>
+      <guid>https://example.com/jvm/jvm-1-base/</guid>
       <description>Java虚拟机基本概念 JVM运行时数据区域 说明 每开启一个线程JVM都给线程分配三个独立的内存区域，分别是Stack Area（虚拟机栈）、PC Registers（程序计数器）、Native Method Area（本地方法区）。而他们的共享内存区域是Method Area（方法区）、Heap（堆）。
 PC Register 程序寄存器，线程执行的字节码的行号指示器，通过改变计数器的值选取下一条执行的字节码指令，控制分支、循环、跳转、异常处理、线程恢复。
  java虚拟机的多线程是通过线程轮换、分配处理器的执行时间的方式来实现的。在任何一个确定的时刻，一个处理器（多核来说也是一个处理器）都只会执行一条线程中的指令。为了每个线程都能恢复到正确的执行位置，所以就有了PC Register。

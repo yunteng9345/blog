@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lives on 云的博客</title>
-    <link>https://yunteng9345.github.io/life/</link>
-    <description>Recent content in Lives on 云的博客</description>
+    <title>Lives on Example Site</title>
+    <link>https://example.com/life/</link>
+    <description>Recent content in Lives on Example Site</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Wed, 06 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/life/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2021年计划</title>
-      <link>https://yunteng9345.github.io/life/2021-plan/</link>
+      <link>https://example.com/life/2021-plan/</link>
       <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/life/2021-plan/</guid>
+      <guid>https://example.com/life/2021-plan/</guid>
       <description>2021年12月31日截止：
 30本书(今天是2021年1月4日)：
 10/30
@@ -33,10 +33,10 @@
     
     <item>
       <title>收集问题</title>
-      <link>https://yunteng9345.github.io/life/bytedace-oc/</link>
+      <link>https://example.com/life/bytedace-oc/</link>
       <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://yunteng9345.github.io/life/bytedace-oc/</guid>
+      <guid>https://example.com/life/bytedace-oc/</guid>
       <description>【面经】字节北京抖音直播后端面经-已OC
 面经内容
 Image

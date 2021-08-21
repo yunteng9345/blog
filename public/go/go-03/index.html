@@ -1,141 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='go语言'><title>go语言《平台与架构》</title>
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+<link rel='canonical' href='https://example.com/go/go-03/'>
 
-    <meta name="author" content="🎂云☁️">
-    <meta name="description" content="go语言">
-    <meta name="keywords" content="blog,developer,personal">
+<link rel="stylesheet" href="/scss/style.scss"><meta property='og:title' content='go语言《平台与架构》'>
+<meta property='og:description' content='go语言'>
+<meta property='og:url' content='https://example.com/go/go-03/'>
+<meta property='og:site_name' content='Example Site'>
+<meta property='og:type' content='article'><meta property='article:section' content='Go' /><meta property='article:published_time' content='2020-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2020-12-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="go语言《平台与架构》">
+<meta name="twitter:description" content="go语言">
+    </head>
+    <body class="
+    article-page 
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="go语言《平台与架构》"/>
-<meta name="twitter:description" content="go语言"/>
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
 
-    <meta property="og:title" content="go语言《平台与架构》" />
-<meta property="og:description" content="go语言" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://yunteng9345.github.io/go/go-03/" /><meta property="article:section" content="go" />
-<meta property="article:published_time" content="2020-12-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-21T00:00:00+00:00" />
-<meta property="og:see_also" content="https://yunteng9345.github.io/jvm/review-web/" /><meta property="og:see_also" content="https://yunteng9345.github.io/jvm/jvm-9-jvm-bytecode/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/06.0/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/2021-plan/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/life/bytedace-oc/" />
-<meta property="og:see_also" content="https://yunteng9345.github.io/go/06.0/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-04/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-02/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-01/" /><meta property="og:see_also" content="https://yunteng9345.github.io/go/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
-
-
-
-    <title>
-  go语言《平台与架构》 · 云的博客
-</title>
-
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
     
-      <link rel="canonical" href="https://yunteng9345.github.io/go/go-03/">
+        on-phone--column extended
     
+">
+    
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
-
-    
-      
-      
-      <link rel="stylesheet" href="/css/coder.min.f01c647a0d25b40da992a37c3376291185eed8a50ced8c26cc2c0bcfe38c97df.css" integrity="sha256-8Bxkeg0ltA2pkqN8M3YpEYXu2KUM7YwmzCwLz&#43;OMl98=" crossorigin="anonymous" media="screen" />
-    
-
-    
-
-    
-      
+    <header class="site-info">
         
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
         
-        <link rel="stylesheet" href="/css/coder-dark.min.126ad3988d46bdae6217a11105b53c9662bca05f39d42d3c0fb366919d334620.css" integrity="sha256-EmrTmI1Gva5iF6ERBbU8lmK8oF851C08D7NmkZ0zRiA=" crossorigin="anonymous" media="screen" />
-      
-    
-
-    
-
-    
-
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-    
-      <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-    
-
-    <meta name="generator" content="Hugo 0.87.0" />
-  </head>
-
-  
-  
-    
-  
-  <body class="colorscheme-auto"
-        onload=" twemoji.parse(document.body); "
-  >
-    
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
-
-    <main class="wrapper">
-      <nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="/">
-      云的博客
-    </a>
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/jvm/">JVM</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/go/">Golang</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/life/">life</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/leetcode/">leetcode</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link" href="/about/">me</a>
-            </li>
-          
-        
-        
-      </ul>
-    
-  </section>
-</nav>
-
-
-      <div class="content">
-        
-  <section class="container page">
-  <article>
-    <header>
-      <h1>go语言《平台与架构》</h1>
+        <h1 class="site-name"><a href="https://example.com">Example Site</a></h1>
+        <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
     </header>
 
-    <p>————摘自<a href="https://github.com/unknwon/the-way-to-go_ZH_CN">https://github.com/unknwon/the-way-to-go_ZH_CN</a></p>
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' target="_blank">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/go/go-03/">go语言《平台与架构》</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        go语言
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 21, 2020</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 min read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <p>————摘自<a class="link" href="https://github.com/unknwon/the-way-to-go_ZH_CN"  target="_blank" rel="noopener"
+    >https://github.com/unknwon/the-way-to-go_ZH_CN</a></p>
 <h1 id="21-平台与架构">2.1 平台与架构</h1>
 <p>Go 语言开发团队开发了适用于以下操作系统的编译器：</p>
 <ul>
@@ -158,7 +202,7 @@
 <p>Go 语言的编译器和链接器都是使用 C 语言编写并产生本地代码，Go 不存在自我引导之类的功能。因此如果使用一个有不同指令集的编译器来构建 Go 程序，就需要针对操作系统和处理器架构（32 位操作系统或 64 位操作系统）进行区别对待。（ <strong>译者注：Go从1.5版本开始已经实现自举。Go语言的编译器和链接器都是Go语言编写的</strong>）</p>
 <p>这款编译器使用非分代、无压缩和并行的方式进行编译，它的编译速度要比 gccgo 更快，产生更好的本地代码，但编译后的程序不能够使用 gcc 进行链接。</p>
 <p>编译器目前支持以下基于 Intel 或 AMD 处理器架构的程序构建。</p>
-<p><img src="https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/images/2.1.gc.jpg?raw=true" alt=""></p>
+<p><img src="https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/images/2.1.gc.jpg?raw=true" alt=""  /></p>
 <p>图2.1 gc 编译器支持的处理器架构</p>
 <p>当你第一次看到这套命名系统的时候你会觉得很奇葩，不过这些命名都是来自于 Plan 9 项目。</p>
 <pre><code> g = 编译器：将源代码编译为项目代码（程序文本）
@@ -181,7 +225,10 @@
  -x 打印 lex tokens
 </code></pre>
 <p>从 Go 1.0.3 版本开始，不再使用 8g，8l 之类的指令进行程序的构建，取而代之的是统一的 <code>go build</code> 和 <code>go install</code> 等命令，而这些指令会自动调用相关的编译器或链接器。</p>
-<p>如果你想获得更深层次的信息，你可以在目录 <a href="https://github.com/golang/go/tree/master/src/cmd"><code>$GOROOT/src/cmd</code></a> 下找到编译器和链接器的源代码。Go 语言本身是由 C 语言开发的，而不是 Go 语言（Go 1.5 开始自举）。词法分析程序是 GNU bison，语法分析程序是名为 <a href="https://github.com/golang/go/blob/master/src%2Fcmd%2Finternal%2Fgc%2Fgo.y"><code>$GOROOT/src/cmd/gc/go.y</code></a> 的 yacc 文件，它会在同一目录输出 <code>y.tab.{c,h}</code> 文件。如果你想知道更多有关构建过程的信息，你可以在 <a href="https://github.com/golang/go/blob/master/src/make.bash"><code>$GOROOT/src/make.bash</code></a> 中找到。</p>
+<p>如果你想获得更深层次的信息，你可以在目录 <a class="link" href="https://github.com/golang/go/tree/master/src/cmd"  target="_blank" rel="noopener"
+    ><code>$GOROOT/src/cmd</code></a> 下找到编译器和链接器的源代码。Go 语言本身是由 C 语言开发的，而不是 Go 语言（Go 1.5 开始自举）。词法分析程序是 GNU bison，语法分析程序是名为 <a class="link" href="https://github.com/golang/go/blob/master/src%2Fcmd%2Finternal%2Fgc%2Fgo.y"  target="_blank" rel="noopener"
+    ><code>$GOROOT/src/cmd/gc/go.y</code></a> 的 yacc 文件，它会在同一目录输出 <code>y.tab.{c,h}</code> 文件。如果你想知道更多有关构建过程的信息，你可以在 <a class="link" href="https://github.com/golang/go/blob/master/src/make.bash"  target="_blank" rel="noopener"
+    ><code>$GOROOT/src/make.bash</code></a> 中找到。</p>
 <p>大部分的目录都包含了名为 <code>doc.go</code> 的文件，这个文件提供了更多详细的信息。</p>
 </li>
 <li>
@@ -199,60 +246,201 @@
 </ol>
 <h2 id="链接">链接</h2>
 <ul>
-<li><a href="directory.md">目录</a></li>
-<li>上一章：<a href="../go-02">语言的主要特性与发展的环境和影响因素</a></li>
-<li>下一节：<a href="../go-04">Go 环境变量</a></li>
+<li><a class="link" href="directory.md" >目录</a></li>
+<li>上一章：<a class="link" href="../go-02" >语言的主要特性与发展的环境和影响因素</a></li>
+<li>下一节：<a class="link" href="../go-04" >Go 环境变量</a></li>
 </ul>
 
-  </article>
-  <script src="https://utteranc.es/client.js"
-        repo="yunteng9345/blog"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
 </section>
 
-  
 
-      </div>
+    <footer class="article-footer">
+    
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-        <p>码出艺术 © 2020 - 2020 | 蒙ICP备2020004632号 | 粤公网安备 44030502006604号</p>
-      
-      
-      
-      
-        
-      
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-  </footer>
+    </footer>
 
-
-    </main>
 
     
-      
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+     
         
-        <script src="/js/dark-mode.min.aee9c8a464eb7b3534c7110f7c5e169e7039e2fd92710e0626d451d6725af137.js"></script>
-      
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
     
 
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 Example Site
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.1.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
     
 
-    
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
 
-    
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
 
-    
+        document.head.appendChild(customFont);
+    }());
+</script>
 
-    <script data-goatcounter="https://code.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-
-  </body>
-
+    </body>
 </html>
