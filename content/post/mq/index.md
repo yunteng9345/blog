@@ -10,7 +10,7 @@ tags = [
 categories = [
     "mq",
 ]
-#image = "mq.jpg"
+
 +++
 
 test
