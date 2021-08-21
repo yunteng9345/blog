@@ -7,13 +7,6 @@
 
 - https://yunteng9345.github.io
 
-## 我的微信
-
-<div align="left">
-<img src="https://www.yunteng9345.github.io/images/wx.jpg" height="400" width="300" >
- </div>
- 
- 
 ## 疑问
 
 如果有任何疑问或错误，欢迎在 issues 进行提问或给予修正意见
