@@ -8,4 +8,12 @@
     {{ if or .Params.math .Site.Params.article.math }}
         {{ partialCached "article/components/math.html" . }}
     {{ end }}
+    <script src="https://utteranc.es/client.js"
+        repo="yunteng9345/yunteng9345.github.io"
+        issue-term="pathname"
+        theme="github-light"  
+        crossorigin="anonymous"
+        async>
+</script>
+
 </article>

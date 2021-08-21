@@ -22,6 +22,12 @@ features = [
 
 min_version = "0.78.0"
 
+[params.utteranc]
+enable = true
+repo = "yunteng9345/yunteng9345.github.io"
+issueTerm = "pathname"
+theme = "github-light"
+
 [author]
 name = "Jimmy Cai"
 homepage = "https://jimmycai.com"
