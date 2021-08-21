@@ -1,7 +1,7 @@
 baseurl: https://yunteng9345.github.io/
 languageCode: zh-cn
 theme: hugo-theme-stack
-paginate: 5
+paginate: 10
 title: Bug王     
 
 # Change it to your Disqus shortname before using
@@ -135,7 +135,7 @@ params:
         toggle: true
 
         # Available values: auto, light, dark
-        default: auto
+        default: light
 
     imageProcessing:
         cover:
