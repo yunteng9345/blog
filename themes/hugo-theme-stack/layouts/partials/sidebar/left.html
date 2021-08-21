@@ -10,14 +10,16 @@
             {{ if (default true .enabled) }}
             <figure class="site-avatar">
                 {{ if not .local }}
-                    <img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                <a href="/"><img src="{{ .src }}" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar"></a>
                 {{ else }}
                     {{ $avatar := resources.Get (.src) }}
                     
                     {{ if $avatar }}
                         {{ $avatarResized := $avatar.Resize "300x" }}
+                        <a href="/">
                         <img src="{{ $avatarResized.RelPermalink }}" width="{{ $avatarResized.Width }}"
                             height="{{ $avatarResized.Height }}" class="site-logo" loading="lazy" alt="Avatar">
+                        </a>
                     {{ else }}
                         {{ errorf "Failed loading avatar from %q" . }}
                     {{ end }}
