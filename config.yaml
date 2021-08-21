@@ -1,8 +1,8 @@
 baseurl: https://yunteng9345.github.io/
-languageCode: en-us
+languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 5
-title:     
+title: Bug王     
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -34,8 +34,8 @@ params:
         lastUpdated: Jan 02, 2006 15:04 MST
 
     sidebar:
-        emoji: 🍥
-        subtitle: test, consectetur adipiscing elit.
+        emoji: 
+        subtitle: 代码、读书、猫、吉他
         avatar:
             enabled: true
             local: true
@@ -119,7 +119,7 @@ params:
     opengraph:
         twitter:
             # Your Twitter username
-            site:
+            site: yunteng95
 
             # Available values: summary, summary_large_image
             card: summary_large_image

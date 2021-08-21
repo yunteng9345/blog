@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Bug王</title>
-    <link>https://yunteng9345.github.io/post/</link>
-    <description>Recent content in Posts on Bug王</description>
+    <title>消息队列 on Bug王</title>
+    <link>https://yunteng9345.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+    <description>Recent content in 消息队列 on Bug王</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>消息队列的前世今生</title>
       <link>https://yunteng9345.github.io/p/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/</link>
