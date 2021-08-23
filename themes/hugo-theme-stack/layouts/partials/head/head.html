@@ -7,8 +7,6 @@
 {{- $title := partialCached "data/title" . .RelPermalink -}}
 <title>{{ $title }}</title>
 
-<link rel="icon" type="image/x-icon" href="bitbug_favicon.ico" />
-
 <link rel='canonical' href='{{ .Permalink }}'>
 
 {{- partial "head/style.html" . -}}
