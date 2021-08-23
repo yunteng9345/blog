@@ -2,7 +2,7 @@ baseurl: https://yunteng9345.github.io/
 languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 10
-title: Bug王     
+title: 码艺术     
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
