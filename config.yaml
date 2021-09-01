@@ -35,7 +35,7 @@ params:
 
     sidebar:
         emoji: 
-        subtitle: 代码、读书、猫、吉他
+        subtitle: 学习要以我为主，为我所用。不怕慢，就怕停
         avatar:
             enabled: true
             local: true
