@@ -17,23 +17,25 @@
 &lt;p&gt;&lt;strong&gt;线程&lt;/strong&gt;（thread）是操作系统能够进行运算调度的&lt;strong&gt;最小单位&lt;/strong&gt;。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;java线程的生命周期&#34;&gt;Java线程的生命周期&lt;/h2&gt;
-&lt;p&gt;&lt;figure style=&#34;flex-grow: 195; flex-basis: 468px&#34;&gt;
-		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle.png&#34; data-size=&#34;987x506&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle.png&#34;
-				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_hucd1cf39901f2d0914d9bec392af38e53_51092_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_hucd1cf39901f2d0914d9bec392af38e53_51092_1024x0_resize_box_3.png 1024w&#34;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 238; flex-basis: 572px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle.png&#34; data-size=&#34;987x414&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_hu4ad4f12ae0117077ebdd61856154b6ab_47144_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_hu4ad4f12ae0117077ebdd61856154b6ab_47144_1024x0_resize_box_3.png 1024w&#34;
 				width=&#34;987&#34;
-				height=&#34;506&#34;
+				height=&#34;414&#34;
 				loading=&#34;lazy&#34;
-				alt=&#34;Java线程的生命周期&#34;&gt;
+				alt=&#34;Java线程的生命周期——码艺术&#34;&gt;
 		&lt;/a&gt;
 		
-		&lt;figcaption&gt;Java线程的生命周期&lt;/figcaption&gt;
+		&lt;figcaption&gt;Java线程的生命周期——码艺术&lt;/figcaption&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;新建（New）：&lt;/p&gt;
-&lt;p&gt;就绪（Runnable）：&lt;/p&gt;
-&lt;p&gt;运行（Running）:&lt;/p&gt;
-&lt;p&gt;阻塞（Blocked）:&lt;/p&gt;
-&lt;p&gt;销毁（Terminated）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;新建（New）：刚使用new方法，new出来的线程。&lt;/li&gt;
+&lt;li&gt;就绪（Runnable）：调用的线程的&lt;code&gt;start()&lt;/code&gt;方法后，这时候&lt;strong&gt;线程处于等待CPU分配资源阶段，谁先抢的CPU资源，谁开始执行&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;运行（Running）：当就绪的线程被调度并获得CPU的资源时，便进入了运行状态，run方法定义了线程的功能。&lt;/li&gt;
+&lt;li&gt;阻塞（Blocked）：在运行状态的时候，可能因为某些原因导致运行状态的线程进入了阻塞状态，比如&lt;code&gt;sleep()&lt;/code&gt;、&lt;code&gt;wait()&lt;/code&gt;之后线程就变为阻塞状态，这个时候需要有其他机制将阻塞状态的线程唤醒，比如调用&lt;code&gt;notify()&lt;/code&gt;或者&lt;code&gt;notifyAll()&lt;/code&gt;方法，&lt;strong&gt;唤醒的线程不会立即执行&lt;code&gt;run()&lt;/code&gt;方法&lt;/strong&gt;，而是进入就绪状态（Runnable）状态，再次等待CPU分配资源进入运行状态。&lt;/li&gt;
+&lt;li&gt;销毁（Terminated）：如果线程正常执行完成后或线程被提前强制性终止、出现异常导致结束，那么线程就要被销毁并释放资源。&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         

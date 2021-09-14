@@ -18,14 +18,29 @@ categories = [
 
 ## Java线程的生命周期
 
-![Java线程的生命周期](threadLifeCycle.png)
+![Java线程的生命周期——码艺术](threadLifeCycle.png)
 
-新建（New）：
+1. 新建（New）：刚使用new方法，new出来的线程。
+2. 就绪（Runnable）：调用的线程的`start()`方法后，这时候**线程处于等待CPU分配资源阶段，谁先抢的CPU资源，谁开始执行**。
+3. 运行（Running）：当就绪的线程被调度并获得CPU的资源时，便进入了运行状态，run方法定义了线程的功能。
+4. 阻塞（Blocked）：在运行状态的时候，可能因为某些原因导致运行状态的线程进入了阻塞状态，比如`sleep()`、`wait()`之后线程就变为阻塞状态，这个时候需要有其他机制将阻塞状态的线程唤醒，比如调用`notify()`或者`notifyAll()`方法，**唤醒的线程不会立即执行`run()`方法**，而是进入就绪状态（Runnable）状态，再次等待CPU分配资源进入运行状态。
+5. 销毁（Terminated）：如果线程正常执行完成后或线程被提前强制性终止、出现异常导致结束，那么线程就要被销毁并释放资源。
 
-就绪（Runnable）：
 
-运行（Running）:
 
-阻塞（Blocked）:
 
-销毁（Terminated）：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
