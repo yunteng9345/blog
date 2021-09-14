@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='java线程'><title>Java多线程详解</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='何为线程？  线程（thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。
+ Java线程的生命周期  Java线程的生命周期 
+新建（New）：
+就绪（Runnable）：
+运行（Running）:
+阻塞（Blocked）:
+销毁（Terminated）：'><title>Java多线程详解</title>
 
 <link rel='canonical' href='https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Java多线程详解'>
-<meta property='og:description' content='java线程'>
+<meta property='og:description' content='何为线程？  线程（thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。
+ Java线程的生命周期  Java线程的生命周期 
+新建（New）：
+就绪（Runnable）：
+运行（Running）:
+阻塞（Blocked）:
+销毁（Terminated）：'>
 <meta property='og:url' content='https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/'>
 <meta property='og:site_name' content='码艺术'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='线程' /><meta property='article:published_time' content='2021-08-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-08-23T00:00:00&#43;00:00'/>
 <meta name="twitter:site" content="@yunteng95">
     <meta name="twitter:creator" content="@yunteng95"><meta name="twitter:title" content="Java多线程详解">
-<meta name="twitter:description" content="java线程">
+<meta name="twitter:description" content="何为线程？  线程（thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。
+ Java线程的生命周期  Java线程的生命周期 
+新建（New）：
+就绪（Runnable）：
+运行（Running）:
+阻塞（Blocked）:
+销毁（Terminated）：">
     </head>
     <body class="
-    article-page 
+    article-page has-toc
 ">
     <script>
         (function() {
@@ -41,125 +59,22 @@
 </script>
 <div class="container main-container flex 
     
-        on-phone--column extended
+        extended
     
 ">
     
-        <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
-        
-            
-            <figure class="site-avatar">
-                
-                    
-                    
-                    
-                        
-                        <a href="/">
-                        <img src="/img/avatar_hub71195b252e6e88b5edc9899f4d2ee4b_224567_300x0_resize_q75_box.jpg" width="300"
-                            height="333" class="site-logo" loading="lazy" alt="Avatar">
-                        </a>
-                    
-                
-
-                
-            </figure>
-            
-        
-        <h1 class="site-name"><a href="https://yunteng9345.github.io/">码艺术</a></h1>
-        <h2 class="site-description">学习要以我为主，为我所用。不怕慢，就怕停</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/' target="_blank">
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <div id="article-toolbar">
+            <a href="https://yunteng9345.github.io/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+  <polyline points="15 6 9 12 15 18" />
 </svg>
 
 
 
-                
-                <span>主页</span>
+                <span>返回</span>
             </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/' >
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>查找</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>暗色模式</span>
-            </li>
-        
-    </ol>
-</aside>
-
+        </div>
     
 <main class="main full-width">
     <article class="main-article">
@@ -220,7 +135,28 @@
 </header>
 
     <section class="article-content">
-    <p>java线程</p>
+    <h2 id="何为线程">何为线程？</h2>
+<blockquote>
+<p><strong>线程</strong>（thread）是操作系统能够进行运算调度的<strong>最小单位</strong>。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。</p>
+</blockquote>
+<h2 id="java线程的生命周期">Java线程的生命周期</h2>
+<p><figure style="flex-grow: 195; flex-basis: 468px">
+		<a href="/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle.png" data-size="987x506"><img src="/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle.png"
+				srcset="/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_hucd1cf39901f2d0914d9bec392af38e53_51092_480x0_resize_box_3.png 480w, /p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_hucd1cf39901f2d0914d9bec392af38e53_51092_1024x0_resize_box_3.png 1024w"
+				width="987"
+				height="506"
+				loading="lazy"
+				alt="Java线程的生命周期">
+		</a>
+		
+		<figcaption>Java线程的生命周期</figcaption>
+		
+	</figure></p>
+<p>新建（New）：</p>
+<p>就绪（Runnable）：</p>
+<p>运行（Running）:</p>
+<p>阻塞（Blocked）:</p>
+<p>销毁（Terminated）：</p>
 
 </section>
 
@@ -410,6 +346,33 @@
             >
 
             </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">目录</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#何为线程">何为线程？</a></li>
+    <li><a href="#java线程的生命周期">Java线程的生命周期</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
     
 
         </div>
