@@ -36,6 +36,101 @@
 &lt;li&gt;阻塞（Blocked）：在运行状态的时候，可能因为某些原因导致运行状态的线程进入了阻塞状态，比如&lt;code&gt;sleep()&lt;/code&gt;、&lt;code&gt;wait()&lt;/code&gt;之后线程就变为阻塞状态，这个时候需要有其他机制将阻塞状态的线程唤醒，比如调用&lt;code&gt;notify()&lt;/code&gt;或者&lt;code&gt;notifyAll()&lt;/code&gt;方法，&lt;strong&gt;唤醒的线程不会立即执行&lt;code&gt;run()&lt;/code&gt;方法&lt;/strong&gt;，而是进入就绪状态（Runnable）状态，再次等待CPU分配资源进入运行状态。&lt;/li&gt;
 &lt;li&gt;销毁（Terminated）：如果线程正常执行完成后或线程被提前强制性终止、出现异常导致结束，那么线程就要被销毁并释放资源。&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;新建状态&#34;&gt;新建状态&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Thread t1 = new Thread();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这里的创建，仅仅是在JAVA的这种编程语言层面被创建，而在操作系统层面，真正的线程还没有被创建。只有当我们调用了 start() 方法之后，该线程才会被创建出来，进入Runnable状态。只有当我们调用了 &lt;code&gt;start()&lt;/code&gt; 方法之后，该线程才会被创建出来。&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 181; flex-basis: 434px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_new.png&#34; data-size=&#34;413x228&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_new.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_new_hu1c672cb809a2075a685dc18510c863be_12197_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_new_hu1c672cb809a2075a685dc18510c863be_12197_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;413&#34;
+				height=&#34;228&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;Java线程的新建状态——码艺术&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Java线程的新建状态——码艺术&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;就绪状态&#34;&gt;就绪状态&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;t1.start()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;调用&lt;code&gt;start()&lt;/code&gt;方法后，JVM 进程会去创建一个新的线程，而此线程不会马上被 CPU 调度运行，进入Running状态，这里会有一个中间状态，就是Runnable状态，可以理解为等待被 CPU 调度的状态。&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 170; flex-basis: 409px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable.png&#34; data-size=&#34;646x379&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable_hu48234fc21a75f040428eed58c31fc500_28697_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable_hu48234fc21a75f040428eed58c31fc500_28697_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;646&#34;
+				height=&#34;379&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;Java线程的就绪状态——码艺术&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Java线程的就绪状态——码艺术&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Runnable状态的线程&lt;strong&gt;无法直接进入Blocked状态和Terminated状态&lt;/strong&gt;。只能进入Running状态的线程，换句话说，只有获得CPU调度执行权的线程才有资格进入Blocked状态和Terminated状态，Runnable状态的线程要么能被转换成Running状态，要么被意外终止。如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 206; flex-basis: 495px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable2status.png&#34; data-size=&#34;659x319&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable2status.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable2status_huf107e3cd710efc09f5bbb2e1975be0e0_21051_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_runnable2status_huf107e3cd710efc09f5bbb2e1975be0e0_21051_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;659&#34;
+				height=&#34;319&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;Java线程的就绪状态转变——码艺术&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Java线程的就绪状态转变——码艺术&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;运行状态&#34;&gt;运行状态&lt;/h2&gt;
+&lt;p&gt;当CPU调度发生，并从任务队列中选中了某个Runnable线程时，该线程会进入Running执行状态，并且开始调用run()方法中逻辑代码。&lt;/p&gt;
+&lt;p&gt;处于Running状态的线程能发生以下状态转变：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被转换成Terminated状态，比如调用 &lt;code&gt;stop()&lt;/code&gt; 方法。&lt;/li&gt;
+&lt;li&gt;被转换成Blocked状态，比如调用了&lt;code&gt;sleep()&lt;/code&gt;, &lt;code&gt;wait()&lt;/code&gt; 方法被加入 waitSet 中。&lt;/li&gt;
+&lt;li&gt;被转换成Blocked状态，如进行 IO 阻塞操作，如查询数据库进入阻塞状态。&lt;/li&gt;
+&lt;li&gt;被转换成Blocked状态，比如获取某个锁的释放，而被加入该锁的阻塞队列中。&lt;/li&gt;
+&lt;li&gt;该线程的时间片用完，CPU 再次调度，进入Runnable状态。&lt;/li&gt;
+&lt;li&gt;线程主动调用 yield 方法，让出 CPU 资源，进入Runnable状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 106; flex-basis: 255px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_running2status.png&#34; data-size=&#34;466x438&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_running2status.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_running2status_hu367a75e1a48d33ad76a4e8a7d21d6bae_24277_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_running2status_hu367a75e1a48d33ad76a4e8a7d21d6bae_24277_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;466&#34;
+				height=&#34;438&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;Java线程的运行状态转变——码艺术&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Java线程的运行状态转变——码艺术&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;阻塞状态&#34;&gt;阻塞状态&lt;/h2&gt;
+&lt;p&gt;Blocked状态的线程能够发生如下状态改变&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 145; flex-basis: 348px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_blocked2status.png&#34; data-size=&#34;458x315&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_blocked2status.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_blocked2status_hueb6594c63b47f5b5cc909a6b4311819b_17897_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/threadLifeCycle_blocked2status_hueb6594c63b47f5b5cc909a6b4311819b_17897_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;458&#34;
+				height=&#34;315&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;Java线程的阻塞状态转变——码艺术&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Java线程的阻塞状态转变——码艺术&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被转换成Terminated状态，比如调用 &lt;code&gt;stop()&lt;/code&gt; 方法，或者是 JVM 意外 Crash。&lt;/li&gt;
+&lt;li&gt;被转换成Runnable状态，阻塞时间结束，如：读取到了数据库数据后。&lt;/li&gt;
+&lt;li&gt;完成了指定时间的休眠，进入到Runnable状态。&lt;/li&gt;
+&lt;li&gt;正在wait中的线程，被其他线程调用&lt;code&gt;notify()&lt;/code&gt;、&lt;code&gt;notifyAll()&lt;/code&gt;方法唤醒，进入到Runnable状态。&lt;/li&gt;
+&lt;li&gt;线程获取到了想要的锁资源，进入Runnable状态。&lt;/li&gt;
+&lt;li&gt;线程在阻塞状态下被打断，如其他线程调用了&lt;code&gt;interrupt()&lt;/code&gt;方法，进入到Runnable状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;终止状态&#34;&gt;终止状态&lt;/h2&gt;
+&lt;p&gt;一旦线程进入了Terminated状态，就意味着这个线程生命的终结，哪些情况下，线程会进入到Terminated状态呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程正常运行结束，生命周期结束。&lt;/li&gt;
+&lt;li&gt;线程运行过程中出现意外错误。&lt;/li&gt;
+&lt;li&gt;JVM 异常结束，所有的线程生命周期均被结束。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         
