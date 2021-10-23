@@ -6,7 +6,34 @@
         <description>Recent content on 码艺术</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 23 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>《重构第二版》笔记</title>
+        <link>https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 23 Oct 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;思想&#34;&gt;思想&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;需求的变化使重构变得必要&lt;/p&gt;
+&lt;p&gt;重构就是以微小的步伐修改程序，如果有问题，可立马发现&lt;/p&gt;
+&lt;p&gt;傻瓜都能写出计算机可以理解的代码，唯有能写出人类容易理解的代码，才是优秀的程序员&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;步骤&#34;&gt;步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;重构前，检查自己是否有一套可靠的测试集，这些测试必须有自我检验的能力（&lt;strong&gt;单元测试&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;把复杂的代码分解为更小的单元&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;细节&#34;&gt;细节&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;将函数分割为单一功能，提炼到外部提供调用&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;改动完成之后，立马编译执行一遍单元测试，原因：&lt;strong&gt;在真的犯了错误时：只需要考虑一个很小的改动范围，使得排查与修复问题易如反掌&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;变量改名，使它们更加简洁&lt;/li&gt;
+&lt;li&gt;处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量&lt;/li&gt;
+&lt;li&gt;利用多态取代条件表达式&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Java多线程详解</title>
         <link>https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/</link>
         <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
