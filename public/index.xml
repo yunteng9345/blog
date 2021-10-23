@@ -12,7 +12,8 @@
         <pubDate>Sat, 23 Oct 2021 00:00:00 +0000</pubDate>
         
         <guid>https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/</guid>
-        <description>&lt;h2 id=&#34;思想&#34;&gt;思想&lt;/h2&gt;
+        <description>&lt;h1 id=&#34;第1章重构第一个示例&#34;&gt;第1章——重构，第一个示例&lt;/h1&gt;
+&lt;h2 id=&#34;思想&#34;&gt;思想&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;需求的变化使重构变得必要&lt;/p&gt;
 &lt;p&gt;重构就是以微小的步伐修改程序，如果有问题，可立马发现&lt;/p&gt;
