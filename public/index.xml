@@ -7,6 +7,59 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <lastBuildDate>Sat, 23 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>《MySQL是怎样运行的》笔记</title>
+        <link>https://yunteng9345.github.io/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 23 Oct 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://yunteng9345.github.io/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;p&gt;MySQL服务器处理客户端请求&lt;/p&gt;
+&lt;p&gt;客户端进程向服务端进程发送一段文本（MySQL语句），服务器处理后再向客户端发送一段文本（数据结果）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;连接管理
+&lt;ol&gt;
+&lt;li&gt;处理连接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;解析与优化
+&lt;ol&gt;
+&lt;li&gt;查询缓存&lt;/li&gt;
+&lt;li&gt;语法解析&lt;/li&gt;
+&lt;li&gt;查询优化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;存储引擎
+&lt;ol&gt;
+&lt;li&gt;MyISAM、InnoDB&lt;/li&gt;
+&lt;li&gt;文件系统&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>《单元测试的艺术》笔记</title>
+        <link>https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 23 Oct 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;优秀单元测试特性&#34;&gt;优秀单元测试特性&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;他应该是自动化的，可重复执行&lt;/li&gt;
+&lt;li&gt;他应该很容易实现&lt;/li&gt;
+&lt;li&gt;他应该第二天还有意义&lt;/li&gt;
+&lt;li&gt;任何人都应该一键运行他&lt;/li&gt;
+&lt;li&gt;他应该运行速度很快&lt;/li&gt;
+&lt;li&gt;他的结果应该是很稳定的（如果运行之间没有修改，多次运行一个测试应该返回相同的结果）&lt;/li&gt;
+&lt;li&gt;他应该能完全控制被测试的单元&lt;/li&gt;
+&lt;li&gt;他应该是完全隔离的（独立于其他测试的运行）&lt;/li&gt;
+&lt;li&gt;如果他失败了，我们应该很容易发现什么是期待结果，进而定位问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;单元测试不等于集成测试&#34;&gt;单元测试不等于集成测试&lt;/h2&gt;
+&lt;p&gt;任何测试，如果他运行不快，结果不稳定，或者用到被测试单元的一个或多个真实依赖物，我们就认为他是&lt;strong&gt;集成测试&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;单元测试也可以共用方法使代码一目了然&#34;&gt;单元测试也可以共用方法，使代码一目了然&lt;/h2&gt;
+</description>
+        </item>
+        <item>
         <title>《重构第二版》笔记</title>
         <link>https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/</link>
         <pubDate>Sat, 23 Oct 2021 00:00:00 +0000</pubDate>
@@ -31,6 +84,27 @@
 &lt;li&gt;变量改名，使它们更加简洁&lt;/li&gt;
 &lt;li&gt;处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量&lt;/li&gt;
 &lt;li&gt;利用多态取代条件表达式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;第2章重构的原则&#34;&gt;第2章——重构的原则&lt;/h1&gt;
+&lt;h2 id=&#34;思想-1&#34;&gt;思想&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;重构的唯一目的就是让我们开发的更快，用更少的工作量创造更大的价值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;第2章——重构的原则&lt;/p&gt;
+&lt;h1 id=&#34;第3章代码的坏味道&#34;&gt;第3章——代码的坏味道&lt;/h1&gt;
+&lt;h2 id=&#34;思想-2&#34;&gt;思想&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;命名函数或变量，如果想不出一个好名字，说明背后很可能潜藏着更深的设计问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;步骤-1&#34;&gt;步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;规范注释，参照Spring源码&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;细节-1&#34;&gt;细节&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         </item>
@@ -159,6 +233,8 @@
 &lt;li&gt;线程运行过程中出现意外错误。&lt;/li&gt;
 &lt;li&gt;JVM 异常结束，所有的线程生命周期均被结束。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;synchronized使用详解&#34;&gt;synchronized使用详解&lt;/h2&gt;
+&lt;p&gt;synchronized关键字&lt;/p&gt;
 </description>
         </item>
         

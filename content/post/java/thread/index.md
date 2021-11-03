@@ -86,7 +86,9 @@ Blocked状态的线程能够发生如下状态改变
 
 
 
+## synchronized使用详解
 
+synchronized关键字
 
 
 

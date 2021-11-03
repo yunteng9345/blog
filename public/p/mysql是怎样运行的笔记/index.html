@@ -1,39 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='第1章——重构，第一个示例 思想  需求的变化使重构变得必要
-重构就是以微小的步伐修改程序，如果有问题，可立马发现
-傻瓜都能写出计算机可以理解的代码，唯有能写出人类容易理解的代码，才是优秀的程序员
- 步骤  重构前，检查自己是否有一套可靠的测试集，这些测试必须有自我检验的能力（单元测试） 把复杂的代码分解为更小的单元  细节  将函数分割为单一功能，提炼到外部提供调用 改动完成之后，立马编译执行一遍单元测试，原因：在真的犯了错误时：只需要考虑一个很小的改动范围，使得排查与修复问题易如反掌。 变量改名，使它们更加简洁 处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量 利用多态取代条件表达式  第2章——重构的原则 思想  重构的唯一目的就是让我们开发的更快，用更少的工作量创造更大的价值。
- 第2章——重构的原则
-第3章——代码的坏味道 思想  命名函数或变量，如果想不出一个好名字，说明背后很可能潜藏着更深的设计问题。
- 步骤  规范注释，参照Spring源码   细节     '><title>《重构第二版》笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='MySQL服务器处理客户端请求
+客户端进程向服务端进程发送一段文本（MySQL语句），服务器处理后再向客户端发送一段文本（数据结果）
+ 连接管理  处理连接   解析与优化  查询缓存 语法解析 查询优化   存储引擎  MyISAM、InnoDB 文件系统    '><title>《MySQL是怎样运行的》笔记</title>
 
-<link rel='canonical' href='https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/'>
+<link rel='canonical' href='https://yunteng9345.github.io/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='《重构第二版》笔记'>
-<meta property='og:description' content='第1章——重构，第一个示例 思想  需求的变化使重构变得必要
-重构就是以微小的步伐修改程序，如果有问题，可立马发现
-傻瓜都能写出计算机可以理解的代码，唯有能写出人类容易理解的代码，才是优秀的程序员
- 步骤  重构前，检查自己是否有一套可靠的测试集，这些测试必须有自我检验的能力（单元测试） 把复杂的代码分解为更小的单元  细节  将函数分割为单一功能，提炼到外部提供调用 改动完成之后，立马编译执行一遍单元测试，原因：在真的犯了错误时：只需要考虑一个很小的改动范围，使得排查与修复问题易如反掌。 变量改名，使它们更加简洁 处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量 利用多态取代条件表达式  第2章——重构的原则 思想  重构的唯一目的就是让我们开发的更快，用更少的工作量创造更大的价值。
- 第2章——重构的原则
-第3章——代码的坏味道 思想  命名函数或变量，如果想不出一个好名字，说明背后很可能潜藏着更深的设计问题。
- 步骤  规范注释，参照Spring源码   细节     '>
-<meta property='og:url' content='https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='《MySQL是怎样运行的》笔记'>
+<meta property='og:description' content='MySQL服务器处理客户端请求
+客户端进程向服务端进程发送一段文本（MySQL语句），服务器处理后再向客户端发送一段文本（数据结果）
+ 连接管理  处理连接   解析与优化  查询缓存 语法解析 查询优化   存储引擎  MyISAM、InnoDB 文件系统    '>
+<meta property='og:url' content='https://yunteng9345.github.io/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/'>
 <meta property='og:site_name' content='码艺术'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='重构' /><meta property='article:published_time' content='2021-10-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-10-23T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='mysql' /><meta property='article:published_time' content='2021-10-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-10-23T00:00:00&#43;00:00'/>
 <meta name="twitter:site" content="@yunteng95">
-    <meta name="twitter:creator" content="@yunteng95"><meta name="twitter:title" content="《重构第二版》笔记">
-<meta name="twitter:description" content="第1章——重构，第一个示例 思想  需求的变化使重构变得必要
-重构就是以微小的步伐修改程序，如果有问题，可立马发现
-傻瓜都能写出计算机可以理解的代码，唯有能写出人类容易理解的代码，才是优秀的程序员
- 步骤  重构前，检查自己是否有一套可靠的测试集，这些测试必须有自我检验的能力（单元测试） 把复杂的代码分解为更小的单元  细节  将函数分割为单一功能，提炼到外部提供调用 改动完成之后，立马编译执行一遍单元测试，原因：在真的犯了错误时：只需要考虑一个很小的改动范围，使得排查与修复问题易如反掌。 变量改名，使它们更加简洁 处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量 利用多态取代条件表达式  第2章——重构的原则 思想  重构的唯一目的就是让我们开发的更快，用更少的工作量创造更大的价值。
- 第2章——重构的原则
-第3章——代码的坏味道 思想  命名函数或变量，如果想不出一个好名字，说明背后很可能潜藏着更深的设计问题。
- 步骤  规范注释，参照Spring源码   细节     ">
+    <meta name="twitter:creator" content="@yunteng95"><meta name="twitter:title" content="《MySQL是怎样运行的》笔记">
+<meta name="twitter:description" content="MySQL服务器处理客户端请求
+客户端进程向服务端进程发送一段文本（MySQL语句），服务器处理后再向客户端发送一段文本（数据结果）
+ 连接管理  处理连接   解析与优化  查询缓存 语法解析 查询优化   存储引擎  MyISAM、InnoDB 文件系统    ">
     </head>
     <body class="
-    article-page has-toc
+    article-page 
 ">
     <script>
         (function() {
@@ -59,22 +47,125 @@
 </script>
 <div class="container main-container flex 
     
-        extended
+        on-phone--column extended
     
 ">
     
-        <div id="article-toolbar">
-            <a href="https://yunteng9345.github.io/" class="back-home">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <a href="/">
+                        <img src="/img/avatar_hub71195b252e6e88b5edc9899f4d2ee4b_224567_300x0_resize_q75_box.jpg" width="300"
+                            height="333" class="site-logo" loading="lazy" alt="Avatar">
+                        </a>
+                    
+                
+
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://yunteng9345.github.io/">码艺术</a></h1>
+        <h2 class="site-description">学习要以我为主，为我所用。不怕慢，就怕停</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' target="_blank">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="15 6 9 12 15 18" />
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
 </svg>
 
 
 
-                <span>返回</span>
+                
+                <span>主页</span>
             </a>
-        </div>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>查找</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
     
 <main class="main full-width">
     <article class="main-article">
@@ -92,7 +183,7 @@
     
 
     <h2 class="article-title">
-        <a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/">《重构第二版》笔记</a>
+        <a href="/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/">《MySQL是怎样运行的》笔记</a>
     </h2>
 
     
@@ -135,46 +226,27 @@
 </header>
 
     <section class="article-content">
-    <h1 id="第1章重构第一个示例">第1章——重构，第一个示例</h1>
-<h2 id="思想">思想</h2>
-<blockquote>
-<p>需求的变化使重构变得必要</p>
-<p>重构就是以微小的步伐修改程序，如果有问题，可立马发现</p>
-<p>傻瓜都能写出计算机可以理解的代码，唯有能写出人类容易理解的代码，才是优秀的程序员</p>
-</blockquote>
-<h2 id="步骤">步骤</h2>
+    <p>MySQL服务器处理客户端请求</p>
+<p>客户端进程向服务端进程发送一段文本（MySQL语句），服务器处理后再向客户端发送一段文本（数据结果）</p>
 <ol>
-<li>重构前，检查自己是否有一套可靠的测试集，这些测试必须有自我检验的能力（<strong>单元测试</strong>）</li>
-<li>把复杂的代码分解为更小的单元</li>
+<li>连接管理
+<ol>
+<li>处理连接</li>
 </ol>
-<h2 id="细节">细节</h2>
+</li>
+<li>解析与优化
 <ol>
-<li><strong>将函数分割为单一功能，提炼到外部提供调用</strong></li>
-<li>改动完成之后，立马编译执行一遍单元测试，原因：<strong>在真的犯了错误时：只需要考虑一个很小的改动范围，使得排查与修复问题易如反掌</strong>。</li>
-<li>变量改名，使它们更加简洁</li>
-<li>处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量</li>
-<li>利用多态取代条件表达式</li>
+<li>查询缓存</li>
+<li>语法解析</li>
+<li>查询优化</li>
 </ol>
-<h1 id="第2章重构的原则">第2章——重构的原则</h1>
-<h2 id="思想-1">思想</h2>
-<blockquote>
-<p>重构的唯一目的就是让我们开发的更快，用更少的工作量创造更大的价值。</p>
-</blockquote>
-<p>第2章——重构的原则</p>
-<h1 id="第3章代码的坏味道">第3章——代码的坏味道</h1>
-<h2 id="思想-2">思想</h2>
-<blockquote>
-<p>命名函数或变量，如果想不出一个好名字，说明背后很可能潜藏着更深的设计问题。</p>
-</blockquote>
-<h2 id="步骤-1">步骤</h2>
+</li>
+<li>存储引擎
 <ol>
-<li>规范注释，参照Spring源码</li>
-<li></li>
+<li>MyISAM、InnoDB</li>
+<li>文件系统</li>
 </ol>
-<h2 id="细节-1">细节</h2>
-<ol>
-<li></li>
-<li></li>
+</li>
 </ol>
 
 </section>
@@ -184,7 +256,7 @@
     
     <section class="article-tags">
         
-            <a href="/tags/%E9%87%8D%E6%9E%84/">重构</a>
+            <a href="/tags/mysql/">mysql</a>
         
     </section>
 
@@ -224,24 +296,24 @@
                 
                     
 <article class="">
-    <a href="/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">《MySQL是怎样运行的》笔记</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="">
     <a href="/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/">
         
         
 
         <div class="article-details">
             <h2 class="article-title">《单元测试的艺术》笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《重构第二版》笔记</h2>
         </div>
     </a>
 </article>
@@ -396,44 +468,6 @@
             >
 
             </main>
-    
-        <aside class="sidebar right-sidebar sticky">
-            <section class="widget archives">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-                </div>
-                <h2 class="widget-title section-title">目录</h2>
-                
-                <div class="widget--toc">
-                    <nav id="TableOfContents">
-  <ol>
-    <li><a href="#思想">思想</a></li>
-    <li><a href="#步骤">步骤</a></li>
-    <li><a href="#细节">细节</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#思想-1">思想</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#思想-2">思想</a></li>
-    <li><a href="#步骤-1">步骤</a></li>
-    <li><a href="#细节-1">细节</a></li>
-  </ol>
-</nav>
-                </div>
-            </section>
-        </aside>
     
 
         </div>

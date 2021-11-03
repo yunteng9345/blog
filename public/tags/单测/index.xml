@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>单测 on 码艺术</title>
+    <link>https://yunteng9345.github.io/tags/%E5%8D%95%E6%B5%8B/</link>
+    <description>Recent content in 单测 on 码艺术</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 23 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yunteng9345.github.io/tags/%E5%8D%95%E6%B5%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《单元测试的艺术》笔记</title>
+      <link>https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 23 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/</guid>
+      <description>优秀单元测试特性  他应该是自动化的，可重复执行 他应该很容易实现 他应该第二天还有意义 任何人都应该一键运行他 他应该运行速度很快 他的结果应该是很稳定的（如果运行之间没有修改，多次运行一个测试应该返回相同的结果） 他应该能完全控制被测试的单元 他应该是完全隔离的（独立于其他测试的运行） 如果他失败了，我们应该很容易发现什么是期待结果，进而定位问题  单元测试不等于集成测试 任何测试，如果他运行不快，结果不稳定，或者用到被测试单元的一个或多个真实依赖物，我们就认为他是集成测试。
+单元测试也可以共用方法，使代码一目了然 </description>
+    </item>
+    
+  </channel>
+</rss>
