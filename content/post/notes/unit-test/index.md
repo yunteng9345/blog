@@ -7,7 +7,7 @@ tags = [
     "单测",
 ]
 categories = [
-    "book",·
+    "book","笔记"
 ]
 
 +++

@@ -56,7 +56,34 @@
 &lt;/ol&gt;
 &lt;h2 id=&#34;单元测试不等于集成测试&#34;&gt;单元测试不等于集成测试&lt;/h2&gt;
 &lt;p&gt;任何测试，如果他运行不快，结果不稳定，或者用到被测试单元的一个或多个真实依赖物，我们就认为他是&lt;strong&gt;集成测试&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;单元测试也可以共用方法使代码一目了然&#34;&gt;单元测试也可以共用方法，使代码一目了然&lt;/h2&gt;
+&lt;p&gt;单元测试也可以共用方法，使代码一目了然&lt;/p&gt;
+&lt;h2 id=&#34;存根stub和模拟对象的区别&#34;&gt;存根（stub）和模拟对象的区别&lt;/h2&gt;
+&lt;p&gt;存根是用来模拟各种场景的测试对象&lt;/p&gt;
+&lt;h2 id=&#34;细节&#34;&gt;细节&lt;/h2&gt;
+&lt;p&gt;测试过程中，如果一个断言失败了，那么不需要关心后面的断言&lt;/p&gt;
+&lt;p&gt;单元测试，只做&lt;strong&gt;一件&lt;/strong&gt;事情&lt;/p&gt;
+&lt;h2 id=&#34;mock&#34;&gt;Mock&lt;/h2&gt;
+&lt;p&gt;Mocks are used as a replacement for a dependency.、&lt;/p&gt;
+&lt;h2 id=&#34;断言注意&#34;&gt;断言注意&lt;/h2&gt;
+&lt;p&gt;单元测试中不应该有多个断言，如果有的话，可分成2个单元测试。避免多个关注点&lt;/p&gt;
+&lt;p&gt;覆盖率低于20%说明缺少很多测试&lt;/p&gt;
+&lt;p&gt;断言中的&lt;strong&gt;魔法值&lt;/strong&gt;应该用常量的英文单词，可一眼看出预期。&lt;/p&gt;
+&lt;p&gt;断言和操作分离&lt;/p&gt;
+&lt;p&gt;单元测试失败的原因：要改变人的习惯，更多的是做出心理上的改变，而非技术上的。人们不喜欢改变，改变通常伴随着害怕、不确定和怀疑。&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 223; flex-basis: 535px&#34;&gt;
+		&lt;a href=&#34;https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/image-20211111152032834.png&#34; data-size=&#34;1029x461&#34;&gt;&lt;img src=&#34;https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/image-20211111152032834.png&#34;
+				srcset=&#34;https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/image-20211111152032834_hu2459bf03d2767477242276fa44b9df4b_143098_480x0_resize_box_3.png 480w, https://yunteng9345.github.io/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/image-20211111152032834_hu2459bf03d2767477242276fa44b9df4b_143098_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1029&#34;
+				height=&#34;461&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;image-20211111152032834&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;image-20211111152032834&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;​					——摘自《单元测试的艺术》&lt;/p&gt;
+&lt;p&gt;研究表明：大部分的缺陷并不是来自代码自身，而是由人们之间的误解、不断变化的需求以及缺少应用领域知识造成的。&lt;/p&gt;
 </description>
         </item>
         <item>
