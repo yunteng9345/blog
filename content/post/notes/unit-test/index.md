@@ -74,7 +74,7 @@ Mocks are used as a replacement for a dependency.、
 
 
 
-![image-20211111152032834](C:\Users\yunteng\AppData\Roaming\Typora\typora-user-images\image-20211111152032834.png)
+![image-20211111152032834](image-20211111152032834.png)
 
 ​					——摘自《单元测试的艺术》
 
