@@ -21,7 +21,7 @@
  步骤  规范注释，参照Spring源码   细节     '>
 <meta property='og:url' content='https://yunteng9345.github.io/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/'>
 <meta property='og:site_name' content='码艺术'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='重构' /><meta property='article:published_time' content='2021-10-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-10-23T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='复习' /><meta property='article:published_time' content='2021-10-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-10-23T00:00:00&#43;00:00'/>
 <meta name="twitter:site" content="@yunteng95">
     <meta name="twitter:creator" content="@yunteng95"><meta name="twitter:title" content="《重构第二版》笔记">
 <meta name="twitter:description" content="第1章——重构，第一个示例 思想  需求的变化使重构变得必要
@@ -135,46 +135,134 @@
 </header>
 
     <section class="article-content">
-    <h1 id="第1章重构第一个示例">第1章——重构，第一个示例</h1>
-<h2 id="思想">思想</h2>
-<blockquote>
-<p>需求的变化使重构变得必要</p>
-<p>重构就是以微小的步伐修改程序，如果有问题，可立马发现</p>
-<p>傻瓜都能写出计算机可以理解的代码，唯有能写出人类容易理解的代码，才是优秀的程序员</p>
+    <blockquote>
+<p>从古至今，长江和黄河流域水患不断，远古时期，大禹曾拓宽河道，清除淤沙让流水更加顺畅；都江堰作为史上最成功的的治水案例之一，用引流将岷江之水分流到多个支流中，以分担水流压力；三门峡和葛洲坝通过建造水库将水引入水库先存储起来，然后再想办法把水库中的水缓缓地排出去，以此提高下游的抗洪能力。</p>
 </blockquote>
-<h2 id="步骤">步骤</h2>
+<p>高并发的处理方式目前有三种方式</p>
 <ol>
-<li>重构前，检查自己是否有一套可靠的测试集，这些测试必须有自我检验的能力（<strong>单元测试</strong>）</li>
-<li>把复杂的代码分解为更小的单元</li>
+<li>Scale-out(横向扩展)：采用分布式部署的方式把流量分流开，让每个服务器都承担一部分并发和流量。</li>
+<li>缓存：使用缓存来提高系统的性能（空间换时间）</li>
+<li>异步：某些场景下，处理未完成的请求时，可以先让请求返回，数据准备好之后返回请求方。这样可以在单位时间内处理更多的请求。</li>
 </ol>
-<h2 id="细节">细节</h2>
+<p>OSI 网络模型分层：物理层、数据链路层、   网络层、传输层、       会话层、表现层、应用层。</p>
+<p>TCP/IP 协议分层：            链路层、                网络层、传输层、                 应用层。</p>
+<h2 id="高可用系统设计的思路">高可用系统设计的思路</h2>
 <ol>
-<li><strong>将函数分割为单一功能，提炼到外部提供调用</strong></li>
-<li>改动完成之后，立马编译执行一遍单元测试，原因：<strong>在真的犯了错误时：只需要考虑一个很小的改动范围，使得排查与修复问题易如反掌</strong>。</li>
-<li>变量改名，使它们更加简洁</li>
-<li>处理结果变量时，将循环代码和变量放在一起，然后用查询函数取代临时变量</li>
-<li>利用多态取代条件表达式</li>
+<li>
+<p>系统设计</p>
+<ul>
+<li>
+<p>failover机制</p>
+</li>
+<li>
+<p>超时调整</p>
+</li>
+<li>
+<p>降级、限流</p>
+</li>
+</ul>
+</li>
+<li>
+<p>系统运维</p>
+<ul>
+<li>
+<p>灰度发布</p>
+</li>
+<li>
+<p>故障演练</p>
+</li>
+</ul>
+</li>
 </ol>
-<h1 id="第2章重构的原则">第2章——重构的原则</h1>
-<h2 id="思想-1">思想</h2>
-<blockquote>
-<p>重构的唯一目的就是让我们开发的更快，用更少的工作量创造更大的价值。</p>
-</blockquote>
-<p>第2章——重构的原则</p>
-<h1 id="第3章代码的坏味道">第3章——代码的坏味道</h1>
-<h2 id="思想-2">思想</h2>
-<blockquote>
-<p>命名函数或变量，如果想不出一个好名字，说明背后很可能潜藏着更深的设计问题。</p>
-</blockquote>
-<h2 id="步骤-1">步骤</h2>
+<h2 id="高可扩展性的设计思路">高可扩展性的设计思路</h2>
 <ol>
-<li>规范注释，参照Spring源码</li>
+<li>拆分，将复杂问题简单化</li>
 <li></li>
 </ol>
-<h2 id="细节-1">细节</h2>
+<h4 id="1-存储层的扩展性">1. 存储层的扩展性</h4>
+<ul>
+<li>业务维度</li>
+<li>数据库维度</li>
+</ul>
+<h4 id="2-业务层的扩展性">2. 业务层的扩展性</h4>
+<ul>
+<li>业务</li>
+<li>重要性</li>
+<li>请求来源</li>
+</ul>
+<p>对于数据库连接池，根据我的经验，一般在线上我建议最小连接数控制在 10 左右，最大连接数控制在 20～30 左右即可。</p>
+<p>java线程池学习（重要）</p>
+<p>在 4 核 8G 的机器上运 MySQL 5.7 时，大概可以支撑 500 的 TPS 和 10000 的 QPS</p>
+<p>Mysql主从复制</p>
+<p><figure style="flex-grow: 225; flex-basis: 541px">
+		<a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/16373226209384.png" data-size="1142x506"><img src="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/16373226209384.png"
+				srcset="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/16373226209384_huc469d2a88f644ae73d901c9e1c733b50_202791_480x0_resize_box_3.png 480w, /p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/16373226209384_huc469d2a88f644ae73d901c9e1c733b50_202791_1024x0_resize_box_3.png 1024w"
+				width="1142"
+				height="506"
+				loading="lazy"
+				alt="img">
+		</a>
+		
+		<figcaption>img</figcaption>
+		
+	</figure></p>
+<p>主从同步过程：从库在连接到主节点时，会创建一个IO线程，用来请求主库的binlog。把接收到的binlog信息写入relay log的日志文件中。而主库也会创建一个log dump的线程来发送binlog给从库。同事，从库还会创建一个SQL线程读取relay log中的内容，然后做回放将信息写入从库。</p>
+<p>同步延迟导致短时间数据不一致问题处理方案</p>
 <ol>
-<li></li>
-<li></li>
+<li>数据冗余（推荐使用，效率高）</li>
+<li>使用缓存</li>
+<li>查询主库</li>
+</ol>
+<h2 id="倒排索引">倒排索引</h2>
+<p>倒排索引是指将记录中的某些列做分词，然后形成的分词与记录 ID 之间的映射关系。比如说，你的垂直电商项目里面有以下记录：</p>
+<p><figure style="flex-grow: 367; flex-basis: 881px">
+		<a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553123%281%29.jpg" data-size="1142x311"><img src="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553123%281%29.jpg"
+				srcset="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553123%281%29_hufd9b35715f2f9137da2aa6dc9b55384f_73381_480x0_resize_q75_box.jpg 480w, /p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553123%281%29_hufd9b35715f2f9137da2aa6dc9b55384f_73381_1024x0_resize_q75_box.jpg 1024w"
+				width="1142"
+				height="311"
+				loading="lazy"
+				alt="img">
+		</a>
+		
+		<figcaption>img</figcaption>
+		
+	</figure></p>
+<p>那么，我们将商品名称做简单的分词，然后建立起分词和商品 ID 的对应关系，就像下面展示的这样：</p>
+<p><figure style="flex-grow: 252; flex-basis: 606px">
+		<a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553177%281%29.jpg" data-size="1142x452"><img src="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553177%281%29.jpg"
+				srcset="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553177%281%29_hu0788671f7640a7bc61d8be2e211d93c4_79812_480x0_resize_q75_box.jpg 480w, /p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/1637553177%281%29_hu0788671f7640a7bc61d8be2e211d93c4_79812_1024x0_resize_q75_box.jpg 1024w"
+				width="1142"
+				height="452"
+				loading="lazy"
+				alt="img">
+		</a>
+		
+		<figcaption>img</figcaption>
+		
+	</figure></p>
+<h3 id="分布式缓存的高可用的3种主流方案">分布式缓存的高可用的3种主流方案</h3>
+<ol>
+<li>
+<p>客户端方案，一般也称为 Smart Client。我们通过制定一些数据分片和数据读写的策略，可以实现缓存高可用。这种方案的好处是性能没有损耗，缺点是客户端逻辑复杂且在多语言环境下不能复用。</p>
+</li>
+<li>
+<p>中间代理方案，在客户端和缓存节点之间增加了中间层，在性能上会有一些损耗，在代理层会有一些内置的高可用方案，比如 Codis 会使用 Codis Ha 或者 Sentinel。</p>
+</li>
+<li>
+<p>服务端方案，依赖于组件的实现，Memcached 就只支持单机版没有分布式和 HA 的方案，而 Redis 在 2.4 版本提供了 Sentinel 方案可以自动进行主从切换。服务端方案会在运维上增加一些复杂度。</p>
+</li>
+</ol>
+<h3 id="解决缓存穿透问题的2种最主要的解决方案">解决缓存穿透问题的2种最主要的解决方案</h3>
+<ol>
+<li>
+<p>回种空值是一种最常见的解决思路，实现起来也最简单，如果评估空值缓存占据的缓存空间可以接受，那么可以优先使用这种方案；</p>
+</li>
+<li>
+<p>布隆过滤器会引入一个新的组件，也会引入一些开发上的复杂度和运维上的成本。所以只有在存在海量查询数据库中，不存在数据的请求时才会使用，在使用时也要关注布隆过滤器对内存空间的消耗；</p>
+</li>
+<li>
+<p>对于极热点缓存数据穿透造成的“狗桩效应”，可以通过设置分布式锁或者后台线程定时加载的方式来解决。</p>
+</li>
 </ol>
 
 </section>
@@ -184,7 +272,7 @@
     
     <section class="article-tags">
         
-            <a href="/tags/%E9%87%8D%E6%9E%84/">重构</a>
+            <a href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a>
         
     </section>
 
@@ -224,6 +312,18 @@
                 
                     
 <article class="">
+    <a href="/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《单元测试的艺术》笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
     <a href="/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/">
         
         
@@ -236,12 +336,12 @@
                 
                     
 <article class="">
-    <a href="/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/">
+    <a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">《单元测试的艺术》笔记</h2>
+            <h2 class="article-title">《重构第二版》笔记</h2>
         </div>
     </a>
 </article>
@@ -302,7 +402,9 @@
     <section class="copyright">
         &copy; 
         
-        2021 码艺术
+            2021 - 
+        
+        2022 码艺术
     </section>
     
     <section class="powerby">
@@ -416,19 +518,23 @@
                 <div class="widget--toc">
                     <nav id="TableOfContents">
   <ol>
-    <li><a href="#思想">思想</a></li>
-    <li><a href="#步骤">步骤</a></li>
-    <li><a href="#细节">细节</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#思想-1">思想</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#思想-2">思想</a></li>
-    <li><a href="#步骤-1">步骤</a></li>
-    <li><a href="#细节-1">细节</a></li>
+    <li><a href="#高可用系统设计的思路">高可用系统设计的思路</a></li>
+    <li><a href="#高可扩展性的设计思路">高可扩展性的设计思路</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#1-存储层的扩展性">1. 存储层的扩展性</a></li>
+            <li><a href="#2-业务层的扩展性">2. 业务层的扩展性</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#倒排索引">倒排索引</a>
+      <ol>
+        <li><a href="#分布式缓存的高可用的3种主流方案">分布式缓存的高可用的3种主流方案</a></li>
+        <li><a href="#解决缓存穿透问题的2种最主要的解决方案">解决缓存穿透问题的2种最主要的解决方案</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
                 </div>
