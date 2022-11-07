@@ -4,10 +4,9 @@ author = "云腾"
 title = "《MySQL是怎样运行的》笔记"
 date = "2021-10-23"
 tags = [
-    "mysql",
 ]
 categories = [
-    "book",
+    "技术",
 ]
 
 +++

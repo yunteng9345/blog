@@ -4,10 +4,9 @@ author = "云腾"
 title = "《单元测试的艺术》笔记"
 date = "2021-10-23"
 tags = [
-    "单测",
 ]
 categories = [
-    "book","笔记"
+    "技术"
 ]
 
 +++

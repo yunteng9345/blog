@@ -33,7 +33,7 @@ Runnable状态的线程无法直接进入Blocked状态和Terminated状态。只�
  被转换成Terminated状态，比如调用 stop() 方法。 被转换成Blocked状态，比如调用了sleep(), wait() 方法被加入 waitSet 中。 被转换成Blocked状态，如进行 IO 阻塞操作，如查询数据库进入阻塞状态。 被转换成Blocked状态，比如获取某个锁的释放，而被加入该锁的阻塞队列中。 该线程的时间片用完，CPU 再次调度，进入Runnable状态。 线程主动调用 yield 方法，让出 CPU 资源，进入Runnable状态。   Java线程的运行状态转变——码艺术'>
 <meta property='og:url' content='https://yunteng9345.github.io/p/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/'>
 <meta property='og:site_name' content='码艺术'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='线程' /><meta property='article:published_time' content='2021-08-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-08-23T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-08-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-08-23T00:00:00&#43;00:00'/>
 <meta name="twitter:site" content="@yunteng95">
     <meta name="twitter:creator" content="@yunteng95"><meta name="twitter:title" content="Java多线程详解">
 <meta name="twitter:description" content="何为线程？  线程（thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。
@@ -102,8 +102,8 @@ Runnable状态的线程无法直接进入Blocked状态和Terminated状态。只�
     
     <header class="article-category">
         
-            <a href="/categories/java/" >
-                java
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
             </a>
         
     </header>
@@ -280,12 +280,6 @@ Runnable状态的线程无法直接进入Blocked状态和Terminated状态。只�
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/%E7%BA%BF%E7%A8%8B/">线程</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -315,6 +309,61 @@ Runnable状态的线程无法直接进入Blocked状态和Terminated状态。只�
 
     <aside class="related-contents--wrapper">
     
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/p/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《MySQL是怎样运行的》笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%9A%84%E8%89%BA%E6%9C%AF%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《单元测试的艺术》笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《重构第二版》笔记</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/p/%E9%87%8D%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%89%88%E7%AC%94%E8%AE%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">《重构第二版》笔记</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
     
 </aside>
 

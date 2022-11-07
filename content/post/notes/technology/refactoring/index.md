@@ -4,10 +4,9 @@ author = "云腾"
 title = "《重构第二版》笔记"
 date = "2021-10-23"
 tags = [
-    "重构",
 ]
 categories = [
-    "book",
+    "技术",
 ]
 
 +++
