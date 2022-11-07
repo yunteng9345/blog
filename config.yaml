@@ -48,7 +48,6 @@ params:
         license:
             enabled: true
             default: Licensed under CC BY-NC-SA 4.0
-
     comments:
         enabled: true
         provider: disqus
@@ -126,7 +125,7 @@ params:
 
     defaultImage:
         opengraph:
-            enabled: false
+            enabled: true
             local: false
             src:
 
@@ -148,15 +147,41 @@ params:
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
     main:
-        - identifier: home
+        - identifier: all
           name: 主页
           url: /
+          weight: -80
+          pre: home
+          params:
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: false
+          
+        - identifier: note
+          name: 笔记
+          url: /categories/读书笔记/
+          weight: -200
+          pre: home
+          params:
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: false
+              
+        - identifier: technology
+          name: 技术
+          url: /categories/技术/
           weight: -100
           pre: home
           params:
               ### For demonstration purpose, the home link will be open in a new tab
-              newTab: true
-
+              newTab: false
+        - identifier: feel
+          name: 感悟
+          url: /categories/感悟/
+          weight: -90
+          pre: home
+          params:
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: false
+        
 related:
     includeNewer: true
     threshold: 60
